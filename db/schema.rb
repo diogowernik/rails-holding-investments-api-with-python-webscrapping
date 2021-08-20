@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_15_182232) do
+ActiveRecord::Schema.define(version: 2021_08_15_202503) do
 
   create_table "anos", force: :cascade do |t|
     t.integer "ano"
@@ -76,6 +76,15 @@ ActiveRecord::Schema.define(version: 2021_08_15_182232) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "criptos", force: :cascade do |t|
+    t.string "ticker"
+    t.string "title"
+    t.string "slug"
+    t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "deriva_moves", force: :cascade do |t|
     t.integer "carteira_id"
     t.integer "estado_id"
@@ -132,6 +141,15 @@ ActiveRecord::Schema.define(version: 2021_08_15_182232) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "fiis", force: :cascade do |t|
+    t.string "ticker"
+    t.string "title"
+    t.string "slug"
+    t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "investimentos", force: :cascade do |t|
     t.integer "ativo_id"
     t.integer "carteira_id"
@@ -145,6 +163,36 @@ ActiveRecord::Schema.define(version: 2021_08_15_182232) do
     t.index ["carteira_id"], name: "index_investimentos_on_carteira_id"
     t.index ["corretora_id"], name: "index_investimentos_on_corretora_id"
     t.index ["tipo_id"], name: "index_investimentos_on_tipo_id"
+  end
+
+  create_table "portfolio_criptos", force: :cascade do |t|
+    t.integer "category_id"
+    t.integer "portfolio_id"
+    t.integer "cripto_id"
+    t.decimal "shares_amount"
+    t.decimal "share_cost"
+    t.decimal "total_cost"
+    t.decimal "total_today"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_portfolio_criptos_on_category_id"
+    t.index ["cripto_id"], name: "index_portfolio_criptos_on_cripto_id"
+    t.index ["portfolio_id"], name: "index_portfolio_criptos_on_portfolio_id"
+  end
+
+  create_table "portfolio_fiis", force: :cascade do |t|
+    t.integer "category_id"
+    t.integer "portfolio_id"
+    t.integer "fii_id"
+    t.decimal "shares_amount"
+    t.decimal "share_cost"
+    t.decimal "total_cost"
+    t.decimal "total_today"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_portfolio_fiis_on_category_id"
+    t.index ["fii_id"], name: "index_portfolio_fiis_on_fii_id"
+    t.index ["portfolio_id"], name: "index_portfolio_fiis_on_portfolio_id"
   end
 
   create_table "portfolios", force: :cascade do |t|

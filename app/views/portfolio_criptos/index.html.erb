@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Portfolio Criptos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Portfolio</th>
+      <th>Cripto</th>
+      <th>Amount</th>
+      <th>Share cost</th>
+      <th>Total cost</th>
+      <th>Total today</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @portfolio_criptos.each do |portfolio_cripto| %>
+      <tr>
+        <td><%= portfolio_cripto.category %></td>
+        <td><%= portfolio_cripto.portfolio %></td>
+        <td><%= portfolio_cripto.cripto %></td>
+        <td><%= portfolio_cripto.amount %></td>
+        <td><%= portfolio_cripto.share_cost %></td>
+        <td><%= portfolio_cripto.total_cost %></td>
+        <td><%= portfolio_cripto.total_today %></td>
+        <td><%= link_to 'Show', portfolio_cripto %></td>
+        <td><%= link_to 'Edit', edit_portfolio_cripto_path(portfolio_cripto) %></td>
+        <td><%= link_to 'Destroy', portfolio_cripto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Portfolio Fii', new_portfolio_cripto_path %>

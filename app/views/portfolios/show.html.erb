@@ -1,19 +1,105 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @portfolio.title %>
-</p>
+<section id="tabs" class="project-tab">
 
-<p>
-  <strong>Slug:</strong>
-  <%= @portfolio.slug %>
-</p>
+    <nav>
+        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+        <% if @portfolio_fiis.any? %>
+            <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Fundos Imobiliários</a>
+        <% end %>
+        <% if @portfolio_criptos.any? %>
+            <a class="nav-item nav-link <% if @portfolio_fiis.empty? %> active <% end %>" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Criptomoedas</a>
+        <% end %>
+            <%# <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Project Tab 3</a> %>
+        </div>
+    </nav>
+    
+    <div class="tab-content" id="nav-tabContent">
 
-<p>
-  <strong>User:</strong>
-  <%= @portfolio.user %>
-</p>
+    <% if @portfolio_fiis.any? %>
+        <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Ticker</th>
+                        <th>Qnt</th>
+                        <th>PM</th>
+                        <th>Custo Total</th>
+                        <th>Total Hoje</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @portfolio_fiis.each do |portfolio_fii| %>
+                    <tr>
+                        <td><%= portfolio_fii.fii.ticker %></td>                        
+                        <td><%= number_with_precision(portfolio_fii.shares_amount, precision: 0) %>
+                        <td><%= number_with_precision(portfolio_fii.share_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                        <td><%= number_with_precision(portfolio_fii.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                        <td><%= number_with_precision(portfolio_fii.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
+                        <td><%= link_to 'Edit', edit_portfolio_fii_path(portfolio_fii) %> | <%= link_to 'Destroy', portfolio_fii_path(portfolio_fii), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    <% end %>
 
-<%= link_to 'Edit', edit_portfolio_path(@portfolio) %> |
-<%= link_to 'Back', portfolios_path %>
+    <% if @portfolio_criptos.any? %>
+        <div class="tab-pane fade <% if @portfolio_fiis.empty? %> show active <% end %>" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Ticker</th>
+                        <th>Qnt</th>
+                        <th>Preço medio</th>
+                        <th>Custo Total</th>
+                        <th>Total Hoje</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @portfolio_criptos.each do |portfolio_cripto| %>
+                    <tr>
+                        <td><%= portfolio_cripto.cripto.ticker %></td>
+                        <td><%= number_with_precision(portfolio_cripto.shares_amount, precision: 0) %></td>
+                        <td><%= portfolio_cripto.share_cost %></td>
+                        <td><%= portfolio_cripto.total_cost %></td>
+                        <td><%= portfolio_cripto.total_today %></td>
+                        <td><%= link_to 'Edit', edit_portfolio_cripto_path(portfolio_cripto) %> | <%= link_to 'Destroy', portfolio_cripto_path(portfolio_cripto), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    <% end %>
+
+        <%# <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+            <table class="table" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Contest Name</th>
+                        <th>Date</th>
+                        <th>Award Position</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="#">Work 1</a></td>
+                        <td>Doe</td>
+                        <td>john@example.com</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#">Work 2</a></td>
+                        <td>Moe</td>
+                        <td>mary@example.com</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#">Work 3</a></td>
+                        <td>Dooley</td>
+                        <td>july@example.com</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> %>
+    </div>
+</section>

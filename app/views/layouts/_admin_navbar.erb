@@ -1,83 +1,75 @@
 <header class="topnavbar-wrapper">
-    <nav class="navbar topnavbar navbar-expand-lg">
-        <div class="navbar-header">
-           <a href="/" class="navbar-brand text-success">
-              Minha Holding - Area Admin
-           </a>
-           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topnavbar">
-              <span class="navbar-toggler-icon"></span>
-           </button>
-        </div>
-        
-        <div class="navbar-collapse collapse" id="topnavbar">
-        <ul class="nav navbar-nav mr-auto flex-column flex-lg-row">
-            
-        <% if user_signed_in? %>
+   <nav class="navbar topnavbar navbar-expand-lg navbar-light bg-light" style="background-color: white !important;">
+   <a class="navbar-brand" href="#">Minha Holding - Admin</a>
+   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+   </button>
 
-        <% end %>
-        </ul>
-           <ul class="navbar-nav flex-row">
-              <% if(!user_signed_in?) %>
+   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+      </ul>
+      <ul class="navbar-nav">
+            <% if(!user_signed_in?) %>
+               <li class="nav-item">
+                     <%= link_to new_user_session_path, class: 'button-upgrade' do %>
+                        <button class="btn btn-outline-custom btn-lg btn-custom-nav" type="button" data-toggle="modal" data-target="#myModal">
+                           <em class="fa fa-lock fa-lg"></em> &nbsp; Login 
+                        </button>
+                     <% end %>
+               </li>
+            <% else %>
+                     
                   <li class="nav-item">
-                      <%= link_to new_user_session_path, class: 'button-upgrade' do %>
-                          <button class="btn btn-outline-custom btn-lg btn-custom-nav" type="button" data-toggle="modal" data-target="#myModal">
-                             <em class="fa fa-lock fa-lg"></em> &nbsp; Login 
-                          </button>
-                      <% end %>
+                     <%= link_to admin_categories_path, class: 'nav-link' do %>
+                           Admin
+                     <% end %>
                   </li>
-              <% else %>
-                        
-                    <li class="nav-item">
-                        <%= link_to carteiras_path, class: 'nav-link nav-link-custom' do %>
-                             Carteiras
-                        <% end %>
-                    </li>
-                    <li class="nav-item">
-                        <%= link_to deriva_moves_path, class: 'nav-link nav-link-custom' do %>
-                             Mov. de Derivativos
-                        <% end %>
-                        
-                    </li>
-                    <li class="nav-item dropdown dropdown-list">
-                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-toggle="dropdown">
-                             <%= image_tag avatar_url(current_user), class: 'align-self-start mx-2 circle thumb32' %>
-                         </a>
-                         <div class="dropdown-menu dropdown-menu-right">
-                            <div class="dropdown-item">
-                               <div class="list-group">
-                                    
-                                      <div class="list-group-item list-group-item-action">
-                                         <div class="media">
-                                            <div class="align-self-start mr-2">
-                                               <em class="fa fa-cogs fa-2x text-info"></em>
-                                            </div>
-                                            <div class="media-body">
-                                               <p class="m-0">Área Administrativa</p>
-                                               <p class="m-0 text-muted text-sm">Minhas coisas</p>
-                                            </div>
-                                         </div>
-                                      </div>
-                                    
-                                      <div class="list-group-item list-group-item-action">
-                                     <div class="media">
-                                        <div class="align-self-start mr-2">
-                                           <em class="fa fa-sign-out fa-2x text-warning"></em>
-                                        </div>
-                                        <div class="media-body">
-                                          <%= link_to destroy_user_session_path, method: :delete do %>
-                                            <p class="m-0">Sair</p>
-                                            <p class="m-0 text-muted text-sm">Fazer Logout </p>
-                                          <% end %>
-                                        </div>
-                                     </div>
-                                  </div>
-                                    
-                               </div>
-                            </div>
-                         </div>
-                      </li>
-              <% end %>
-           </ul>
-        </div>
-    </nav>
+                  <li class="nav-item">
+                     <%= link_to portfolios_path, class: 'nav-link' do %>
+                           App
+                     <% end %>
+                     
+                  </li>
+                  <li class="nav-item dropdown dropdown-list">
+                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-toggle="dropdown">
+                           <%= image_tag avatar_url(current_user), class: 'align-self-start mx-2 circle thumb32' %>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                           <div class="dropdown-item">
+                              <div class="list-group">
+                                 
+                                    <div class="list-group-item list-group-item-action">
+                                       <div class="media">
+                                          <div class="align-self-start mr-2">
+                                             <em class="fa fa-cogs fa-2x text-info"></em>
+                                          </div>
+                                          <div class="media-body">
+                                             <p class="m-0">Área Administrativa</p>
+                                             <p class="m-0 text-muted text-sm">Minhas coisas</p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 
+                                    <div class="list-group-item list-group-item-action">
+                                    <div class="media">
+                                       <div class="align-self-start mr-2">
+                                          <em class="fa fa-sign-out fa-2x text-warning"></em>
+                                       </div>
+                                       <div class="media-body">
+                                       <%= link_to destroy_user_session_path, method: :delete do %>
+                                          <p class="m-0">Sair</p>
+                                          <p class="m-0 text-muted text-sm">Fazer Logout </p>
+                                       <% end %>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 
+                              </div>
+                           </div>
+                        </div>
+                     </li>
+            <% end %>
+         </ul>
+   </div>
+   </nav>
 </header>

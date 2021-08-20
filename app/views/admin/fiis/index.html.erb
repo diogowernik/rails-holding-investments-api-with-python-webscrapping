@@ -1,0 +1,34 @@
+<div class="float-right"><%= link_to new_admin_fii_path do %>
+	<button class="btn btn-outline-success">
+		<em class="fa fa-plus-circle"></em> &nbsp; Novo 
+	</button><% end %>
+</div>
+<h3 class="h3-custom mb-4" id="minhas-paginas">
+	<em class="fa fa-vcard-o text-success"></em> &nbsp; Fundos Imobiliários
+</h3>
+<div class="table-responsive mt-2">
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>ticker</th>
+          <th>Preço</th>
+          <th>title</th>
+          <th>Url</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @fiis.each do |fii| %>
+          <tr>
+            <td><%= fii.ticker %></td>
+            <td><%= fii.price %></td>
+            <td><%= fii.title %></td>
+            <td><%= fii.slug %></td>  
+            <td> <%= link_to 'Edit', edit_admin_fii_path(fii.id) %> | <%= link_to 'Destroy', admin_fii_path(fii.id), method: :delete %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+

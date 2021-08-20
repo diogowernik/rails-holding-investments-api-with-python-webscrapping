@@ -7,23 +7,91 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
   </head>
 
   <body>
-  <%= render partial: "layouts/app_navbar" %>
+  <%= render partial: "layouts/topnavbar" %>
         <div class="container-fluid mt-4">
             <div class="row">
                 <div class="col-xl-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <%#= link_to admin_anos_path, class: 'dropdown-item m-2' do %>
-                                <%# Anos %>
-                            <%# end %>
+                    <div class="card">  
+
+
+                        <nav class="navbar navbar-expand navbar-light bg-light">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <%= @portfolio.title %>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <% @portfolios.each do |portfolio| %>
+                                        <% if portfolio.title != @portfolio.title %>  
+                                            <%= link_to portfolio_path(portfolio.id), class: "dropdown-item" do %>
+                                                <% portfolio.title %>
+                                            <% end %>                       
+                                        <% end %>
+                                    <% end %>
+                                
+
+                                </div>
+                            </li>
+
+                            </ul>
+
                         </div>
+                        </nav>
+
+
+                            
                     </div>
                 </div>
                 <div class="col-xl-9">
                     <div class="card">
+
+                    <nav class="navbar navbar-expand navbar-light bg-light">
+                        <%# <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button> %>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                
+                                <li class="nav-item">
+                                    <%= link_to portfolio_path do %>
+                                        <button class="btn btn-outline-primary 
+                                        <%= 'active' if current_page?(portfolio_path) %>">
+                                            Dashboard
+                                        </button>
+                                    <% end %>
+                                </li>
+                                <li class="nav-item">
+                                    <%= link_to portfolio_composition_path do %>
+                                        <button 
+                                        class="btn btn-outline-primary ml-3
+                                        <%= 'active' if current_page?(portfolio_composition_path) %>" >
+                                            Composição
+                                        </button>
+                                    <% end %>
+                                </li>
+                                <li class="nav-item">
+                                    <%= link_to portfolio_radar_path do %>
+                                        <button 
+                                        class="btn btn-outline-primary ml-3
+                                        <%= 'active' if current_page?(portfolio_radar_path) %>" >
+                                            Radar
+                                        </button>
+                                    <% end %>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                    
+                    </div>
+                    <div class="card">
+                        
                         <div class="card-body">
                             <% if alert %><div class="alert alert-success m-5 text-center"><%= alert %></div><% end %>
                             <% if notice %><div class="alert alert-success m-5 text-center"><%= notice %></div><% end %>
@@ -35,5 +103,39 @@
             </div>
         </div>
     </div>
+    <script>
+    $(document).ready( function () {
+        $('table.display').DataTable({
+            'paging': false, // Table pagination
+            'ordering': true, // Column ordering
+            'info': false, // Bottom left status text
+            responsive: true,
+            // columnDefs: [ { visible: true, orderable: false, targets: [3] } ],
+            // "order": [[ 3, "desc" ]],
+            "dom": '<"float-left mt-3"f><"clear">',
+            responsive: true,
+            oLanguage: {
+                sSearch: '<em class="fa fa-search"></em>',
+                sLengthMenu: '_MENU_ records per page',
+                info: 'Showing page _PAGE_ of _PAGES_',
+                zeroRecords: 'Nothing found - sorry',
+                infoEmpty: 'No records available',
+                infoFiltered: '(filtered from _MAX_ total records)',
+                oPaginate: {
+                    sNext: '<em class="fa fa-caret-right"></em>',
+                    sPrevious: '<em class="fa fa-caret-left"></em>'
+                }
+            },
+        });
+    } );
+    </script>
+<style>
+table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc, table.dataTable thead .sorting_asc_disabled, table.dataTable thead .sorting_desc_disabled{
+background-position: 5px center;
+}
+table.dataTable thead th, table.dataTable thead td {
+padding: 10px 18px 10px 28px;           
+}
+</style>
   </body>
 </html>

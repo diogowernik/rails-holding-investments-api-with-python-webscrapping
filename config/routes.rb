@@ -1,18 +1,48 @@
 Rails.application.routes.draw do
-  
-  
   resources :portfolios
+  resources :portfolio_criptos
+  resources :portfolio_fiis
+  resources :criptos
+  resources :fiis
+  
+  get 'portfolio/:id/composition', to: 'portfolios#composition', as: 'portfolio_composition'
+  get 'portfolio/:id/radar', to: 'portfolios#radar', as: 'portfolio_radar'
+
+
   namespace :admin do
-    get '/', to: 'dashboard#index', as: 'dashboard'
-    resources :anos
+    get '/', to: 'categories#index', as: 'dashboard'
     resources :years
     resources :categories
     resources :portfolios
+    resources :criptos
+    resources :fiis
+    resources :portfolio_fiis
+    resources :portfolio_criptos
   end
 
-  namespace :app do
-    resources :carteiras
-    
+  namespace :api do
+    resources :years
+    resources :criptos
+    resources :movements
+    resources :categories
+    resources :portfolios
+    resources :fiis
+    resources :portfoliocriptos
+    resources :portfoliofiis
+
+    get 'portfolio/options', to: 'portfolios#options', as: 'portfolio_options'
+    get 'category/options', to: 'categories#options', as: 'category_options'
+    get 'fii/options', to: 'fiis#options', as: 'fii_options'
+    get 'cripto/options', to: 'criptos#options', as: 'cripto_options'
+
+    get 'portfolio/portfoliofiis/:id', to: 'portfolios#portfoliofiis', as: 'portfolio_portfoliofiis'
+    get 'portfolio/portfoliocriptos/:id', to: 'portfolios#portfoliocriptos', as: 'portfolio_portfoliocriptos'
+
+    resources :sessions, only: [:create]
+    resources :registrations, only: [:create]
+    delete :logout, to: "sessions#logout"
+    get :logged_in, to: "sessions#logged_in"
+
   end
   resources :tutorials
   resources :tasks
@@ -32,7 +62,7 @@ Rails.application.routes.draw do
   resources :tipos
   resources :carteiras
   devise_for :users
-  root to: 'carteiras#index'
+  root to: 'portfolios#index'
   
   get 'seed', to: 'pages#seed', as: 'pages_seed'
   get 'for_google', to: 'pages#for_google', as: 'pages_for_google'

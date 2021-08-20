@@ -9,16 +9,8 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="layout-h">
-    <div class="wrapper">
-      <%= render partial: "layouts/topnavbar" %>
-      <section class="section-container">
-	       <div class="content-wrapper">
-	            <% if alert %><div class="alert alert-success m-5 text-center"><%= alert %></div><% end %>
-              <% if notice %><div class="alert alert-success m-5 text-center"><%= notice %></div><% end %>
-                <%= yield %>
-        </div>
-      </section>
-    </div>
+  <body>
+    <%= render partial: "layouts/topnavbar" %>
+    <%= yield %>
   </body>
 </html>

@@ -1,0 +1,40 @@
+<div class="float-right"><%= link_to new_admin_portfolio_fii_path do %>
+	<button class="btn btn-outline-success">
+		<em class="fa fa-plus-circle"></em> &nbsp; Novo 
+	</button><% end %>
+</div>
+<h3 class="h3-custom mb-4" id="minhas-paginas">
+	<em class="fa fa-vcard-o text-success"></em> &nbsp; Fundos Imobiliários nos Portfolios
+</h3>
+<div class="table-responsive mt-2">
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Ticker</th>
+          <th>Portfolio</th>
+          <th>Categoria</th>
+          <th>Quantidade</th>
+          <th>Custo Unitário</th>
+          <th>Custo Total</th>
+          <th>Total Hoje</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @portfolio_fiis.each do |portfolio_fii| %>
+          <tr>
+            <td><%= portfolio_fii.fii.ticker %></td>
+            <td><%= portfolio_fii.portfolio.title %></td>
+             <td><%= portfolio_fii.category.title %></td>
+            <td><%= portfolio_fii.shares_amount %></td>
+            <td><%= portfolio_fii.share_cost %></td>
+            <td><%= portfolio_fii.total_cost %></td>
+            <td><%= portfolio_fii.total_today %></td>
+            <td> <%= link_to 'Edit', edit_admin_portfolio_fii_path(portfolio_fii.id) %> | <%= link_to 'Destroy', admin_portfolio_fii_path(portfolio_fii.id), method: :delete %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+

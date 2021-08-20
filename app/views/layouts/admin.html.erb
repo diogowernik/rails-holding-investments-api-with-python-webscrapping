@@ -19,12 +19,24 @@
                             <%= link_to admin_categories_path, class: 'dropdown-item m-2' do %>
                                 Categorias de Investimentos
                             <% end %>
+                            <%= link_to admin_fiis_path, class: 'dropdown-item m-2' do %>
+                                Fundos Imobiliários
+                            <% end %>
+                            <%= link_to admin_criptos_path, class: 'dropdown-item m-2' do %>
+                                Criptomoedas
+                            <% end %>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-body">
                             <%= link_to admin_portfolios_path, class: 'dropdown-item m-2' do %>
                                 Portfolios
+                            <% end %>
+                            <%= link_to admin_portfolio_fiis_path, class: 'dropdown-item m-2' do %>
+                                Fundos Imobiliários nos Portfolios
+                            <% end %>
+                            <%= link_to admin_portfolio_criptos_path, class: 'dropdown-item m-2' do %>
+                                Criptomoedas nos Portfolios
                             <% end %>
                         </div>
                     </div>
