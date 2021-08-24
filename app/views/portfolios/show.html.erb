@@ -62,9 +62,9 @@
                     <tr>
                         <td><%= portfolio_cripto.cripto.ticker %></td>
                         <td><%= number_with_precision(portfolio_cripto.shares_amount, precision: 0) %></td>
-                        <td><%= portfolio_cripto.share_cost %></td>
-                        <td><%= portfolio_cripto.total_cost %></td>
-                        <td><%= portfolio_cripto.total_today %></td>
+                        <td><%= number_with_precision(portfolio_cripto.share_cost, precision: 4, separator: ",", delimiter: ".") %></td>
+                        <td><%= number_with_precision(portfolio_cripto.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                        <td><%= number_with_precision(portfolio_cripto.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
                         <td><%= link_to 'Edit', edit_portfolio_cripto_path(portfolio_cripto) %> | <%= link_to 'Destroy', portfolio_cripto_path(portfolio_cripto), method: :delete, data: { confirm: 'Are you sure?' } %></td>
                     </tr>
                     <% end %>

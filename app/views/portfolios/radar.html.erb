@@ -26,7 +26,7 @@
                     <% @criptos.each do |cripto| %>
                     <tr>
                         <td><%= cripto.ticker %></td>
-                        <td><%= number_to_currency(cripto.price, unit: "R$ ", separator: ",", delimiter: ".", strip_insignificant_zeros: true) %></td>
+                        <td><%= number_with_precision(cripto.price, precision: 4, separator: ",", delimiter: ".") %></td>
                     </tr>
                     <% end %>
                 </tbody>
@@ -47,7 +47,7 @@
                     <% @fiis.each do |fii| %>
                     <tr>
                         <td><%= fii.ticker %></td>
-                        <td><%= fii.price %></td>
+                        <td><%= number_with_precision(fii.price, precision: 2, separator: ",", delimiter: ".") %></td>
                     </tr>
                     <% end %>
                 </tbody>

@@ -7,6 +7,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
@@ -23,22 +24,49 @@
                         <nav class="navbar navbar-expand navbar-light bg-light">
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mr-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <%= @portfolio.title %>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <% @portfolios.each do |portfolio| %>
-                                        <% if portfolio.title != @portfolio.title %>  
-                                            <%= link_to portfolio_path(portfolio.id), class: "dropdown-item" do %>
-                                                <% portfolio.title %>
-                                            <% end %>                       
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <%= @portfolio.title %>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <% @portfolios.each do |portfolio| %>
+                                            <% if portfolio.title != @portfolio.title %>  
+                                                <%= link_to portfolio_path(portfolio.id), class: "dropdown-item" do %>
+                                                    <% portfolio.title %>
+                                                <% end %>                       
+                                            <% end %>
                                         <% end %>
-                                    <% end %>
-                                
+                                    </div>
+                                </li>
+                            </ul>
 
-                                </div>
-                            </li>
+                            <ul class="navbar-nav">
+
+                                <li class="nav-item dropdown dropdown-list">
+                                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-toggle="dropdown">
+                                        <i class="fas fa-lg fa-plus-circle text-primary"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                    <div class="dropdown-item">
+                                        <div class="list-group">                                            
+                                            <div class="list-group-item list-group-item-action">
+                                                <div class="media">
+                                                    <%= link_to new_portfolio_fii_path, class: "dropdown-item" do %>
+                                                        Adicionar Fundo Imobiliário
+                                                    <% end %>  
+                                                </div>
+                                            </div>                                            
+                                            <div class="list-group-item list-group-item-action">
+                                                <div class="media">
+                                                    <%= link_to new_portfolio_cripto_path, class: "dropdown-item" do %>
+                                                        Adicionar Criptomoeda
+                                                    <% end %>                                                                      
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                    </div>
+                                </li>
 
                             </ul>
 
@@ -103,32 +131,32 @@
             </div>
         </div>
     </div>
-    <script>
-    $(document).ready( function () {
-        $('table.display').DataTable({
-            'paging': false, // Table pagination
-            'ordering': true, // Column ordering
-            'info': false, // Bottom left status text
-            responsive: true,
-            // columnDefs: [ { visible: true, orderable: false, targets: [3] } ],
-            // "order": [[ 3, "desc" ]],
-            "dom": '<"float-left mt-3"f><"clear">',
-            responsive: true,
-            oLanguage: {
-                sSearch: '<em class="fa fa-search"></em>',
-                sLengthMenu: '_MENU_ records per page',
-                info: 'Showing page _PAGE_ of _PAGES_',
-                zeroRecords: 'Nothing found - sorry',
-                infoEmpty: 'No records available',
-                infoFiltered: '(filtered from _MAX_ total records)',
-                oPaginate: {
-                    sNext: '<em class="fa fa-caret-right"></em>',
-                    sPrevious: '<em class="fa fa-caret-left"></em>'
-                }
-            },
-        });
-    } );
-    </script>
+<script>
+$(document).ready( function () {
+    $('table.display').DataTable({
+        'paging': false, // Table pagination
+        'ordering': true, // Column ordering
+        'info': false, // Bottom left status text
+        responsive: true,
+        // columnDefs: [ { visible: true, orderable: false, targets: [3] } ],
+        // "order": [[ 3, "desc" ]],
+        "dom": '<"float-left mt-3"f><"clear">',
+        responsive: true,
+        oLanguage: {
+            sSearch: '<em class="fa fa-search"></em>',
+            sLengthMenu: '_MENU_ records per page',
+            info: 'Showing page _PAGE_ of _PAGES_',
+            zeroRecords: 'Nothing found - sorry',
+            infoEmpty: 'No records available',
+            infoFiltered: '(filtered from _MAX_ total records)',
+            oPaginate: {
+                sNext: '<em class="fa fa-caret-right"></em>',
+                sPrevious: '<em class="fa fa-caret-left"></em>'
+            }
+        },
+    });
+} );
+</script>
 <style>
 table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc, table.dataTable thead .sorting_asc_disabled, table.dataTable thead .sorting_desc_disabled{
 background-position: 5px center;
