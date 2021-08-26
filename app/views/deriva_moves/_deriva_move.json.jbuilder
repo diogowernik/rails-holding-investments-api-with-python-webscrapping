@@ -1,1 +1,0 @@
-json.extract! deriva_move, :carteira_id, :derivativo_id, :estado_id, :valor, :data, :quantidade, :movimento, :investimento_id, :corretora_id, :valor_recompra, :data_recompra, :resultado
