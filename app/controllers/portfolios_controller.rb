@@ -12,6 +12,7 @@ class PortfoliosController < ApplicationController
     @portfolios = Portfolio.all
     @portfolio_criptos = PortfolioCripto.all.where(:portfolio_id => @portfolio.id)
     @portfolio_fiis = PortfolioFii.all.where(:portfolio_id => @portfolio.id)
+    @portfolio_br_stocks = PortfolioBrStock.all.where(:portfolio_id => @portfolio.id)
     render layout: "app" 
   end
 
@@ -24,6 +25,7 @@ class PortfoliosController < ApplicationController
     @portfolios = Portfolio.all
     @criptos = Cripto.all
     @fiis = Fii.all
+    @br_stocks = BrStock.all
     render layout: "app" 
   end
   

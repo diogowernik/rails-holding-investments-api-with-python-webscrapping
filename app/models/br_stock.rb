@@ -1,0 +1,2 @@
+class BrStock < ApplicationRecord
+end

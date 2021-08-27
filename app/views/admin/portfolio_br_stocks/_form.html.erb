@@ -1,10 +1,10 @@
-<%= simple_form_for( [:admin, portfolio_fii]) do |form| %>
-  <% if portfolio_fii.errors.any? %>
+<%= simple_form_for([:admin, portfolio_br_stock]) do |form| %>
+  <% if portfolio_br_stock.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(portfolio_fii.errors.count, "error") %> prohibited this portfolio_fii from being saved:</h2>
+      <h2><%= pluralize(portfolio_br_stock.errors.count, "error") %> prohibited this portfolio_br_stock from being saved:</h2>
 
       <ul>
-      <% portfolio_fii.errors.full_messages.each do |message| %>
+      <% portfolio_br_stock.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -12,8 +12,8 @@
   <% end %>
 <div class="row">
   <div class="col-md-4">
-    <%= form.label :fii_id %> 
-    <%= form.select :fii_id, Fii.all.collect {|d| [d.ticker, d.id]}, {}, {class: 'form-control'} %>
+    <%= form.label :br_stock_id %> 
+    <%= form.select :br_stock_id, BrStock.all.collect {|d| [d.ticker, d.id]}, {}, {class: 'form-control'} %>
   </div>
   <div class="col-md-4">
     <%= form.label :portfolio_id %> 
@@ -21,7 +21,7 @@
   </div>
   <div class="col-md-4">
     <%= form.label :category_id %> 
-    <%= form.select :category_id, Category.all.collect {|d| [d.title, d.id]}, {selected: 1}, {class: 'form-control'} %>
+    <%= form.select :category_id, Category.all.collect {|d| [d.title, d.id]}, {selected: 3}, {class: 'form-control'} %>
   </div>
 
 
