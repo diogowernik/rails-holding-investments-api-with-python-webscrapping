@@ -1,0 +1,35 @@
+<div class="float-right"><%= link_to new_admin_property_path do %>
+	<button class="btn btn-outline-success">
+		<em class="fa fa-plus-circle"></em> &nbsp; novo 
+	</button><% end %>
+</div>
+<h3 class="h3-custom mb-4" id="minhas-paginas">
+	<em class="fa fa-vcard-o text-success"></em> &nbsp; Imóveis / Propriedades
+</h3>
+<div class="table-responsive mt-2">
+    <table id="" class="display table table-striped w-100" cellspacing="0">
+      <thead>
+        <tr>
+          <th>ticker</th>
+          <th>Preço</th>
+          <th>title</th>
+          <th>Url</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @properties.each do |property| %>
+          <tr>
+            <td><%= property.ticker %></td>
+            <td><%= property.price %></td>
+            <td><%= property.title %></td>
+            <td><%= property.slug %></td>  
+            
+            <td> <%= link_to 'Edit', edit_admin_property_path(property.id) %> | <%= link_to 'Destroy', admin_property_path(property.id), method: :delete %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+
