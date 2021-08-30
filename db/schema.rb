@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_27_172634) do
+ActiveRecord::Schema.define(version: 2021_08_30_174251) do
 
   create_table "br_stocks", force: :cascade do |t|
     t.string "ticker"
@@ -19,6 +19,18 @@ ActiveRecord::Schema.define(version: 2021_08_27_172634) do
     t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "calls", force: :cascade do |t|
+    t.integer "br_stock_id"
+    t.integer "expiration_id"
+    t.string "ticker"
+    t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "strike"
+    t.index ["br_stock_id"], name: "index_calls_on_br_stock_id"
+    t.index ["expiration_id"], name: "index_calls_on_expiration_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -37,11 +49,25 @@ ActiveRecord::Schema.define(version: 2021_08_27_172634) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "expirations", force: :cascade do |t|
+    t.string "title"
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "fiis", force: :cascade do |t|
     t.string "ticker"
     t.string "title"
     t.string "slug"
     t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "months", force: :cascade do |t|
+    t.string "title"
+    t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -107,6 +133,18 @@ ActiveRecord::Schema.define(version: 2021_08_27_172634) do
     t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "puts", force: :cascade do |t|
+    t.integer "br_stock_id"
+    t.integer "expiration_id"
+    t.string "ticker"
+    t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "strike"
+    t.index ["br_stock_id"], name: "index_puts_on_br_stock_id"
+    t.index ["expiration_id"], name: "index_puts_on_expiration_id"
   end
 
   create_table "users", force: :cascade do |t|

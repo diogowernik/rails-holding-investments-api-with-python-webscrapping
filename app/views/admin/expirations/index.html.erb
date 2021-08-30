@@ -1,10 +1,10 @@
-<div class="float-right"><%= link_to new_admin_year_path do %>
+<div class="float-right"><%= link_to new_admin_expiration_path do %>
 	<button class="btn btn-outline-success">
 		<em class="fa fa-plus-circle"></em> &nbsp; Novo 
 	</button><% end %>
 </div>
 <h3 class="h3-custom mb-4" id="minhas-paginas">
-	<em class="fa fa-vcard-o text-success"></em> &nbsp; years
+	<em class="fa fa-vcard-o text-success"></em> &nbsp; expirations
 </h3>
 <div class="table-responsive mt-2">
     <table id="" class="display table table-striped w-100" cellspacing="0">
@@ -17,11 +17,11 @@
       </thead>
 
       <tbody>
-        <% @years.each do |year| %>
+        <% @expirations.each do |expiration| %>
           <tr>
-            <td><%= year.title %></td>
-            <td><%= year.slug %></td>
-            <td> <%= link_to 'Edit', edit_admin_year_path(year.id) %> | <%= link_to 'Destroy', admin_year_path(year.id), method: :delete %></td>
+            <td><%= expiration.title %></td>
+            <td><%= expiration.slug %></td>
+            <td> <%= link_to 'Edit', edit_admin_expiration_path(expiration.id) %> | <%= link_to 'Destroy', admin_expiration_path(expiration.id), method: :delete %></td>
           </tr>
         <% end %>
       </tbody>

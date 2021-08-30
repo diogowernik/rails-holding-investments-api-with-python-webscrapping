@@ -1,0 +1,32 @@
+<div class="float-right"><%= link_to new_admin_month_path do %>
+	<button class="btn btn-outline-success">
+		<em class="fa fa-plus-circle"></em> &nbsp; Novo
+	</button><% end %>
+</div>
+<h3 class="h3-custom mb-4" id="minhas-paginas">
+	<em class="fa fa-vcard-o text-success"></em> &nbsp; months
+</h3>
+<div class="table-responsive mt-2">
+    <table id="" class="display table table-striped w-100" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Mes</th>
+          <th>Url</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @months.each do |month| %>
+          <tr>
+            <td><%= month.id %></td>
+            <td><%= month.title %></td>
+            <td><%= month.slug %></td>
+            <td> <%= link_to 'Edit', edit_admin_month_path(month.id) %> | <%= link_to 'Destroy', admin_month_path(month.id), method: :delete %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+

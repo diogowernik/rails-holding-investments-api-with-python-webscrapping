@@ -1,0 +1,44 @@
+<%= simple_form_for([:admin, put]) do |form| %>
+  <% if put.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(put.errors.count, "error") %> prohibited this put from being saved:</h2>
+
+      <ul>
+      <% put.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="row">
+  <div class="col-md-6">
+    <%= form.label :br_stock_id %> 
+    <%= form.select :br_stock_id, BrStock.all.collect {|d| [d.ticker, d.id]}, {}, {class: 'form-control'} %>
+  </div>
+  <div class="col-md-6">
+    <%= form.label :expiration_id %> 
+    <%= form.select :expiration_id, Expiration.all.collect {|d| [d.title, d.id]}, {}, {class: 'form-control'} %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <%= form.label :ticker %>
+    <%= form.text_field :ticker, class: 'form-control' %>
+  </div>
+  <div class="col-md-4">
+      <%= form.label :price %>
+      <%= form.text_field :price, class: 'form-control' %>
+  </div>
+  <div class="col-md-4">
+      <%= form.label :strike %>
+      <%= form.text_field :strike, class: 'form-control' %>
+  </div>
+</div>
+<div class="row">
+    <div class="col-md-3 mt-4">
+		<div class="form-group">
+                <%= form.submit 'Enviar', class: 'btn btn-block btn-primary' %>
+         </div>
+     </div>
+</div>
+<% end %>
