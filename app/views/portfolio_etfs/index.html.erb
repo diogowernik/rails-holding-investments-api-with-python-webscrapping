@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Portfolio Etfs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Portfolio</th>
+      <th>Etf</th>
+      <th>Shares amount</th>
+      <th>Share cost</th>
+      <th>Total cost</th>
+      <th>Total today</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @portfolio_etfs.each do |portfolio_etf| %>
+      <tr>
+        <td><%= portfolio_etf.category %></td>
+        <td><%= portfolio_etf.portfolio %></td>
+        <td><%= portfolio_etf.etf %></td>
+        <td><%= portfolio_etf.shares_amount %></td>
+        <td><%= portfolio_etf.share_cost %></td>
+        <td><%= portfolio_etf.total_cost %></td>
+        <td><%= portfolio_etf.total_today %></td>
+        <td><%= link_to 'Show', portfolio_etf %></td>
+        <td><%= link_to 'Edit', edit_portfolio_etf_path(portfolio_etf) %></td>
+        <td><%= link_to 'Destroy', portfolio_etf, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Portfolio Etf', new_portfolio_etf_path %>

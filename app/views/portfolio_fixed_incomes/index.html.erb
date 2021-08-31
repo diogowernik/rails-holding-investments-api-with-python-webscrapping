@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Portfolio Fixed Incomes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Portfolio</th>
+      <th>Fixed income</th>
+      <th>Shares amount</th>
+      <th>Share cost</th>
+      <th>Total cost</th>
+      <th>Total today</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @portfolio_fixed_incomes.each do |portfolio_fixed_income| %>
+      <tr>
+        <td><%= portfolio_fixed_income.category %></td>
+        <td><%= portfolio_fixed_income.portfolio %></td>
+        <td><%= portfolio_fixed_income.fixed_income %></td>
+        <td><%= portfolio_fixed_income.shares_amount %></td>
+        <td><%= portfolio_fixed_income.share_cost %></td>
+        <td><%= portfolio_fixed_income.total_cost %></td>
+        <td><%= portfolio_fixed_income.total_today %></td>
+        <td><%= link_to 'Show', portfolio_fixed_income %></td>
+        <td><%= link_to 'Edit', edit_portfolio_fixed_income_path(portfolio_fixed_income) %></td>
+        <td><%= link_to 'Destroy', portfolio_fixed_income, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Portfolio Fixed Income', new_portfolio_fixed_income_path %>

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Portfolio Holding Tokens</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Portfolio</th>
+      <th>Holding token</th>
+      <th>Shares amount</th>
+      <th>Share cost</th>
+      <th>Total cost</th>
+      <th>Total today</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @portfolio_holding_tokens.each do |portfolio_holding_token| %>
+      <tr>
+        <td><%= portfolio_holding_token.category %></td>
+        <td><%= portfolio_holding_token.portfolio %></td>
+        <td><%= portfolio_holding_token.holding_token %></td>
+        <td><%= portfolio_holding_token.shares_amount %></td>
+        <td><%= portfolio_holding_token.share_cost %></td>
+        <td><%= portfolio_holding_token.total_cost %></td>
+        <td><%= portfolio_holding_token.total_today %></td>
+        <td><%= link_to 'Show', portfolio_holding_token %></td>
+        <td><%= link_to 'Edit', edit_portfolio_holding_token_path(portfolio_holding_token) %></td>
+        <td><%= link_to 'Destroy', portfolio_holding_token, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Portfolio Holding Token', new_portfolio_holding_token_path %>

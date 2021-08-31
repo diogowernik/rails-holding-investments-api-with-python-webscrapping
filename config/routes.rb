@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  resources :portfolio_stocks
+  resources :portfolio_holding_tokens
+  resources :portfolio_etfs
+  resources :portfolio_subscriptions
+  resources :portfolio_currencies
+  resources :portfolio_fixed_incomes
   resources :portfolio_puts
   resources :portfolio_calls
   resources :portfolio_properties

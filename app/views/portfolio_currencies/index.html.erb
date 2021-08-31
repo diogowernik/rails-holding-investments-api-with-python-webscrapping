@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Portfolio Currencies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Portfolio</th>
+      <th>Currency</th>
+      <th>Shares amount</th>
+      <th>Share cost</th>
+      <th>Total cost</th>
+      <th>Total today</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @portfolio_currencies.each do |portfolio_currency| %>
+      <tr>
+        <td><%= portfolio_currency.category %></td>
+        <td><%= portfolio_currency.portfolio %></td>
+        <td><%= portfolio_currency.currency %></td>
+        <td><%= portfolio_currency.shares_amount %></td>
+        <td><%= portfolio_currency.share_cost %></td>
+        <td><%= portfolio_currency.total_cost %></td>
+        <td><%= portfolio_currency.total_today %></td>
+        <td><%= link_to 'Show', portfolio_currency %></td>
+        <td><%= link_to 'Edit', edit_portfolio_currency_path(portfolio_currency) %></td>
+        <td><%= link_to 'Destroy', portfolio_currency, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Portfolio Currency', new_portfolio_currency_path %>

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @portfolio_subscription.category %>
+</p>
+
+<p>
+  <strong>Portfolio:</strong>
+  <%= @portfolio_subscription.portfolio %>
+</p>
+
+<p>
+  <strong>Subscription:</strong>
+  <%= @portfolio_subscription.subscription %>
+</p>
+
+<p>
+  <strong>Shares amount:</strong>
+  <%= @portfolio_subscription.shares_amount %>
+</p>
+
+<p>
+  <strong>Share cost:</strong>
+  <%= @portfolio_subscription.share_cost %>
+</p>
+
+<p>
+  <strong>Total cost:</strong>
+  <%= @portfolio_subscription.total_cost %>
+</p>
+
+<p>
+  <strong>Total today:</strong>
+  <%= @portfolio_subscription.total_today %>
+</p>
+
+<%= link_to 'Edit', edit_portfolio_subscription_path(@portfolio_subscription) %> |
+<%= link_to 'Back', portfolio_subscriptions_path %>
