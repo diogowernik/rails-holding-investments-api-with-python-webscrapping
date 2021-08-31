@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root to: 'portfolios#index'
   devise_for :users
   resources :portfolio_br_stocks
@@ -21,6 +22,12 @@ Rails.application.routes.draw do
     resources :months
     resources :properties
     resources :expirations
+    resources :stocks
+    resources :etfs
+    resources :holding_tokens
+    resources :subscriptions
+    resources :currencies
+    resources :fixed_incomes
 
     resources :portfolio_br_stocks
     resources :portfolio_fiis

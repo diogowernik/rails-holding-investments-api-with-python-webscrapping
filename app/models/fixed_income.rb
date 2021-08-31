@@ -1,0 +1,2 @@
+class FixedIncome < ApplicationRecord
+end
