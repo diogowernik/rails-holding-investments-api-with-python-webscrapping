@@ -18,7 +18,8 @@ class Api::PortfoliosController < ApiController
     @categories = Category.all
     @portfolio_fiis = PortfolioFii.all.where(:portfolio_id => @portfolio.id).order("id desc")
     @portfolio_criptos = PortfolioCripto.all.where(:portfolio_id => @portfolio.id).order("id desc")
-    @portfolio_br_stocks = PortfolioBrStock.all.where(:portfolio_id => @portfolio.id)
+    @portfolio_br_stocks = PortfolioBrStock.all.where(:portfolio_id => @portfolio.id).order("id desc")
+    @portfolio_properties = PortfolioProperty.all.where(:portfolio_id => @portfolio.id).order("id desc")
     render 'api/portfolios/show.json.jbuilder'
   end
 

@@ -3,22 +3,25 @@
 
     <nav>
         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-        <% if @portfolio_fiis.any? %>
-            <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Fundos Imobiliários</a>
-        <% end %>
-        <% if @portfolio_criptos.any? %>
-            <a class="nav-item nav-link <% if @portfolio_fiis.empty? %> active <% end %>" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Criptomoedas</a>
-        <% end %>
-        <% if @portfolio_criptos.any? %>
-            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Ações Brasileiras</a>
+            <% if @portfolio_fiis.any? %>
+                <a class="nav-item nav-link active" id="nav-fii-tab" data-toggle="tab" href="#nav-fii" role="tab" aria-controls="nav-fii" aria-selected="false">Fundos Imobiliários</a>
+            <% end %>
+            <% if @portfolio_criptos.any? %>
+                <a class="nav-item nav-link <% if @portfolio_fiis.empty? %> active <% end %>" id="nav-cripto-tab" data-toggle="tab" href="#nav-cripto" role="tab" aria-controls="nav-cripto" aria-selected="true">Criptomoedas</a>
+            <% end %>
+            <% if @portfolio_br_stocks.any? %>
+                <a class="nav-item nav-link " id="nav-br_stock-tab" data-toggle="tab" href="#nav-br_stock" role="tab" aria-controls="nav-br_stock" aria-selected="false">Ações Brasileiras</a>
+            <% end %>
+            <% if @portfolio_properties.any? %>
+                <a class="nav-item nav-link" id="nav-property-tab" data-toggle="tab" href="#nav-property" role="tab" aria-controls="nav-property" aria-selected="true">Imóveis</a>
+            <% end %>
         </div>
-        <% end %>
     </nav>
     
     <div class="tab-content" id="nav-tabContent">
 
         <% if @portfolio_fiis.any? %>
-            <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <div class="tab-pane fade show active" id="nav-fii" role="tabpanel" aria-labelledby="nav-fii-tab">
                 <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
                     <thead>
                         <tr>
@@ -47,7 +50,7 @@
         <% end %>
 
         <% if @portfolio_criptos.any? %>
-            <div class="tab-pane fade <% if @portfolio_fiis.empty? %> show active <% end %>" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="tab-pane fade <% if @portfolio_fiis.empty? %> show active <% end %>" id="nav-cripto" role="tabpanel" aria-labelledby="nav-cripto-tab">
                 <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
                     <thead>
                         <tr>
@@ -74,8 +77,8 @@
                 </table>
             </div>
         <% end %>
-        <% if @portfolio_criptos.any? %>
-            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+        <% if @portfolio_br_stocks.any? %>
+            <div class="tab-pane fade <% if @portfolio_criptos.empty? %> show active <% end %>" id="nav-br_stock" role="tabpanel" aria-labelledby="nav-br_stock-tab">
                 <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
                     <thead>
                         <tr>
@@ -96,6 +99,35 @@
                             <td><%= number_with_precision(portfolio_br_stock.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td><%= number_with_precision(portfolio_br_stock.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td><%= link_to 'Edit', edit_portfolio_br_stock_path(portfolio_br_stock) %> | <%= link_to 'Destroy', portfolio_br_stock_path(portfolio_br_stock), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        <% end %>
+
+        <% if @portfolio_properties.any? %>
+            <div class="tab-pane fade <% if @portfolio_br_stocks.empty? %> show active <% end %>" id="nav-property" role="tabpanel" aria-labelledby="nav-property-tab">
+                <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>Qnt</th>
+                            <th>Preço medio</th>
+                            <th>Custo Total</th>
+                            <th>Total Hoje</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @portfolio_properties.each do |portfolio_property| %>
+                        <tr>
+                            <td><%= portfolio_property.property.ticker %></td>
+                            <td><%= number_with_precision(portfolio_property.shares_amount, precision: 0) %></td>
+                            <td><%= number_with_precision(portfolio_property.share_cost, precision: 4, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_property.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_property.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= link_to 'Edit', edit_portfolio_property_path(portfolio_property) %> | <%= link_to 'Destroy', portfolio_property_path(portfolio_property), method: :delete, data: { confirm: 'Are you sure?' } %></td>
                         </tr>
                         <% end %>
                     </tbody>

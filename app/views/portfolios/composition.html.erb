@@ -36,7 +36,7 @@
 var chart = new ApexCharts(document.querySelector("#chart"), options);
 chart.render();
 
-var url = "/api/portfolios/1";
+var url = "/api/portfolios/<%= @portfolio.id %>";
 $.getJSON(url, function (response) {
  chart.updateSeries(response);
 });

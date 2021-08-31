@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :portfolio_puts
+  resources :portfolio_calls
+  resources :portfolio_properties
   root to: 'portfolios#index'
   devise_for :users
   resources :portfolio_br_stocks

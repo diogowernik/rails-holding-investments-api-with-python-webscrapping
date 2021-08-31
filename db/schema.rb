@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_30_232912) do
+ActiveRecord::Schema.define(version: 2021_08_31_172641) do
 
   create_table "br_stocks", force: :cascade do |t|
     t.string "ticker"
@@ -123,6 +123,21 @@ ActiveRecord::Schema.define(version: 2021_08_30_232912) do
     t.index ["portfolio_id"], name: "index_portfolio_br_stocks_on_portfolio_id"
   end
 
+  create_table "portfolio_calls", force: :cascade do |t|
+    t.integer "category_id"
+    t.integer "portfolio_id"
+    t.integer "call_id"
+    t.decimal "shares_amount"
+    t.decimal "share_cost"
+    t.decimal "total_cost"
+    t.decimal "total_today"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["call_id"], name: "index_portfolio_calls_on_call_id"
+    t.index ["category_id"], name: "index_portfolio_calls_on_category_id"
+    t.index ["portfolio_id"], name: "index_portfolio_calls_on_portfolio_id"
+  end
+
   create_table "portfolio_criptos", force: :cascade do |t|
     t.integer "category_id"
     t.integer "portfolio_id"
@@ -151,6 +166,36 @@ ActiveRecord::Schema.define(version: 2021_08_30_232912) do
     t.index ["category_id"], name: "index_portfolio_fiis_on_category_id"
     t.index ["fii_id"], name: "index_portfolio_fiis_on_fii_id"
     t.index ["portfolio_id"], name: "index_portfolio_fiis_on_portfolio_id"
+  end
+
+  create_table "portfolio_properties", force: :cascade do |t|
+    t.integer "category_id"
+    t.integer "portfolio_id"
+    t.integer "property_id"
+    t.decimal "shares_amount"
+    t.decimal "share_cost"
+    t.decimal "total_cost"
+    t.decimal "total_today"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_portfolio_properties_on_category_id"
+    t.index ["portfolio_id"], name: "index_portfolio_properties_on_portfolio_id"
+    t.index ["property_id"], name: "index_portfolio_properties_on_property_id"
+  end
+
+  create_table "portfolio_puts", force: :cascade do |t|
+    t.integer "category_id"
+    t.integer "portfolio_id"
+    t.integer "put_id"
+    t.decimal "shares_amount"
+    t.decimal "share_cost"
+    t.decimal "total_cost"
+    t.decimal "total_today"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_portfolio_puts_on_category_id"
+    t.index ["portfolio_id"], name: "index_portfolio_puts_on_portfolio_id"
+    t.index ["put_id"], name: "index_portfolio_puts_on_put_id"
   end
 
   create_table "portfolios", force: :cascade do |t|

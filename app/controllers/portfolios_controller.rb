@@ -13,6 +13,7 @@ class PortfoliosController < ApplicationController
     @portfolio_criptos = PortfolioCripto.all.where(:portfolio_id => @portfolio.id)
     @portfolio_fiis = PortfolioFii.all.where(:portfolio_id => @portfolio.id)
     @portfolio_br_stocks = PortfolioBrStock.all.where(:portfolio_id => @portfolio.id)
+    @portfolio_properties = PortfolioProperty.all.where(:portfolio_id => @portfolio.id)
     render layout: "app" 
   end
 

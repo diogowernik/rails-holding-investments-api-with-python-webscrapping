@@ -29,4 +29,13 @@ json.array! @categories do |category|
             end
         end
     end
+    if @portfolio_properties.any?
+        if category.id == 4
+            json.set! :name, 'Imóveis'
+            json.data @portfolio_properties do |portfolio_property|
+                json.x portfolio_property.property.ticker
+                json.y portfolio_property.total_today
+            end
+        end
+    end
 end
