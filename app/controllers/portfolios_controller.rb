@@ -1,5 +1,5 @@
 class PortfoliosController < ApplicationController
-  before_action :set_portfolio, only: [:show, :edit, :update, :destroy, :composition, :radar]
+  before_action :set_portfolio, only: [:show, :edit, :update, :destroy, :composition, :radar, :derivatives]
   # GET /portfolios
   # GET /portfolios.json
   def index
@@ -19,6 +19,13 @@ class PortfoliosController < ApplicationController
 
   def composition
     @portfolios = Portfolio.all
+    render layout: "app" 
+  end
+
+  def derivatives
+    @portfolios = Portfolio.all
+    @portfolio_calls = PortfolioCall.all.where(:portfolio_id => @portfolio.id)
+    @portfolio_puts = PortfolioPut.all.where(:portfolio_id => @portfolio.id)
     render layout: "app" 
   end
 

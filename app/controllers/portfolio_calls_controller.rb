@@ -28,7 +28,7 @@ class PortfolioCallsController < ApplicationController
 
     respond_to do |format|
       if @portfolio_call.save
-        format.html { redirect_to portfolio_path(@portfolio_call.portfolio.id), notice: 'Portfolio call was successfully created.' }
+        format.html { redirect_to portfolio_derivatives_path(@portfolio_call.portfolio.id), notice: 'Portfolio call was successfully created.' }
         format.json { render :show, status: :created, location: @portfolio_call }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class PortfolioCallsController < ApplicationController
   def update
     respond_to do |format|
       if @portfolio_call.update(portfolio_call_params)
-        format.html { redirect_to portfolio_path(@portfolio_call.portfolio.id), notice: 'Portfolio call was successfully updated.' }
+        format.html { redirect_to portfolio_derivatives_path(@portfolio_call.portfolio.id), notice: 'Portfolio call was successfully updated.' }
         format.json { render :show, status: :ok, location: @portfolio_call }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class PortfolioCallsController < ApplicationController
   def destroy
     @portfolio_call.destroy
     respond_to do |format|
-      format.html { redirect_to portfolio_path(@portfolio_call.portfolio.id), notice: 'Portfolio call was successfully destroyed.' }
+      format.html { redirect_to portfolio_derivatives_path(@portfolio_call.portfolio.id), notice: 'Portfolio call was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

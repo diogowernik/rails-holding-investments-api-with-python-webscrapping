@@ -1,0 +1,74 @@
+<section id="tabs" class="project-tab">
+
+    <nav>
+        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+            <% if @portfolio_puts.any? %>
+                <a class="nav-item nav-link active" id="nav-put-tab" data-toggle="tab" href="#nav-put" role="tab" aria-controls="nav-put" aria-selected="false">Puts</a>
+            <% end %>
+            <% if @portfolio_calls.any? %>
+                <a class="nav-item nav-link <% if @portfolio_puts.empty? %> active <% end %>" id="nav-call-tab" data-toggle="tab" href="#nav-call" role="tab" aria-controls="nav-call" aria-selected="true">Calls</a>
+            <% end %>
+        </div>
+    </nav>
+    
+    <div class="tab-content" id="nav-tabContent">
+
+        <% if @portfolio_puts.any? %>
+            <div class="tab-pane fade show active" id="nav-put" role="tabpanel" aria-labelledby="nav-put-tab">
+                <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>Qnt</th>
+                            <th>PM</th>
+                            <th>Custo Total</th>
+                            <th>Total Hoje</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @portfolio_puts.each do |portfolio_put| %>
+                        <tr>
+                            <td><%= portfolio_put.put.ticker %></td>                        
+                            <td><%= number_with_precision(portfolio_put.shares_amount, precision: 0) %>
+                            <td><%= number_with_precision(portfolio_put.share_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_put.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_put.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= link_to 'Edit', edit_portfolio_put_path(portfolio_put) %> | <%= link_to 'Destroy', portfolio_put_path(portfolio_put), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        <% end %>
+
+        <% if @portfolio_calls.any? %>
+            <div class="tab-pane fade <% if @portfolio_puts.empty? %> show active <% end %>" id="nav-call" role="tabpanel" aria-labelledby="nav-call-tab">
+                <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>Qnt</th>
+                            <th>Preço medio</th>
+                            <th>Custo Total</th>
+                            <th>Total Hoje</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @portfolio_calls.each do |portfolio_call| %>
+                        <tr>
+                            <td><%= portfolio_call.call.ticker %></td>
+                            <td><%= number_with_precision(portfolio_call.shares_amount, precision: 0) %></td>
+                            <td><%= number_with_precision(portfolio_call.share_cost, precision: 4, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_call.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_call.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= link_to 'Edit', edit_portfolio_call_path(portfolio_call) %> | <%= link_to 'Destroy', portfolio_call_path(portfolio_call), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        <% end %>
+    </div>
+</section>

@@ -3,14 +3,17 @@ Rails.application.routes.draw do
   resources :portfolio_puts
   resources :portfolio_calls
   resources :portfolio_properties
-  root to: 'portfolios#index'
-  devise_for :users
   resources :portfolio_br_stocks
   resources :portfolio_criptos
   resources :portfolio_fiis
   resources :portfolios
+
   get 'portfolio/:id/composition', to: 'portfolios#composition', as: 'portfolio_composition'
   get 'portfolio/:id/radar', to: 'portfolios#radar', as: 'portfolio_radar'
+  get 'portfolio/:id/derivatives', to: 'portfolios#derivatives', as: 'portfolio_derivatives'
+
+  root to: 'portfolios#index'
+  devise_for :users
 
   namespace :admin do
     get '/', to: 'categories#index', as: 'dashboard'
