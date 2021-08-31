@@ -1,19 +1,48 @@
 
-<%= simple_form_for(@portfolio_etf) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<%= simple_form_for(@portfolio_etf) do |form| %>
+  <%= form.error_notification %>
+  <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
 
-  <div class="form-inputs">
-    <%= f.association :category %>
-    <%= f.association :portfolio %>
-    <%= f.association :etf %>
-    <%= f.input :shares_amount %>
-    <%= f.input :share_cost %>
-    <%= f.input :total_cost %>
-    <%= f.input :total_today %>
+<div class="row">
+  <div class="col-md-4">
+    <%= form.label :etf_id %> 
+    <%= form.select :etf_id, Etf.all.collect {|d| [d.ticker, d.id]}, {}, {class: 'form-control'} %>
+  </div>
+  <div class="col-md-4">
+    <%= form.label :portfolio_id %> 
+    <%= form.select :portfolio_id, Portfolio.all.collect {|d| [d.title, d.id]}, {}, {class: 'form-control'} %>
+  </div>
+  <div class="col-md-4">
+    <%= form.label :category_id %> 
+    <%= form.select :category_id, Category.all.collect {|d| [d.title, d.id]}, {selected: 8}, {class: 'form-control'} %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+
+</div>
+<div class="row">
+  <div class="col-md-4">
+      <%= form.label :shares_amount %>
+      <%= form.text_field :shares_amount, class: 'form-control' %>
   </div>
+  <div class="col-md-4">
+      <%= form.label :share_cost %>
+      <%= form.text_field :share_cost, class: 'form-control' %>
+  </div>
+  <div class="col-md-4">
+      <%= form.label :total_cost %>
+      <%= form.text_field :total_cost, class: 'form-control' %>
+  </div>
+  <div class="col-md-4">
+      <%= form.label :total_today %>
+      <%= form.text_field :total_today, class: 'form-control' %>
+  </div>
+
+</div>
+<div class="row">
+    <div class="col-md-3 mt-4">
+		<div class="form-group">
+                <%= form.submit 'Enviar', class: 'btn btn-block btn-primary' %>
+         </div>
+     </div>
+</div>
 <% end %>
