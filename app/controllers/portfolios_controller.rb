@@ -1,5 +1,5 @@
 class PortfoliosController < ApplicationController
-  before_action :set_portfolio, only: [:show, :edit, :update, :destroy, :composition, :radar, :derivatives]
+  before_action :set_portfolio, only: [:show, :edit, :update, :destroy, :composition, :radar, :derivatives, :international]
   # GET /portfolios
   # GET /portfolios.json
   def index
@@ -26,6 +26,15 @@ class PortfoliosController < ApplicationController
     @portfolios = Portfolio.all
     @portfolio_calls = PortfolioCall.all.where(:portfolio_id => @portfolio.id)
     @portfolio_puts = PortfolioPut.all.where(:portfolio_id => @portfolio.id)
+    @portfolio_subscriptions = PortfolioSubscription.all.where(:portfolio_id => @portfolio.id)
+    render layout: "app" 
+  end
+
+  def international
+    @portfolios = Portfolio.all
+    @portfolio_currencies = PortfolioCurrency.all.where(:portfolio_id => @portfolio.id)
+    @portfolio_etfs = PortfolioEtf.all.where(:portfolio_id => @portfolio.id)
+    @portfolio_stocks = PortfolioStock.all.where(:portfolio_id => @portfolio.id)
     render layout: "app" 
   end
 

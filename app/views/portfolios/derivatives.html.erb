@@ -8,6 +8,9 @@
             <% if @portfolio_calls.any? %>
                 <a class="nav-item nav-link <% if @portfolio_puts.empty? %> active <% end %>" id="nav-call-tab" data-toggle="tab" href="#nav-call" role="tab" aria-controls="nav-call" aria-selected="true">Calls</a>
             <% end %>
+            <% if @portfolio_subscriptions.any? %>
+                <a class="nav-item nav-link <% if @portfolio_calls.empty? %> active <% end %>" id="nav-subscription-tab" data-toggle="tab" href="#nav-subscription" role="tab" aria-controls="nav-subscription" aria-selected="true">Subscrições</a>
+            <% end %>
         </div>
     </nav>
     
@@ -20,9 +23,13 @@
                         <tr>
                             <th>Ticker</th>
                             <th>Qnt</th>
-                            <th>PM</th>
-                            <th>Custo Total</th>
-                            <th>Total Hoje</th>
+                            <th>Meu Premio</th>
+                            <th>Premio Hj</th>
+                            <th>PM final</th>
+                            <th>Cotação Hj</th>
+                            <th>Resultado</th>
+                            <th>Yield Sintético</th>
+                            <th>Vencimento</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -32,8 +39,12 @@
                             <td><%= portfolio_put.put.ticker %></td>                        
                             <td><%= number_with_precision(portfolio_put.shares_amount, precision: 0) %>
                             <td><%= number_with_precision(portfolio_put.share_cost, precision: 2, separator: ",", delimiter: ".") %></td>
-                            <td><%= number_with_precision(portfolio_put.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
-                            <td><%= number_with_precision(portfolio_put.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_put.put.price, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td class="text-primary"><%= number_with_precision(portfolio_put.put.strike - portfolio_put.share_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_put.put.br_stock.price, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td class="text-primary"><%= number_with_precision(portfolio_put.shares_amount * portfolio_put.share_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_put.share_cost / portfolio_put.put.strike * 100, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= portfolio_put.put.expiration.title %></td>
                             <td><%= link_to 'Edit', edit_portfolio_put_path(portfolio_put) %> | <%= link_to 'Destroy', portfolio_put_path(portfolio_put), method: :delete, data: { confirm: 'Are you sure?' } %></td>
                         </tr>
                         <% end %>
@@ -64,6 +75,35 @@
                             <td><%= number_with_precision(portfolio_call.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td><%= number_with_precision(portfolio_call.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td><%= link_to 'Edit', edit_portfolio_call_path(portfolio_call) %> | <%= link_to 'Destroy', portfolio_call_path(portfolio_call), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        <% end %>
+
+        <% if @portfolio_subscriptions.any? %>
+            <div class="tab-pane fade <% if @portfolio_calls.empty? %> show active <% end %>" id="nav-subscription" role="tabpanel" aria-labelledby="nav-subscription-tab">
+                <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>Qnt</th>
+                            <th>Preço medio</th>
+                            <th>Custo Total</th>
+                            <th>Total Hoje</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @portfolio_subscriptions.each do |portfolio_subscription| %>
+                        <tr>
+                            <td><%= portfolio_subscription.subscription.ticker %></td>
+                            <td><%= number_with_precision(portfolio_subscription.shares_amount, precision: 0) %></td>
+                            <td><%= number_with_precision(portfolio_subscription.share_cost, precision: 4, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_subscription.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_subscription.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= link_to 'Edit', edit_portfolio_subscription_path(portfolio_subscription) %> | <%= link_to 'Destroy', portfolio_subscription_path(portfolio_subscription), method: :delete, data: { confirm: 'Are you sure?' } %></td>
                         </tr>
                         <% end %>
                     </tbody>

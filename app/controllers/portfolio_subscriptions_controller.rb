@@ -28,7 +28,7 @@ class PortfolioSubscriptionsController < ApplicationController
 
     respond_to do |format|
       if @portfolio_subscription.save
-        format.html { redirect_to @portfolio_subscription, notice: 'Portfolio subscription was successfully created.' }
+        format.html { redirect_to portfolio_derivatives_path(@portfolio_subscription.portfolio.id), notice: 'Portfolio subscription was successfully created.' }
         format.json { render :show, status: :created, location: @portfolio_subscription }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class PortfolioSubscriptionsController < ApplicationController
   def update
     respond_to do |format|
       if @portfolio_subscription.update(portfolio_subscription_params)
-        format.html { redirect_to @portfolio_subscription, notice: 'Portfolio subscription was successfully updated.' }
+        format.html { redirect_to portfolio_derivatives_path(@portfolio_subscription.portfolio.id), notice: 'Portfolio subscription was successfully updated.' }
         format.json { render :show, status: :ok, location: @portfolio_subscription }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class PortfolioSubscriptionsController < ApplicationController
   def destroy
     @portfolio_subscription.destroy
     respond_to do |format|
-      format.html { redirect_to portfolio_subscriptions_url, notice: 'Portfolio subscription was successfully destroyed.' }
+      format.html { redirect_to portfolio_derivatives_path(@portfolio_subscription.portfolio.id), notice: 'Portfolio subscription was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

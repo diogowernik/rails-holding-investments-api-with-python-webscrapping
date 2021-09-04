@@ -17,6 +17,7 @@ class Api::PortfoliosController < ApiController
   def show
     @categories = Category.all
     @portfolio_fiis = PortfolioFii.all.where(:portfolio_id => @portfolio.id).order("id desc")
+    @portfolio_subscriptions = PortfolioSubscription.all.where(:portfolio_id => @portfolio.id).order("id desc")
     @portfolio_criptos = PortfolioCripto.all.where(:portfolio_id => @portfolio.id).order("id desc")
     @portfolio_br_stocks = PortfolioBrStock.all.where(:portfolio_id => @portfolio.id).order("id desc")
     @portfolio_properties = PortfolioProperty.all.where(:portfolio_id => @portfolio.id).order("id desc")

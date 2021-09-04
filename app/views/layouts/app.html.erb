@@ -88,6 +88,34 @@
                                                             Adicionar put
                                                         <% end %>                                                                      
                                                     </div>
+                                                </div> 
+                                                <div class="list-group-item list-group-item-action">
+                                                    <div class="media">
+                                                        <%= link_to new_portfolio_subscription_path, class: "dropdown-item" do %>
+                                                            Adicionar subscrições
+                                                        <% end %>                                                                      
+                                                    </div>
+                                                </div> 
+                                                <div class="list-group-item list-group-item-action">
+                                                    <div class="media">
+                                                        <%= link_to new_portfolio_etf_path, class: "dropdown-item" do %>
+                                                            Adicionar Etf
+                                                        <% end %>                                                                      
+                                                    </div>
+                                                </div> 
+                                                <div class="list-group-item list-group-item-action">
+                                                    <div class="media">
+                                                        <%= link_to new_portfolio_currency_path, class: "dropdown-item" do %>
+                                                            Adicionar Moeda Estrangeira
+                                                        <% end %>                                                                      
+                                                    </div>
+                                                </div> 
+                                                <div class="list-group-item list-group-item-action">
+                                                    <div class="media">
+                                                        <%= link_to new_portfolio_stock_path, class: "dropdown-item" do %>
+                                                            Adicionar Ações Estrangeiras
+                                                        <% end %>                                                                      
+                                                    </div>
                                                 </div>                                            
                                             </div>
                                         </div>
@@ -141,6 +169,15 @@
                                             class="btn btn-outline-primary ml-3
                                             <%= 'active' if current_page?(portfolio_derivatives_path) %>" >
                                                 Derivativos
+                                            </button>
+                                        <% end %>
+                                    </li>
+                                    <li class="nav-item">
+                                        <%= link_to portfolio_international_path do %>
+                                            <button 
+                                            class="btn btn-outline-primary ml-3
+                                            <%= 'active' if current_page?(portfolio_international_path) %>" >
+                                                Internacional
                                             </button>
                                         <% end %>
                                     </li>

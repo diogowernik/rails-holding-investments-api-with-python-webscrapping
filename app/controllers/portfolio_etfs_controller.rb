@@ -28,7 +28,7 @@ class PortfolioEtfsController < ApplicationController
 
     respond_to do |format|
       if @portfolio_etf.save
-        format.html { redirect_to @portfolio_etf, notice: 'Portfolio etf was successfully created.' }
+        format.html { redirect_to portfolio_international_path(@portfolio_etf.portfolio.id), notice: 'Portfolio etf was successfully created.' }
         format.json { render :show, status: :created, location: @portfolio_etf }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class PortfolioEtfsController < ApplicationController
   def update
     respond_to do |format|
       if @portfolio_etf.update(portfolio_etf_params)
-        format.html { redirect_to @portfolio_etf, notice: 'Portfolio etf was successfully updated.' }
+        format.html { redirect_to portfolio_international_path(@portfolio_etf.portfolio.id), notice: 'Portfolio etf was successfully updated.' }
         format.json { render :show, status: :ok, location: @portfolio_etf }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class PortfolioEtfsController < ApplicationController
   def destroy
     @portfolio_etf.destroy
     respond_to do |format|
-      format.html { redirect_to portfolio_etfs_url, notice: 'Portfolio etf was successfully destroyed.' }
+      format.html { redirect_to portfolio_international_path(@portfolio_etf.portfolio.id), notice: 'Portfolio etf was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

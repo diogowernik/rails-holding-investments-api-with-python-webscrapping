@@ -16,99 +16,97 @@
         <div class="container-fluid mt-4">
             <div class="row">
                 <div class="col-xl-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <%= link_to admin_categories_path, class: 'dropdown-item m-2' do %>
-                                Categorias de Investimentos
-                            <% end %>
+                    <a href="#admin-menu" data-toggle="collapse">
+                    <div class="card-header text-primary"> Admin Menu</div>
+                    </a>
+                        <div id="admin-menu" class="card-body collapse">
+                        <div class="card">
+                            <a href="#brazilian-investments" data-toggle="collapse">
+                                <div class="card-header text-primary"> Investimentos no Brasil</div>
+                            </a>
+                            <div id="brazilian-investments" class="card-body collapse">
+                                <%= link_to admin_fixed_incomes_path, class: 'dropdown-item m-2' do %>
+                                    Renda Fixas
+                                <% end %>
+                                <%= link_to admin_fiis_path, class: 'dropdown-item m-2' do %>
+                                    Fundos Imobiliários
+                                <% end %>
+                                <%= link_to admin_br_stocks_path, class: 'dropdown-item m-2' do %>
+                                    Ações Brasileiras
+                                <% end %>
+                                <%= link_to admin_properties_path, class: 'dropdown-item m-2' do %>
+                                    Imóveis / Propriedades
+                                <% end %>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <%= link_to admin_fixed_incomes_path, class: 'dropdown-item m-2' do %>
-                                Renda Fixas
-                            <% end %>
-                            <%= link_to admin_fiis_path, class: 'dropdown-item m-2' do %>
-                                Fundos Imobiliários
-                            <% end %>
-                            <%= link_to admin_br_stocks_path, class: 'dropdown-item m-2' do %>
-                                Ações Brasileiras
-                            <% end %>
-                            <%= link_to admin_properties_path, class: 'dropdown-item m-2' do %>
-                                Imóveis / Propriedades
-                            <% end %>
+                        <div class="card">
+                            <a href="#international-investments" data-toggle="collapse">
+                                <div class="card-header text-primary"> Investimentos Internacionais</div>
+                            </a>
+                            <div id="international-investments" class="card-body collapse">
+                                <%= link_to admin_currencies_path, class: 'dropdown-item m-2' do %>
+                                    Moedas Estrangeiras
+                                <% end %>
+                                <%= link_to admin_etfs_path, class: 'dropdown-item m-2' do %>
+                                    ETFs
+                                <% end %>
+                                <%= link_to admin_stocks_path, class: 'dropdown-item m-2' do %>
+                                    Stocks
+                                <% end %>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <%= link_to admin_currencies_path, class: 'dropdown-item m-2' do %>
-                                Moedas Estrangeiras
-                            <% end %>
-                            <%= link_to admin_etfs_path, class: 'dropdown-item m-2' do %>
-                                ETFs
-                            <% end %>
-                            <%= link_to admin_stocks_path, class: 'dropdown-item m-2' do %>
-                                Stocks
-                            <% end %>
+                        <div class="card">
+                            <a href="#cripto" data-toggle="collapse">
+                                <div class="card-header text-primary"> criptomoedas</div>
+                            </a>
+                            <div id="cripto" class="card-body collapse">
+                                <%= link_to admin_criptos_path, class: 'dropdown-item m-2' do %>
+                                    Criptomoedas
+                                <% end %>
+                                <%= link_to admin_holding_tokens_path, class: 'dropdown-item m-2' do %>
+                                    Minha Holding Token
+                                <% end %>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <%= link_to admin_criptos_path, class: 'dropdown-item m-2' do %>
-                                Criptomoedas
-                            <% end %>
-                            
+                        <div class="card">
+                            <a href="#derivatives" data-toggle="collapse">
+                                <div class="card-header text-primary"> Derivativos</div>
+                            </a>
+                            <div id="derivatives" class="card-body collapse">
+                                <%= link_to admin_calls_path, class: 'dropdown-item m-2' do %>
+                                    Calls de Ações
+                                <% end %>
+                                <%= link_to admin_puts_path, class: 'dropdown-item m-2' do %>
+                                    Puts de Ações
+                                <% end %>
+                                <%= link_to admin_subscriptions_path, class: 'dropdown-item m-2' do %>
+                                    Subscrições de Fundos Imobiliários
+                                <% end %>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <%= link_to admin_holding_tokens_path, class: 'dropdown-item m-2' do %>
-                                Minha Holding Token
-                            <% end %>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <%= link_to admin_calls_path, class: 'dropdown-item m-2' do %>
-                                Calls de Ações
-                            <% end %>
-                            <%= link_to admin_puts_path, class: 'dropdown-item m-2' do %>
-                                Puts de Ações
-                            <% end %>
-                            <%= link_to admin_subscriptions_path, class: 'dropdown-item m-2' do %>
-                                Subscrições de Fundos Imobiliários
-                            <% end %>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <%= link_to admin_portfolios_path, class: 'dropdown-item m-2' do %>
-                                Portfolios
-                            <% end %>
-                            <%= link_to admin_portfolio_fiis_path, class: 'dropdown-item m-2' do %>
-                                Fundos Imobiliários nos Portfolios
-                            <% end %>
-                            <%= link_to admin_portfolio_criptos_path, class: 'dropdown-item m-2' do %>
-                                Criptomoedas nos Portfolios
-                            <% end %>
-                            <%= link_to admin_portfolio_br_stocks_path, class: 'dropdown-item m-2' do %>
-                                Ações Brasileiras nos Portfolios
-                            <% end %>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <%= link_to admin_years_path, class: 'dropdown-item m-2' do %>
-                                Anos
-                            <% end %>
-                            <%= link_to admin_months_path, class: 'dropdown-item m-2' do %>
-                                Meses
-                            <% end %>
-                            <%= link_to admin_expirations_path, class: 'dropdown-item m-2' do %>
-                                Vencimentos
-                            <% end %>
-                        </div>
-                    </div>
+                        <div class="card">
+                            <a href="#systems" data-toggle="collapse">
+                                <div class="card-header text-primary"> Sistema</div>
+                            </a>
+                            <div id="systems" class="card-body collapse">
+                                <%= link_to admin_categories_path, class: 'dropdown-item m-2' do %>
+                                    Categorias de Investimentos
+                                <% end %>
+                                <%= link_to admin_portfolios_path, class: 'dropdown-item m-2' do %>
+                                    Portfolios
+                                <% end %>
+                                <%= link_to admin_years_path, class: 'dropdown-item m-2' do %>
+                                    Anos
+                                <% end %>
+                                <%= link_to admin_months_path, class: 'dropdown-item m-2' do %>
+                                    Meses
+                                <% end %>
+                                <%= link_to admin_expirations_path, class: 'dropdown-item m-2' do %>
+                                    Vencimentos dos derivativos
+                                <% end %>
+                            </div>
+                        </div>   
+                    </div>   
                 </div>
                 <div class="col-xl-9">
                     <div class="card">

@@ -28,7 +28,7 @@ class PortfolioCurrenciesController < ApplicationController
 
     respond_to do |format|
       if @portfolio_currency.save
-        format.html { redirect_to @portfolio_currency, notice: 'Portfolio currency was successfully created.' }
+        format.html { redirect_to portfolio_international_path(@portfolio_currency.portfolio.id), notice: 'Portfolio currency was successfully created.' }
         format.json { render :show, status: :created, location: @portfolio_currency }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class PortfolioCurrenciesController < ApplicationController
   def update
     respond_to do |format|
       if @portfolio_currency.update(portfolio_currency_params)
-        format.html { redirect_to @portfolio_currency, notice: 'Portfolio currency was successfully updated.' }
+        format.html { redirect_to portfolio_international_path(@portfolio_currency.portfolio.id), notice: 'Portfolio currency was successfully updated.' }
         format.json { render :show, status: :ok, location: @portfolio_currency }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class PortfolioCurrenciesController < ApplicationController
   def destroy
     @portfolio_currency.destroy
     respond_to do |format|
-      format.html { redirect_to portfolio_currencies_url, notice: 'Portfolio currency was successfully destroyed.' }
+      format.html { redirect_to portfolio_international_path(@portfolio_currency.portfolio.id), notice: 'Portfolio currency was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

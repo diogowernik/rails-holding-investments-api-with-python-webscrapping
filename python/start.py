@@ -1,0 +1,4 @@
+import br_stocks_price
+import fiis_price
+import calls_price
+import puts_price

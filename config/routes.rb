@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   get 'portfolio/:id/composition', to: 'portfolios#composition', as: 'portfolio_composition'
   get 'portfolio/:id/radar', to: 'portfolios#radar', as: 'portfolio_radar'
   get 'portfolio/:id/derivatives', to: 'portfolios#derivatives', as: 'portfolio_derivatives'
+  get 'portfolio/:id/international', to: 'portfolios#international', as: 'portfolio_international'
+
 
   root to: 'portfolios#index'
   devise_for :users
