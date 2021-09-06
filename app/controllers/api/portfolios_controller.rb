@@ -1,5 +1,5 @@
 class Api::PortfoliosController < ApiController
-  before_action :set_portfolio, only: [:show, :update, :destroy, :portfoliofiis, :portfoliocriptos]
+  before_action :set_portfolio, only: [:show, :update, :destroy, :br_stocks_chart, :portfoliofiis, :portfoliocriptos]
 
   # GET /portfolios
   def index
@@ -22,6 +22,12 @@ class Api::PortfoliosController < ApiController
     @portfolio_br_stocks = PortfolioBrStock.all.where(:portfolio_id => @portfolio.id).order("id desc")
     @portfolio_properties = PortfolioProperty.all.where(:portfolio_id => @portfolio.id).order("id desc")
     render 'api/portfolios/show.json.jbuilder'
+  end
+
+  def br_stocks_chart
+    @categories = Category.all
+    @portfolio_br_stocks = PortfolioBrStock.all.where(:portfolio_id => @portfolio.id).order("id desc")
+    render 'api/portfolios/br_stocks_chart.json.jbuilder'
   end
 
   def portfoliofiis
