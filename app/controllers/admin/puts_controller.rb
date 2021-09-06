@@ -69,6 +69,6 @@ class Admin::PutsController < AdminController
 
     # Only allow a list of trusted parameters through.
     def put_params
-      params.require(:put).permit(:br_stock_id, :expiration_id, :ticker, :strike, :price)
+      params.require(:put).permit(:br_stock_id, :expiration_id, :ticker, :strike, :price, :is_disable)
     end
 end

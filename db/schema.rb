@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_31_192729) do
+ActiveRecord::Schema.define(version: 2021_09_05_234448) do
 
   create_table "br_stocks", force: :cascade do |t|
     t.string "ticker"
@@ -29,6 +29,9 @@ ActiveRecord::Schema.define(version: 2021_08_31_192729) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "strike"
+    t.boolean "is_disable"
+    t.decimal "prize"
+    t.decimal "total_prize"
     t.index ["br_stock_id"], name: "index_calls_on_br_stock_id"
     t.index ["expiration_id"], name: "index_calls_on_expiration_id"
   end
@@ -133,9 +136,13 @@ ActiveRecord::Schema.define(version: 2021_08_31_192729) do
     t.decimal "total_today"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "situation_id"
+    t.decimal "price"
+    t.decimal "total_price"
     t.index ["call_id"], name: "index_portfolio_calls_on_call_id"
     t.index ["category_id"], name: "index_portfolio_calls_on_category_id"
     t.index ["portfolio_id"], name: "index_portfolio_calls_on_portfolio_id"
+    t.index ["situation_id"], name: "index_portfolio_calls_on_situation_id"
   end
 
   create_table "portfolio_criptos", force: :cascade do |t|
@@ -253,9 +260,13 @@ ActiveRecord::Schema.define(version: 2021_08_31_192729) do
     t.decimal "total_today"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "situation_id"
+    t.decimal "price"
+    t.decimal "total_price"
     t.index ["category_id"], name: "index_portfolio_puts_on_category_id"
     t.index ["portfolio_id"], name: "index_portfolio_puts_on_portfolio_id"
     t.index ["put_id"], name: "index_portfolio_puts_on_put_id"
+    t.index ["situation_id"], name: "index_portfolio_puts_on_situation_id"
   end
 
   create_table "portfolio_stocks", force: :cascade do |t|
@@ -314,8 +325,18 @@ ActiveRecord::Schema.define(version: 2021_08_31_192729) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "strike"
+    t.boolean "is_disable"
+    t.decimal "prize"
+    t.decimal "total_prize"
     t.index ["br_stock_id"], name: "index_puts_on_br_stock_id"
     t.index ["expiration_id"], name: "index_puts_on_expiration_id"
+  end
+
+  create_table "situations", force: :cascade do |t|
+    t.string "title"
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "stocks", force: :cascade do |t|

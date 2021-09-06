@@ -21,8 +21,8 @@ conn = create_connection('../db/development.sqlite3')
 
 cursor = conn.cursor()
 
-app_puts = pd.read_sql_query("SELECT ticker, strike, price FROM Puts ORDER BY ticker", conn, index_col="ticker")
-# print(app_puts)
+app_puts = pd.read_sql_query("SELECT ticker, strike, price FROM Puts WHERE is_disable = false ORDER BY ticker", conn, index_col="ticker")
+print(app_puts)
 
 url = 'https://www.tradergrafico.com.br/opcoes/'
 header = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36"}

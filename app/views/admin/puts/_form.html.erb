@@ -21,17 +21,20 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-3">
     <%= form.label :ticker %>
     <%= form.text_field :ticker, class: 'form-control' %>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
       <%= form.label :price %>
       <%= form.text_field :price, class: 'form-control' %>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
       <%= form.label :strike %>
       <%= form.text_field :strike, class: 'form-control' %>
+  </div>
+  <div class="col-md-3 mt-3">
+      <%= form.input :is_disable, inline_label: 'Desabilitado?', class: 'form-control' %>
   </div>
 </div>
 <div class="row">

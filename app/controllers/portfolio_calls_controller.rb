@@ -28,7 +28,7 @@ class PortfolioCallsController < ApplicationController
 
     respond_to do |format|
       if @portfolio_call.save
-        format.html { redirect_to portfolio_derivatives_path(@portfolio_call.portfolio.id), notice: 'Portfolio call was successfully created.' }
+        format.html { redirect_to portfolio_calls_management_path(@portfolio_call.portfolio.id), notice: 'Portfolio call was successfully created.' }
         format.json { render :show, status: :created, location: @portfolio_call }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class PortfolioCallsController < ApplicationController
   def update
     respond_to do |format|
       if @portfolio_call.update(portfolio_call_params)
-        format.html { redirect_to portfolio_derivatives_path(@portfolio_call.portfolio.id), notice: 'Portfolio call was successfully updated.' }
+        format.html { redirect_to portfolio_calls_management_path(@portfolio_call.portfolio.id), notice: 'Portfolio call was successfully updated.' }
         format.json { render :show, status: :ok, location: @portfolio_call }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class PortfolioCallsController < ApplicationController
   def destroy
     @portfolio_call.destroy
     respond_to do |format|
-      format.html { redirect_to portfolio_derivatives_path(@portfolio_call.portfolio.id), notice: 'Portfolio call was successfully destroyed.' }
+      format.html { redirect_to portfolio_calls_management_path(@portfolio_call.portfolio.id), notice: 'Portfolio call was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +69,6 @@ class PortfolioCallsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def portfolio_call_params
-      params.require(:portfolio_call).permit(:category_id, :portfolio_id, :call_id, :shares_amount, :share_cost, :total_cost, :total_today)
+      params.require(:portfolio_call).permit(:category_id, :portfolio_id, :situation_id, :call_id, :shares_amount, :price, :total_price, :share_cost, :total_cost, :total_today)
     end
 end

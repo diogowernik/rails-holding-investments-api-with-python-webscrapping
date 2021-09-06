@@ -14,6 +14,7 @@
           <th>Preço</th>
           <th>Strike</th>
           <th>Vencimento</th>
+          <th>Desabilitado</th>
           <th></th>
         </tr>
       </thead>
@@ -25,6 +26,7 @@
             <td><%= put.price %></td>
             <td><%= put.strike %></td>
             <td><%= put.expiration.title %></td>
+            <td <% if put.is_disable %> class="text-primary" <% end %> ><%= put.is_disable %></td>
             <td> <%= link_to 'Edit', edit_admin_put_path(put.id) %> | <%= link_to 'Destroy', admin_put_path(put.id), method: :delete %></td>
           </tr>
         <% end %>

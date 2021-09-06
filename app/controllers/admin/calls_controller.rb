@@ -69,6 +69,6 @@ class Admin::CallsController < AdminController
 
     # Only allow a list of trusted parameters through.
     def call_params
-      params.require(:call).permit(:br_stock_id, :expiration_id, :ticker, :strike, :price)
+      params.require(:call).permit(:br_stock_id, :expiration_id, :ticker, :strike, :price, :is_disable)
     end
 end

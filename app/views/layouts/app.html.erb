@@ -155,20 +155,20 @@
                                         <% end %>
                                     </li>
                                     <li class="nav-item">
-                                        <%= link_to portfolio_radar_path do %>
+                                        <%= link_to portfolio_calls_management_path do %>
                                             <button 
                                             class="btn btn-outline-primary ml-3
-                                            <%= 'active' if current_page?(portfolio_radar_path) %>" >
-                                                Radar
+                                            <%= 'active' if current_page?(portfolio_calls_management_path) %>" >
+                                                Calls
                                             </button>
                                         <% end %>
                                     </li>
                                     <li class="nav-item">
-                                        <%= link_to portfolio_derivatives_path do %>
+                                        <%= link_to portfolio_puts_management_path do %>
                                             <button 
                                             class="btn btn-outline-primary ml-3
-                                            <%= 'active' if current_page?(portfolio_derivatives_path) %>" >
-                                                Derivativos
+                                            <%= 'active' if current_page?(portfolio_puts_management_path) %>" >
+                                                Puts
                                             </button>
                                         <% end %>
                                     </li>
@@ -189,17 +189,9 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-12">
-                    <div class="card">
-                        
-                        <div class="card-body">
-                            <% if alert %><div class="alert alert-success m-5 text-center"><%= alert %></div><% end %>
-                            <% if notice %><div class="alert alert-success m-5 text-center"><%= notice %></div><% end %>
-                            <%= yield %>
-                        </div>
-                    </div>
-                </div>
-                    
+                <% if alert %><div class="alert alert-success m-5 text-center"><%= alert %></div><% end %>
+                <% if notice %><div class="alert alert-success m-5 text-center"><%= notice %></div><% end %>
+                <%= yield %>          
             </div>
         </div>
     </div>

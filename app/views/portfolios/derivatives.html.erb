@@ -21,11 +21,13 @@
                 <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
                     <thead>
                         <tr>
+                            <th>Status</th>
                             <th>Ticker</th>
                             <th>Qnt</th>
                             <th>Meu Premio</th>
                             <th>Premio Hj</th>
-                            <th>PM final</th>
+                            <th>PM final (Compra)</th>
+                            <th>Strike</th>
                             <th>Cotação Hj</th>
                             <th>Resultado</th>
                             <th>Yield Sintético</th>
@@ -36,16 +38,18 @@
                     <tbody>
                         <% @portfolio_puts.each do |portfolio_put| %>
                         <tr>
+                            <td><%= portfolio_put.situation.title %></td>     
                             <td><%= portfolio_put.put.ticker %></td>                        
                             <td><%= number_with_precision(portfolio_put.shares_amount, precision: 0) %>
                             <td><%= number_with_precision(portfolio_put.share_cost, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td><%= number_with_precision(portfolio_put.put.price, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td class="text-primary"><%= number_with_precision(portfolio_put.put.strike - portfolio_put.share_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_put.put.strike, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td><%= number_with_precision(portfolio_put.put.br_stock.price, precision: 2, separator: ",", delimiter: ".") %></td>
-                            <td class="text-primary"><%= number_with_precision(portfolio_put.shares_amount * portfolio_put.share_cost, precision: 2, separator: ",", delimiter: ".") %></td>
-                            <td><%= number_with_precision(portfolio_put.share_cost / portfolio_put.put.strike * 100, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td class="text-primary"><%= number_with_precision(portfolio_put.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td class="text-primary"><%= number_with_precision((portfolio_put.total_cost/(portfolio_put.shares_amount * portfolio_put.put.strike))*100, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td><%= portfolio_put.put.expiration.title %></td>
-                            <td><%= link_to 'Edit', edit_portfolio_put_path(portfolio_put) %> | <%= link_to 'Destroy', portfolio_put_path(portfolio_put), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                            <td><%= link_to 'E', edit_portfolio_put_path(portfolio_put) %> | <%= link_to 'D', portfolio_put_path(portfolio_put), method: :delete, data: { confirm: 'Are you sure?' } %></td>
                         </tr>
                         <% end %>
                     </tbody>
@@ -58,23 +62,36 @@
                 <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
                     <thead>
                         <tr>
+                            <th>Status</th>
                             <th>Ticker</th>
                             <th>Qnt</th>
-                            <th>Preço medio</th>
-                            <th>Custo Total</th>
-                            <th>Total Hoje</th>
+                            <th>Meu Premio</th>
+                            <th>Premio Hj</th>
+                            <th>Cotação Hj</th>
+                            <th>Strike</th>
+                            <th>PM final (Venda)</th>
+                            <th>Resultado</th>
+                            <th>Yield Sintético</th>
+                            <th>Vencimento</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <% @portfolio_calls.each do |portfolio_call| %>
                         <tr>
-                            <td><%= portfolio_call.call.ticker %></td>
-                            <td><%= number_with_precision(portfolio_call.shares_amount, precision: 0) %></td>
-                            <td><%= number_with_precision(portfolio_call.share_cost, precision: 4, separator: ",", delimiter: ".") %></td>
-                            <td><%= number_with_precision(portfolio_call.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
-                            <td><%= number_with_precision(portfolio_call.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
-                            <td><%= link_to 'Edit', edit_portfolio_call_path(portfolio_call) %> | <%= link_to 'Destroy', portfolio_call_path(portfolio_call), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                            <td><%= portfolio_call.situation.title %></td>     
+                            <td><%= portfolio_call.call.ticker %></td>                        
+                            <td><%= number_with_precision(portfolio_call.shares_amount, precision: 0) %>
+                            <td><%= number_with_precision(portfolio_call.share_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td <% if portfolio_call.call.price <= 0.09 %>class="text-primary"<% end %>
+                            ><%= number_with_precision(portfolio_call.call.price, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td ><%= number_with_precision(portfolio_call.call.br_stock.price, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td class="text-primary"><%= number_with_precision(portfolio_call.call.strike, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td class="text-primary"><%= number_with_precision(portfolio_call.call.strike + portfolio_call.share_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td class="text-primary"><%= number_with_precision(portfolio_call.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_call.share_cost / portfolio_call.call.strike * 100, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= portfolio_call.call.expiration.title %></td>
+                            <td><%= link_to 'E', edit_portfolio_call_path(portfolio_call) %> | <%= link_to 'D', portfolio_call_path(portfolio_call), method: :delete, data: { confirm: 'Are you sure?' } %></td>
                         </tr>
                         <% end %>
                     </tbody>

@@ -1,0 +1,30 @@
+<div class="float-right"><%= link_to new_admin_situation_path do %>
+	<button class="btn btn-outline-success">
+		<em class="fa fa-plus-circle"></em> &nbsp; Novo 
+	</button><% end %>
+</div>
+<h3 class="h3-custom mb-4" id="minhas-paginas">
+	<em class="fa fa-vcard-o text-success"></em> &nbsp; Estados dos Derivativos
+</h3>
+<div class="table-responsive mt-2">
+    <table id="" class="display table table-striped w-100" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Url</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @situations.each do |situation| %>
+          <tr>
+            <td><%= situation.title %></td>
+            <td><%= situation.slug %></td>
+            <td> <%= link_to 'Edit', edit_admin_situation_path(situation.id) %> | <%= link_to 'Destroy', admin_situation_path(situation.id), method: :delete %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+

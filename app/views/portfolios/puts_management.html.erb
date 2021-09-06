@@ -1,0 +1,38 @@
+<h4> Puts Abertas </h4>
+
+<table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Status</th>
+            <th>Ticker</th>
+            <th>Qnt</th>
+            <th>Meu Premio</th>
+            <th>Premio Hj</th>
+            <th>PM final (Compra)</th>
+            <th>Strike</th>
+            <th>Cotação Hj</th>
+            <th>Resultado</th>
+            <th>Yield Sintético</th>
+            <th>Vencimento</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @portfolio_open_puts.each do |portfolio_put| %>
+        <tr>
+            <td><%= portfolio_put.situation.title %></td>     
+            <td><%= portfolio_put.put.ticker %></td>                        
+            <td><%= number_with_precision(portfolio_put.shares_amount, precision: 0) %>
+            <td><%= number_with_precision(portfolio_put.price, precision: 2, separator: ",", delimiter: ".") %></td>
+            <td><%= number_with_precision(portfolio_put.put.price, precision: 2, separator: ",", delimiter: ".") %></td>
+            <td class="text-primary"><%= number_with_precision(portfolio_put.put.strike - portfolio_put.price, precision: 2, separator: ",", delimiter: ".") %></td>
+            <td><%= number_with_precision(portfolio_put.put.strike, precision: 2, separator: ",", delimiter: ".") %></td>
+            <td><%= number_with_precision(portfolio_put.put.br_stock.price, precision: 2, separator: ",", delimiter: ".") %></td>
+            <td class="text-primary"><%= number_with_precision(portfolio_put.total_price, precision: 2, separator: ",", delimiter: ".") %></td>
+            <td class="text-primary"><%= number_with_precision((portfolio_put.total_price/(portfolio_put.shares_amount * portfolio_put.put.strike))*100, precision: 2, separator: ",", delimiter: ".") %></td>
+            <td><%= portfolio_put.put.expiration.title %></td>
+            <td><%= link_to 'E', edit_portfolio_put_path(portfolio_put) %> | <%= link_to 'D', portfolio_put_path(portfolio_put), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

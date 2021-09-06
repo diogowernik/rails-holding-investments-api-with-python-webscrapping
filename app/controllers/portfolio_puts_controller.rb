@@ -28,7 +28,7 @@ class PortfolioPutsController < ApplicationController
 
     respond_to do |format|
       if @portfolio_put.save
-        format.html { redirect_to portfolio_derivatives_path(@portfolio_put.portfolio.id), notice: 'Portfolio put was successfully created.' }
+        format.html { redirect_to portfolio_puts_management_path(@portfolio_put.portfolio.id), notice: 'Portfolio put was successfully created.' }
         format.json { render :show, status: :created, location: @portfolio_put }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class PortfolioPutsController < ApplicationController
   def update
     respond_to do |format|
       if @portfolio_put.update(portfolio_put_params)
-        format.html { redirect_to portfolio_derivatives_path(@portfolio_put.portfolio.id), notice: 'Portfolio put was successfully updated.' }
+        format.html { redirect_to portfolio_puts_management_path(@portfolio_put.portfolio.id), notice: 'Portfolio put was successfully updated.' }
         format.json { render :show, status: :ok, location: @portfolio_put }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class PortfolioPutsController < ApplicationController
   def destroy
     @portfolio_put.destroy
     respond_to do |format|
-      format.html { redirect_to portfolio_derivatives_path(@portfolio_put.portfolio.id), notice: 'Portfolio put was successfully destroyed.' }
+      format.html { redirect_to portfolio_puts_management_path(@portfolio_put.portfolio.id), notice: 'Portfolio put was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +69,6 @@ class PortfolioPutsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def portfolio_put_params
-      params.require(:portfolio_put).permit(:category_id, :portfolio_id, :put_id, :shares_amount, :share_cost, :total_cost, :total_today)
+      params.require(:portfolio_put).permit(:category_id, :portfolio_id, :put_id, :situation_id, :shares_amount, :price, :total_price, :share_cost, :total_cost, :total_today)
     end
 end

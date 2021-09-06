@@ -14,6 +14,7 @@
           <th>Preço</th>
           <th>Strike</th>
           <th>Vencimento</th>
+          <th>Desabilitado?</th>
           <th></th>
         </tr>
       </thead>
@@ -25,6 +26,7 @@
             <td><%= call.price %></td>
             <td><%= call.strike %></td>
             <td><%= call.expiration.title %></td>
+            <td <% if call.is_disable %> class="text-primary" <% end %> ><%= call.is_disable %></td>
             <td> <%= link_to 'Edit', edit_admin_call_path(call.id) %> | <%= link_to 'Destroy', admin_call_path(call.id), method: :delete %></td>
           </tr>
         <% end %>
