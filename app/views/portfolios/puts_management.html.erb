@@ -1,38 +1,181 @@
-<h4> Puts Abertas </h4>
+<div class="col-xl-12">
+    <div class="card">
+        
+        <div class="card-body">
 
-<table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
-    <thead>
-        <tr>
-            <th>Status</th>
-            <th>Ticker</th>
-            <th>Qnt</th>
-            <th>Meu Premio</th>
-            <th>Premio Hj</th>
-            <th>PM final (Compra)</th>
-            <th>Strike</th>
-            <th>Cotação Hj</th>
-            <th>Resultado</th>
-            <th>Yield Sintético</th>
-            <th>Vencimento</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @portfolio_open_puts.each do |portfolio_put| %>
-        <tr>
-            <td><%= portfolio_put.situation.title %></td>     
-            <td><%= portfolio_put.put.ticker %></td>                        
-            <td><%= number_with_precision(portfolio_put.shares_amount, precision: 0) %>
-            <td><%= number_with_precision(portfolio_put.price, precision: 2, separator: ",", delimiter: ".") %></td>
-            <td><%= number_with_precision(portfolio_put.put.price, precision: 2, separator: ",", delimiter: ".") %></td>
-            <td class="text-primary"><%= number_with_precision(portfolio_put.put.strike - portfolio_put.price, precision: 2, separator: ",", delimiter: ".") %></td>
-            <td><%= number_with_precision(portfolio_put.put.strike, precision: 2, separator: ",", delimiter: ".") %></td>
-            <td><%= number_with_precision(portfolio_put.put.br_stock.price, precision: 2, separator: ",", delimiter: ".") %></td>
-            <td class="text-primary"><%= number_with_precision(portfolio_put.total_price, precision: 2, separator: ",", delimiter: ".") %></td>
-            <td class="text-primary"><%= number_with_precision((portfolio_put.total_price/(portfolio_put.shares_amount * portfolio_put.put.strike))*100, precision: 2, separator: ",", delimiter: ".") %></td>
-            <td><%= portfolio_put.put.expiration.title %></td>
-            <td><%= link_to 'E', edit_portfolio_put_path(portfolio_put) %> | <%= link_to 'D', portfolio_put_path(portfolio_put), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-        <% end %>
-    </tbody>
-</table>
+            <h4>Puts Abertas</h4>
+
+            <table class="display table table-striped table-bordered w-100" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Ticker</th>
+                        <th>Qnt</th>
+                        <th>Meu Premio</th>
+                        <th>Premio Hj</th>
+                        <th>Cotação Hj</th>
+                        <th>Strike</th>
+                        <th>PM final (Venda)</th>
+                        <th>Resultado</th>
+                        <th>Yield Sintético</th>
+                        <th>Vencimento</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @portfolio_open_puts.each do |portfolio_put| %>
+                    <tr>
+                        <td><%= portfolio_put.situation.title %></td>     
+                        <td><%= portfolio_put.put.ticker %></td>                        
+                        <td><%= number_with_precision(portfolio_put.shares_amount, precision: 0) %>
+                        <td><%= number_with_precision(portfolio_put.price, precision: 2, separator: ",", delimiter: ".") %></td>
+                        <td <% if portfolio_put.put.price <= 0.09 %>class="text-primary"<% end %>
+                        ><%= number_with_precision(portfolio_put.put.price, precision: 2, separator: ",", delimiter: ".") %></td>
+                        <td ><%= number_with_precision(portfolio_put.put.br_stock.price, precision: 2, separator: ",", delimiter: ".") %></td>
+                        <td class="text-primary"><%= number_with_precision(portfolio_put.put.strike, precision: 2, separator: ",", delimiter: ".") %></td>
+                        <td class="text-primary"><%= number_with_precision(portfolio_put.put.strike + portfolio_put.price, precision: 2, separator: ",", delimiter: ".") %></td>
+                        <td class="text-primary"><%= number_with_precision(portfolio_put.total_price, precision: 2, separator: ",", delimiter: ".") %></td>
+                        <td class="text-primary"><%= number_with_precision((portfolio_put.total_price/(portfolio_put.shares_amount * portfolio_put.put.strike))*100, precision: 2, separator: ",", delimiter: ".") %></td>
+                        <td><%= portfolio_put.put.expiration.title %></td>
+                        <td><%= link_to 'E', edit_portfolio_put_path(portfolio_put) %> | <%= link_to 'D', portfolio_put_path(portfolio_put), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+<div class="col-xl-5">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="mt-5">Ações do Portfolio</h4>
+            <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Ticker</th>
+                        <th>Qnt</th>
+                        <th>Preço medio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @portfolio_br_stocks.each do |portfolio_br_stock| %>
+                    <tr>
+                        <td><%= portfolio_br_stock.br_stock.ticker %></td>
+                        <td><%= number_with_precision(portfolio_br_stock.shares_amount, precision: 0) %></td>
+                        <td><%= number_with_precision(portfolio_br_stock.share_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="col-xl-7">
+    <div class="card">
+        <div class="card-body">
+            <div id="chart">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="col-xl-12">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="mt-5">Puts Finalizadas</h4>
+
+            <table class="display table table-striped table-bordered w-100" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Ticker</th>
+                        <th>Resultado</th>
+                        <th>Yield Sintético</th>
+                        <th>Vencimento</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @portfolio_puts.each do |portfolio_put| %>
+                    <tr>
+                        <td><%= portfolio_put.situation.title %></td>     
+                        <td><%= portfolio_put.put.ticker %></td>                        
+                        <td class="text-primary"><%= number_with_precision(portfolio_put.total_price, precision: 2, separator: ",", delimiter: ".") %></td>
+                        <td class="text-primary"><%= number_with_precision((portfolio_put.total_price/(portfolio_put.shares_amount * portfolio_put.put.strike))*100, precision: 2, separator: ",", delimiter: ".") %></td>
+                        <td><%= portfolio_put.put.expiration.title %></td>
+                        <td><%= link_to 'E', edit_portfolio_put_path(portfolio_put) %> | <%= link_to 'D', portfolio_put_path(portfolio_put), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<script>
+  var options = {
+    series: [],
+    legend: {
+      show: true,
+      position: 'bottom',
+      horizontalAlign: 'left',
+      fontSize: '14px',
+      fontFamily: 'Helvetica, Arial',
+      fontWeight: 400,
+      width:'20px',
+    },
+    theme: {
+      mode: 'light', 
+    //   palette: 'palette6', 
+    },
+  dataLabels: {
+    enabled: true,
+    style: {
+      fontSize: '12px',
+    },
+    formatter: function(text, op) {
+      return [text, op.value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0, maximumFractionDigits: 0 })]
+    },
+    offsetY: -4
+  },
+  chart: {
+    height: 310,
+    type: 'treemap',
+    toolbar: {
+      show: false}
+  },
+  colors: [
+    '#3B93A5',
+    '#F7B844',
+    '#ADD8C7',
+    '#EC3C65',
+    '#CDD7B6',
+    '#C1F666',
+    '#D43F97',
+    '#1E5D8C',
+    '#421243',
+    '#7F94B0',
+    '#EF6537',
+    '#C0ADDB'
+    ],
+    plotOptions: {
+        treemap: {
+            distributed: true,
+            enableShades: false
+        }
+    }
+};
+
+var chart = new ApexCharts(document.querySelector("#chart"), options);
+chart.render();
+
+var url = "/api/portfolio/<%= @portfolio.id %>/br_stocks_chart";
+$.getJSON(url, function (response) {
+ chart.updateSeries(response);
+});
+
+
+</script>

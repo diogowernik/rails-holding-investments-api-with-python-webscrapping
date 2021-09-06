@@ -1,5 +1,5 @@
 class PortfoliosController < ApplicationController
-  before_action :set_portfolio, only: [:show, :edit, :update, :destroy, :composition, :international, :calls_management, :puts_management]
+  before_action :set_portfolio, only: [:show, :edit, :update, :destroy, :br_stocks_management, :fiis_management, :criptos_management, :international, :calls_management, :puts_management]
   # GET /portfolios
   # GET /portfolios.json
   def index
@@ -34,7 +34,25 @@ class PortfoliosController < ApplicationController
     @portfolios = Portfolio.all
     @portfolio_open_puts = PortfolioPut.all.where(:portfolio_id => @portfolio.id).where(:situation_id => 1)
     @portfolio_puts = PortfolioPut.all.where(:portfolio_id => @portfolio.id).where("situation_id = 2 or situation_id = 3 or situation_id = 4")
+    @portfolio_br_stocks = PortfolioBrStock.all.where(:portfolio_id => @portfolio.id)
+    render layout: "app" 
+  end
 
+  def br_stocks_management
+    @portfolios = Portfolio.all
+    @portfolio_br_stocks = PortfolioBrStock.all.where(:portfolio_id => @portfolio.id)
+    render layout: "app" 
+  end
+
+  def fiis_management
+    @portfolios = Portfolio.all
+    @portfolio_fiis = PortfolioFii.all.where(:portfolio_id => @portfolio.id)
+    render layout: "app" 
+  end
+
+  def criptos_management
+    @portfolios = Portfolio.all
+    @portfolio_criptos = PortfolioCripto.all.where(:portfolio_id => @portfolio.id)
     render layout: "app" 
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_05_234448) do
+ActiveRecord::Schema.define(version: 2021_09_06_180005) do
 
   create_table "br_stocks", force: :cascade do |t|
     t.string "ticker"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2021_09_05_234448) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "custom_order"
   end
 
   create_table "criptos", force: :cascade do |t|

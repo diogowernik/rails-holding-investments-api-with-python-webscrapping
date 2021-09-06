@@ -1,0 +1,105 @@
+<div class="col-xl-5">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="mt-5">Criptomoedas do Portfolio</h4>
+                <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>Qnt</th>
+                            <th>Preço medio</th>
+                            <th>Custo Total</th>
+                            <th>Total Hoje</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @portfolio_criptos.each do |portfolio_cripto| %>
+                        <tr>
+                            <td><%= portfolio_cripto.cripto.ticker %></td>
+                            <td><%= number_with_precision(portfolio_cripto.shares_amount, precision: 0) %></td>
+                            <td><%= number_with_precision(portfolio_cripto.share_cost, precision: 4, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_cripto.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_cripto.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= link_to 'Edit', edit_portfolio_cripto_path(portfolio_cripto) %> | <%= link_to 'Destroy', portfolio_cripto_path(portfolio_cripto), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+        </div>
+    </div>
+</div>
+<div class="col-xl-7">
+    <div class="card">
+        <div class="card-body">
+            <div id="chart">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+  var options = {
+    series: [],
+    legend: {
+      show: true,
+      position: 'bottom',
+      horizontalAlign: 'left',
+      fontSize: '14px',
+      fontFamily: 'Helvetica, Arial',
+      fontWeight: 400,
+      width:'20px',
+    },
+    theme: {
+      mode: 'light', 
+    //   palette: 'palette6', 
+    },
+  dataLabels: {
+    enabled: true,
+    style: {
+      fontSize: '12px',
+    },
+    formatter: function(text, op) {
+      return [text, op.value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0, maximumFractionDigits: 0 })]
+    },
+    offsetY: -4
+  },
+  chart: {
+    height: 310,
+    type: 'treemap',
+    toolbar: {
+      show: false}
+  },
+  colors: [
+    '#3B93A5',
+    '#F7B844',
+    '#ADD8C7',
+    '#EC3C65',
+    '#CDD7B6',
+    '#C1F666',
+    '#D43F97',
+    '#1E5D8C',
+    '#421243',
+    '#7F94B0',
+    '#EF6537',
+    '#C0ADDB'
+    ],
+    plotOptions: {
+        treemap: {
+            distributed: true,
+            enableShades: false
+        }
+    }
+};
+
+var chart = new ApexCharts(document.querySelector("#chart"), options);
+chart.render();
+
+var url = "/api/portfolio/<%= @portfolio.id %>/criptos_chart";
+$.getJSON(url, function (response) {
+ chart.updateSeries(response);
+});
+
+
+</script>

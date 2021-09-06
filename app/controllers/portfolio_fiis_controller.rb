@@ -29,7 +29,7 @@ class PortfolioFiisController < ApplicationController
 
     respond_to do |format|
       if @portfolio_fii.save
-        format.html { redirect_to portfolio_path(@portfolio_fii.portfolio.id), notice: 'Portfolio fii was successfully created.' }
+        format.html { redirect_to portfolio_fiis_management_path(@portfolio_fii.portfolio.id), notice: 'Portfolio fii was successfully created.' }
         format.json { render :show, status: :created, location: @portfolio_fii }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class PortfolioFiisController < ApplicationController
   def update
     respond_to do |format|
       if @portfolio_fii.update(portfolio_fii_params)
-        format.html { redirect_to portfolio_path(@portfolio_fii.portfolio.id), notice: 'Portfolio fii was successfully updated.' }
+        format.html { redirect_to portfolio_fiis_management_path(@portfolio_fii.portfolio.id), notice: 'Portfolio fii was successfully updated.' }
         format.json { render :show, status: :ok, location: @portfolio_fii }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class PortfolioFiisController < ApplicationController
   def destroy
     @portfolio_fii.destroy
     respond_to do |format|
-      format.html { redirect_to portfolio_path(@portfolio_fii.portfolio.id), notice: 'Portfolio fii was successfully destroyed.' }
+      format.html { redirect_to portfolio_fiis_management_path(@portfolio_fii.portfolio.id), notice: 'Portfolio fii was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

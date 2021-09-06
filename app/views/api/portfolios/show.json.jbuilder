@@ -20,15 +20,15 @@ json.array! @categories do |category|
             end
         end
     end
-    if @portfolio_subscriptions.any?
-        if category.id == 10
-            json.set! :name, 'Subscrições'
-            json.data @portfolio_subscriptions do |portfolio_subscription|
-                json.x portfolio_subscription.subscription.ticker
-                json.y portfolio_subscription.total_today
-            end
-        end
-    end
+    # if @portfolio_subscriptions.any?
+    #     if category.id == 10
+    #         json.set! :name, 'Subscrições'
+    #         json.data @portfolio_subscriptions do |portfolio_subscription|
+    #             json.x portfolio_subscription.subscription.ticker
+    #             json.y portfolio_subscription.total_today
+    #         end
+    #     end
+    # end
     if @portfolio_br_stocks.any?
         if category.id == 3
             json.set! :name, 'Ações Brasileiras'

@@ -5,11 +5,11 @@ class Api::CategoriesController < ApplicationController
   def index
     @categories = Category.all
 
-    render json: @categories.order("id desc")
+    render json: @categories.order("custom_order asc")
   end
 
   def options
-    @categories = Category.all
+    @categories = Category.all.order("custom_order desc")
     render 'api/categories/options.json.jbuilder'
   end
 

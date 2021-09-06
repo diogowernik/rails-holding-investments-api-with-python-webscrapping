@@ -10,6 +10,7 @@
     <table id="" class="display table table-striped w-100" cellspacing="0">
       <thead>
         <tr>
+          <th>Ordem</th>
           <th>Id</th>
           <th>Title</th>
           <th>Url</th>
@@ -20,8 +21,13 @@
       <tbody>
         <% @categories.each do |category| %>
           <tr>
+            <td><%= category.custom_order %></td>
             <td><%= category.id %></td>
-            <td><%= category.title %></td>
+            <td>
+            <a href="/admin/<%= category.slug %>">
+                <%= category.title %>
+            </a>
+            </td>
             <td><%= category.slug %></td>
             <td> <%= link_to 'Edit', edit_admin_category_path(category.id) %> | <%= link_to 'Destroy', admin_category_path(category.id), method: :delete %></td>
           </tr>

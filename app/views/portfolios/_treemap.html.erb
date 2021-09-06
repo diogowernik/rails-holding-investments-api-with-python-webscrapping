@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+<div id="chart"><div>
+
+<script>
+  var options = {
+    series: [],
+    legend: {
+      show: true,
+      position: 'bottom',
+      horizontalAlign: 'left',
+      fontSize: '14px',
+      fontFamily: 'Helvetica, Arial',
+      fontWeight: 400,
+      width:'20px',
+    },
+    theme: {
+      mode: 'light', 
+      palette: 'palette6', 
+    },
+  dataLabels: {
+    enabled: true,
+    style: {
+      fontSize: '12px',
+    },
+    formatter: function(text, op) {
+      return [text, op.value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0, maximumFractionDigits: 0 })]
+    },
+    offsetY: -4
+  },
+  chart: {
+    height: 450,
+    type: 'treemap',
+    toolbar: {
+      show: false}
+  }
+};
+
+var chart = new ApexCharts(document.querySelector("#chart"), options);
+chart.render();
+
+var url = "/api/portfolios/<%= @portfolio.id %>";
+$.getJSON(url, function (response) {
+ chart.updateSeries(response);
+});
+
+
+</script>

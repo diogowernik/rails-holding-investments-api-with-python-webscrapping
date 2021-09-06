@@ -14,12 +14,12 @@ Rails.application.routes.draw do
   resources :portfolio_fiis
   resources :portfolios
 
-  get 'portfolio/:id/composition', to: 'portfolios#composition', as: 'portfolio_composition'
-  get 'portfolio/:id/radar', to: 'portfolios#radar', as: 'portfolio_radar'
-  get 'portfolio/:id/derivatives', to: 'portfolios#derivatives', as: 'portfolio_derivatives'
   get 'portfolio/:id/international', to: 'portfolios#international', as: 'portfolio_international'
   get 'portfolio/:id/calls_management', to: 'portfolios#calls_management', as: 'portfolio_calls_management'
   get 'portfolio/:id/puts_management', to: 'portfolios#puts_management', as: 'portfolio_puts_management'
+  get 'portfolio/:id/br_stocks_management', to: 'portfolios#br_stocks_management', as: 'portfolio_br_stocks_management'
+  get 'portfolio/:id/fiis_management', to: 'portfolios#fiis_management', as: 'portfolio_fiis_management'
+  get 'portfolio/:id/criptos_management', to: 'portfolios#criptos_management', as: 'portfolio_criptos_management'
 
 
   root to: 'portfolios#index'
@@ -68,5 +68,7 @@ Rails.application.routes.draw do
     get 'portfolio/portfoliofiis/:id', to: 'portfolios#portfoliofiis', as: 'portfolio_portfoliofiis'
     get 'portfolio/portfoliocriptos/:id', to: 'portfolios#portfoliocriptos', as: 'portfolio_portfoliocriptos'
     get 'portfolio/:id/br_stocks_chart', to: 'portfolios#br_stocks_chart', as: 'portfolio_br_stocks_chart'
+    get 'portfolio/:id/criptos_chart', to: 'portfolios#criptos_chart', as: 'portfolio_criptos_chart'
+    get 'portfolio/:id/fiis_chart', to: 'portfolios#fiis_chart', as: 'portfolio_fiis_chart'
   end
 end

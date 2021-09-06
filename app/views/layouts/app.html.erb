@@ -146,11 +146,20 @@
                                         <% end %>
                                     </li>
                                     <li class="nav-item">
-                                        <%= link_to portfolio_composition_path do %>
+                                        <%= link_to portfolio_fiis_management_path do %>
                                             <button 
                                             class="btn btn-outline-primary ml-3
-                                            <%= 'active' if current_page?(portfolio_composition_path) %>" >
-                                                Composição
+                                            <%= 'active' if current_page?(portfolio_fiis_management_path) %>" >
+                                                Fiis
+                                            </button>
+                                        <% end %>
+                                    </li>
+                                    <li class="nav-item">
+                                        <%= link_to portfolio_br_stocks_management_path do %>
+                                            <button 
+                                            class="btn btn-outline-primary ml-3
+                                            <%= 'active' if current_page?(portfolio_br_stocks_management_path) %>" >
+                                                Ações Br
                                             </button>
                                         <% end %>
                                     </li>
@@ -169,6 +178,15 @@
                                             class="btn btn-outline-primary ml-3
                                             <%= 'active' if current_page?(portfolio_puts_management_path) %>" >
                                                 Puts
+                                            </button>
+                                        <% end %>
+                                    </li>
+                                    <li class="nav-item">
+                                        <%= link_to portfolio_criptos_management_path do %>
+                                            <button 
+                                            class="btn btn-outline-primary ml-3
+                                            <%= 'active' if current_page?(portfolio_criptos_management_path) %>" >
+                                                Criptos
                                             </button>
                                         <% end %>
                                     </li>
