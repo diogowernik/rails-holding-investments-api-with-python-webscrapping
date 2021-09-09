@@ -1,52 +1,7 @@
-<section id="tabs" class="project-tab">
-
-    <nav>
-        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-            <% if @portfolio_etfs.any? %>
-                <a class="nav-item nav-link active" id="nav-etf-tab" data-toggle="tab" href="#nav-etf" role="tab" aria-controls="nav-etf" aria-selected="false">ETFs</a>
-            <% end %>
-            <% if @portfolio_currencies.any? %>
-                <a class="nav-item nav-link <% if @portfolio_etfs.empty? %> active <% end %>" id="nav-currency-tab" data-toggle="tab" href="#nav-currency" role="tab" aria-controls="nav-currency" aria-selected="true">Moedas Estrangeiras</a>
-            <% end %>
-            <% if @portfolio_stocks.any? %>
-                <a class="nav-item nav-link <% if @portfolio_currencies.empty? %> active <% end %>" id="nav-stock-tab" data-toggle="tab" href="#nav-stock" role="tab" aria-controls="nav-stock" aria-selected="true">Ações Estrangeiras</a>
-            <% end %>
-        </div>
-    </nav>
-    
-    <div class="tab-content" id="nav-tabContent">
-
-        <% if @portfolio_etfs.any? %>
-            <div class="tab-pane fade show active" id="nav-etf" role="tabpanel" aria-labelledby="nav-etf-tab">
-                <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Ticker</th>
-                            <th>Qnt</th>
-                            <th>PM</th>
-                            <th>Custo Total</th>
-                            <th>Total Hoje</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% @portfolio_etfs.each do |portfolio_etf| %>
-                        <tr>
-                            <td><%= portfolio_etf.etf.ticker %></td>                        
-                            <td><%= number_with_precision(portfolio_etf.shares_amount, precision: 0) %>
-                            <td><%= number_with_precision(portfolio_etf.share_cost, precision: 2, separator: ",", delimiter: ".") %></td>
-                            <td><%= number_with_precision(portfolio_etf.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
-                            <td><%= number_with_precision(portfolio_etf.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
-                            <td><%= link_to 'Edit', edit_portfolio_etf_path(portfolio_etf) %> | <%= link_to 'Destroy', portfolio_etf_path(portfolio_etf), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                        </tr>
-                        <% end %>
-                    </tbody>
-                </table>
-            </div>
-        <% end %>
-
-        <% if @portfolio_currencies.any? %>
-            <div class="tab-pane fade <% if @portfolio_etfs.empty? %> show active <% end %>" id="nav-currency" role="tabpanel" aria-labelledby="nav-currency-tab">
+<div class="col-xl-5">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="mt-5">Internacional do Portfolio</h4>
                 <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
                     <thead>
                         <tr>
@@ -66,41 +21,87 @@
                             <td><%= number_with_precision(portfolio_currency.share_cost, precision: 4, separator: ",", delimiter: ".") %></td>
                             <td><%= number_with_precision(portfolio_currency.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td><%= number_with_precision(portfolio_currency.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
-                            <td><%= link_to 'Edit', edit_portfolio_currency_path(portfolio_currency) %> | <%= link_to 'Destroy', portfolio_currency_path(portfolio_currency), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                            <td><%= link_to 'E', edit_portfolio_currency_path(portfolio_currency) %> | <%= link_to 'D', portfolio_currency_path(portfolio_currency), method: :delete, data: { confirm: 'Are you sure?' } %></td>
                         </tr>
                         <% end %>
                     </tbody>
                 </table>
-            </div>
-        <% end %>
 
-        <% if @portfolio_stocks.any? %>
-            <div class="tab-pane fade <% if @portfolio_currencies.empty? %> show active <% end %>" id="nav-stock" role="tabpanel" aria-labelledby="nav-stock-tab">
-                <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Ticker</th>
-                            <th>Qnt</th>
-                            <th>Preço medio</th>
-                            <th>Custo Total</th>
-                            <th>Total Hoje</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% @portfolio_stocks.each do |portfolio_stock| %>
-                        <tr>
-                            <td><%= portfolio_stock.stock.ticker %></td>
-                            <td><%= number_with_precision(portfolio_stock.shares_amount, precision: 0) %></td>
-                            <td><%= number_with_precision(portfolio_stock.share_cost, precision: 4, separator: ",", delimiter: ".") %></td>
-                            <td><%= number_with_precision(portfolio_stock.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
-                            <td><%= number_with_precision(portfolio_stock.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
-                            <td><%= link_to 'Edit', edit_portfolio_stock_path(portfolio_stock) %> | <%= link_to 'Destroy', portfolio_stock_path(portfolio_stock), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                        </tr>
-                        <% end %>
-                    </tbody>
-                </table>
-            </div>
-        <% end %>
+        </div>
     </div>
-</section>
+</div>
+<div class="col-xl-7">
+    <div class="card">
+        <div class="card-body">
+            <div id="chart">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+  var options = {
+    series: [],
+    legend: {
+      show: true,
+      position: 'bottom',
+      horizontalAlign: 'left',
+      fontSize: '14px',
+      fontFamily: 'Helvetica, Arial',
+      fontWeight: 400,
+      width:'20px',
+    },
+    theme: {
+      mode: 'light', 
+    //   palette: 'palette6', 
+    },
+  dataLabels: {
+    enabled: true,
+    style: {
+      fontSize: '12px',
+    },
+    formatter: function(text, op) {
+      return [text, op.value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0, maximumFractionDigits: 0 })]
+    },
+    offsetY: -4
+  },
+  chart: {
+    height: 310,
+    type: 'treemap',
+    toolbar: {
+      show: false}
+  },
+  colors: [
+    '#3B93A5',
+    '#F7B844',
+    '#38BC6A',
+    '#EC3C65',
+    '#748C38',
+    '#8A1459',
+    '#71A021',
+    '#1E5D8C',
+    '#421243',
+    '#7F94B0',
+    '#EF6537',
+    '#C0ADDB'
+    ],
+    plotOptions: {
+        treemap: {
+            distributed: true,
+            enableShades: false
+        }
+    }
+};
+
+var chart = new ApexCharts(document.querySelector("#chart"), options);
+chart.render();
+
+var url = "/api/portfolio/<%= @portfolio.id %>/currencies_chart";
+$.getJSON(url, function (response) {
+ chart.updateSeries(response);
+});
+
+
+</script>
+

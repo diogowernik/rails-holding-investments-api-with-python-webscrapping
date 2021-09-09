@@ -145,15 +145,8 @@
                                             </button>
                                         <% end %>
                                     </li>
-                                    <li class="nav-item">
-                                        <%= link_to portfolio_fiis_management_path do %>
-                                            <button 
-                                            class="btn btn-outline-primary ml-3
-                                            <%= 'active' if current_page?(portfolio_fiis_management_path) %>" >
-                                                Fiis
-                                            </button>
-                                        <% end %>
-                                    </li>
+                                </ul>
+                                <ul class="navbar-nav ml-3">
                                     <li class="nav-item">
                                         <%= link_to portfolio_br_stocks_management_path do %>
                                             <button 
@@ -164,6 +157,36 @@
                                         <% end %>
                                     </li>
                                     <li class="nav-item">
+                                        <%= link_to portfolio_fiis_management_path do %>
+                                            <button 
+                                            class="btn btn-outline-primary ml-3
+                                            <%= 'active' if current_page?(portfolio_fiis_management_path) %>" >
+                                                Fiis
+                                            </button>
+                                        <% end %>
+                                    </li>
+                                    <li class="nav-item">
+                                        <%= link_to portfolio_international_path do %>
+                                            <button 
+                                            class="btn btn-outline-primary ml-3
+                                            <%= 'active' if current_page?(portfolio_international_path) %>" >
+                                                Internacional
+                                            </button>
+                                        <% end %>
+                                    </li>
+                                    <li class="nav-item">
+                                        <%= link_to portfolio_criptos_management_path do %>
+                                            <button 
+                                            class="btn btn-outline-primary ml-3
+                                            <%= 'active' if current_page?(portfolio_criptos_management_path) %>" >
+                                                Criptos
+                                            </button>
+                                        <% end %>
+                                    </li>
+                                    
+                                </ul>
+                                <ul class="navbar-nav ml-3">
+                                     <li class="nav-item">
                                         <%= link_to portfolio_calls_management_path do %>
                                             <button 
                                             class="btn btn-outline-primary ml-3
@@ -182,20 +205,11 @@
                                         <% end %>
                                     </li>
                                     <li class="nav-item">
-                                        <%= link_to portfolio_criptos_management_path do %>
+                                        <%= link_to portfolio_subscriptions_management_path do %>
                                             <button 
                                             class="btn btn-outline-primary ml-3
-                                            <%= 'active' if current_page?(portfolio_criptos_management_path) %>" >
-                                                Criptos
-                                            </button>
-                                        <% end %>
-                                    </li>
-                                    <li class="nav-item">
-                                        <%= link_to portfolio_international_path do %>
-                                            <button 
-                                            class="btn btn-outline-primary ml-3
-                                            <%= 'active' if current_page?(portfolio_international_path) %>" >
-                                                Internacional
+                                            <%= 'active' if current_page?(portfolio_subscriptions_management_path) %>" >
+                                                Subscrições 
                                             </button>
                                         <% end %>
                                     </li>
@@ -207,9 +221,12 @@
                 </div>
             </div>
             <div class="row">
-                <% if alert %><div class="alert alert-success m-5 text-center"><%= alert %></div><% end %>
-                <% if notice %><div class="alert alert-success m-5 text-center"><%= notice %></div><% end %>
-                <%= yield %>          
+                <div class="col-xl-12">
+                    <% if alert %><div class="alert alert-success m-5 text-center"><%= alert %></div><% end %>
+                    <% if notice %><div class="alert alert-success m-5 text-center"><%= notice %></div><% end %>
+                </div>
+                <%= yield %>    
+                  
             </div>
         </div>
     </div>

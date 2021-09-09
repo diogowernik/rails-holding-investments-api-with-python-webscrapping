@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get 'portfolio/:id/br_stocks_management', to: 'portfolios#br_stocks_management', as: 'portfolio_br_stocks_management'
   get 'portfolio/:id/fiis_management', to: 'portfolios#fiis_management', as: 'portfolio_fiis_management'
   get 'portfolio/:id/criptos_management', to: 'portfolios#criptos_management', as: 'portfolio_criptos_management'
+  get 'portfolio/:id/subscriptions_management', to: 'portfolios#subscriptions_management', as: 'portfolio_subscriptions_management'
 
 
   root to: 'portfolios#index'
@@ -70,5 +71,6 @@ Rails.application.routes.draw do
     get 'portfolio/:id/br_stocks_chart', to: 'portfolios#br_stocks_chart', as: 'portfolio_br_stocks_chart'
     get 'portfolio/:id/criptos_chart', to: 'portfolios#criptos_chart', as: 'portfolio_criptos_chart'
     get 'portfolio/:id/fiis_chart', to: 'portfolios#fiis_chart', as: 'portfolio_fiis_chart'
+    get 'portfolio/:id/currencies_chart', to: 'portfolios#currencies_chart', as: 'portfolio_currencies_chart'
   end
 end

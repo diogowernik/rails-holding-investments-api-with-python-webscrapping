@@ -13,9 +13,11 @@
                         <th>Qnt</th>
                         <th>Meu Premio</th>
                         <th>Premio Hj</th>
-                        <th>Cotação Hj</th>
+
+                        <th>PM final (compra)</th>
                         <th>Strike</th>
-                        <th>PM final (Venda)</th>
+                        <th>Cotação Hj</th>
+                        
                         <th>Resultado</th>
                         <th>Yield Sintético</th>
                         <th>Vencimento</th>
@@ -31,9 +33,11 @@
                         <td><%= number_with_precision(portfolio_put.price, precision: 2, separator: ",", delimiter: ".") %></td>
                         <td <% if portfolio_put.put.price <= 0.09 %>class="text-primary"<% end %>
                         ><%= number_with_precision(portfolio_put.put.price, precision: 2, separator: ",", delimiter: ".") %></td>
-                        <td ><%= number_with_precision(portfolio_put.put.br_stock.price, precision: 2, separator: ",", delimiter: ".") %></td>
+                        
+                        <td class="text-primary"><%= number_with_precision(portfolio_put.put.strike - portfolio_put.price, precision: 2, separator: ",", delimiter: ".") %></td>
                         <td class="text-primary"><%= number_with_precision(portfolio_put.put.strike, precision: 2, separator: ",", delimiter: ".") %></td>
-                        <td class="text-primary"><%= number_with_precision(portfolio_put.put.strike + portfolio_put.price, precision: 2, separator: ",", delimiter: ".") %></td>
+                        <td ><%= number_with_precision(portfolio_put.put.br_stock.price, precision: 2, separator: ",", delimiter: ".") %></td>                                                
+                        
                         <td class="text-primary"><%= number_with_precision(portfolio_put.total_price, precision: 2, separator: ",", delimiter: ".") %></td>
                         <td class="text-primary"><%= number_with_precision((portfolio_put.total_price/(portfolio_put.shares_amount * portfolio_put.put.strike))*100, precision: 2, separator: ",", delimiter: ".") %></td>
                         <td><%= portfolio_put.put.expiration.title %></td>

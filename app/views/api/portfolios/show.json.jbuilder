@@ -20,15 +20,15 @@ json.array! @categories do |category|
             end
         end
     end
-    # if @portfolio_subscriptions.any?
-    #     if category.id == 10
-    #         json.set! :name, 'Subscrições'
-    #         json.data @portfolio_subscriptions do |portfolio_subscription|
-    #             json.x portfolio_subscription.subscription.ticker
-    #             json.y portfolio_subscription.total_today
-    #         end
-    #     end
-    # end
+    if @portfolio_subscriptions.any?
+        if category.id == 10
+            json.set! :name, 'Subscrições'
+            json.data @portfolio_subscriptions do |portfolio_subscription|
+                json.x portfolio_subscription.subscription.ticker
+                json.y portfolio_subscription.total_today
+            end
+        end
+    end
     if @portfolio_br_stocks.any?
         if category.id == 3
             json.set! :name, 'Ações Brasileiras'
@@ -44,6 +44,24 @@ json.array! @categories do |category|
             json.data @portfolio_properties do |portfolio_property|
                 json.x portfolio_property.property.ticker
                 json.y portfolio_property.total_today
+            end
+        end
+    end
+    if @portfolio_currencies.any?
+        if category.id == 6
+            json.set! :name, 'Internacional'
+            json.data @portfolio_currencies do |portfolio_currency|
+                json.x portfolio_currency.currency.ticker
+                json.y portfolio_currency.total_today
+            end
+        end
+    end
+    if @portfolio_fixed_incomes.any?
+        if category.id == 5
+            json.set! :name, 'Renda Fixa'
+            json.data @portfolio_fixed_incomes do |portfolio_fixed_income|
+                json.x portfolio_fixed_income.fixed_income.ticker
+                json.y portfolio_fixed_income.total_today
             end
         end
     end

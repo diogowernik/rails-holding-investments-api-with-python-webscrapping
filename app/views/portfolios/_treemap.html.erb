@@ -15,7 +15,7 @@
     },
     theme: {
       mode: 'light', 
-      palette: 'palette6', 
+      // palette: 'palette6', 
     },
   dataLabels: {
     enabled: true,
@@ -32,7 +32,26 @@
     type: 'treemap',
     toolbar: {
       show: false}
-  }
+  },
+  colors: [
+    '#3B93A5',
+    '#F7B844',
+    '#1E5D8C',
+    '#5C388E',
+    '#748C38',
+    '#8A1459',
+    '#71A021',
+    '#1E5D8C',
+    '#421243',
+    '#7F94B0',
+    '#EF6537',
+    ],
+    plotOptions: {
+        treemap: {
+            // distributed: true,
+            enableShades: false
+        }
+    }
 };
 
 var chart = new ApexCharts(document.querySelector("#chart"), options);

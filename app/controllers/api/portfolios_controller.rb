@@ -1,5 +1,5 @@
 class Api::PortfoliosController < ApiController
-  before_action :set_portfolio, only: [:show, :update, :destroy, :fiis_chart, :criptos_chart, :br_stocks_chart, :portfoliofiis, :portfoliocriptos]
+  before_action :set_portfolio, only: [:show, :update, :destroy, :fiis_chart, :criptos_chart, :br_stocks_chart, :currencies_chart, :portfoliofiis, :portfoliocriptos]
 
   # GET /portfolios
   def index
@@ -21,25 +21,33 @@ class Api::PortfoliosController < ApiController
     @portfolio_criptos = PortfolioCripto.all.where(:portfolio_id => @portfolio.id).order("id desc")
     @portfolio_br_stocks = PortfolioBrStock.all.where(:portfolio_id => @portfolio.id).order("id desc")
     @portfolio_properties = PortfolioProperty.all.where(:portfolio_id => @portfolio.id).order("id desc")
+    @portfolio_currencies = PortfolioCurrency.all.where(:portfolio_id => @portfolio.id).order("id desc")
+    @portfolio_fixed_incomes = PortfolioFixedIncome.all.where(:portfolio_id => @portfolio.id).order("id desc")
     render 'api/portfolios/show.json.jbuilder'
   end
 
   def br_stocks_chart
     @categories = Category.all
-    @portfolio_br_stocks = PortfolioBrStock.all.where(:portfolio_id => @portfolio.id).order("id desc")
+    @portfolio_br_stocks = PortfolioBrStock.all.where(:portfolio_id => @portfolio.id).order("total_today asc")
     render 'api/portfolios/br_stocks_chart.json.jbuilder'
   end
 
   def criptos_chart
     @categories = Category.all
-    @portfolio_criptos = PortfolioCripto.all.where(:portfolio_id => @portfolio.id).order("id desc")
+    @portfolio_criptos = PortfolioCripto.all.where(:portfolio_id => @portfolio.id).order("total_today asc")
     render 'api/portfolios/criptos_chart.json.jbuilder'
   end
 
   def fiis_chart
     @categories = Category.all
-    @portfolio_fiis = PortfolioFii.all.where(:portfolio_id => @portfolio.id).order("id desc")
+    @portfolio_fiis = PortfolioFii.all.where(:portfolio_id => @portfolio.id).order("total_today asc")
     render 'api/portfolios/fiis_chart.json.jbuilder'
+  end
+
+  def currencies_chart
+    @categories = Category.all
+    @portfolio_currencies = PortfolioCurrency.all.where(:portfolio_id => @portfolio.id).order("total_today asc")
+    render 'api/portfolios/currencies_chart.json.jbuilder'
   end
 
   def portfoliofiis

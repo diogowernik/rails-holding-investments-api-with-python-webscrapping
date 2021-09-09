@@ -17,11 +17,11 @@
                         <% @portfolio_criptos.each do |portfolio_cripto| %>
                         <tr>
                             <td><%= portfolio_cripto.cripto.ticker %></td>
-                            <td><%= number_with_precision(portfolio_cripto.shares_amount, precision: 0) %></td>
+                            <td><%= number_with_precision(portfolio_cripto.shares_amount, precision: 4) %></td>
                             <td><%= number_with_precision(portfolio_cripto.share_cost, precision: 4, separator: ",", delimiter: ".") %></td>
-                            <td><%= number_with_precision(portfolio_cripto.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
-                            <td><%= number_with_precision(portfolio_cripto.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
-                            <td><%= link_to 'Edit', edit_portfolio_cripto_path(portfolio_cripto) %> | <%= link_to 'Destroy', portfolio_cripto_path(portfolio_cripto), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                            <td><%= number_with_precision(portfolio_cripto.total_cost, precision: 4, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_cripto.total_today, precision: 4, separator: ",", delimiter: ".") %></td>
+                            <td><%= link_to 'E', edit_portfolio_cripto_path(portfolio_cripto) %> | <%= link_to 'D', portfolio_cripto_path(portfolio_cripto), method: :delete, data: { confirm: 'Are you sure?' } %></td>
                         </tr>
                         <% end %>
                     </tbody>
@@ -74,11 +74,11 @@
   colors: [
     '#3B93A5',
     '#F7B844',
-    '#ADD8C7',
+    '#38BC6A',
     '#EC3C65',
-    '#CDD7B6',
-    '#C1F666',
-    '#D43F97',
+    '#748C38',
+    '#8A1459',
+    '#71A021',
     '#1E5D8C',
     '#421243',
     '#7F94B0',
