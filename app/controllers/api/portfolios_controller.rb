@@ -1,16 +1,10 @@
 class Api::PortfoliosController < ApiController
-  before_action :set_portfolio, only: [:show, :update, :destroy, :fiis_chart, :criptos_chart, :br_stocks_chart, :currencies_chart, :portfoliofiis, :portfoliocriptos]
+  before_action :set_portfolio, only: [:show, :update, :destroy, :fiis_chart, :fixed_incomes_chart, :properties_chart, :criptos_chart, :br_stocks_chart, :internationals_chart, :portfoliofiis, :portfoliocriptos]
 
   # GET /portfolios
   def index
     @portfolios = current_user.portfolios
-
     render json: @portfolios.order("id desc")
-  end
-
-  def options
-    @portfolios = Portfolio.all
-    render 'api/portfolios/options.json.jbuilder'
   end
 
   # GET /portfolios/1
@@ -21,7 +15,7 @@ class Api::PortfoliosController < ApiController
     @portfolio_criptos = PortfolioCripto.all.where(:portfolio_id => @portfolio.id).order("id desc")
     @portfolio_br_stocks = PortfolioBrStock.all.where(:portfolio_id => @portfolio.id).order("id desc")
     @portfolio_properties = PortfolioProperty.all.where(:portfolio_id => @portfolio.id).order("id desc")
-    @portfolio_currencies = PortfolioCurrency.all.where(:portfolio_id => @portfolio.id).order("id desc")
+    @portfolio_internationals = PortfolioInternational.all.where(:portfolio_id => @portfolio.id).order("total_today asc")
     @portfolio_fixed_incomes = PortfolioFixedIncome.all.where(:portfolio_id => @portfolio.id).order("id desc")
     render 'api/portfolios/show.json.jbuilder'
   end
@@ -44,23 +38,24 @@ class Api::PortfoliosController < ApiController
     render 'api/portfolios/fiis_chart.json.jbuilder'
   end
 
-  def currencies_chart
+  def internationals_chart
     @categories = Category.all
-    @portfolio_currencies = PortfolioCurrency.all.where(:portfolio_id => @portfolio.id).order("total_today asc")
-    render 'api/portfolios/currencies_chart.json.jbuilder'
+    @portfolio_internationals = PortfolioInternational.all.where(:portfolio_id => @portfolio.id).order("total_today asc")
+    render 'api/portfolios/internationals_chart.json.jbuilder'
   end
 
-  def portfoliofiis
-    @portfoliofiis = Portfoliofii.all.where(:portfolio_id => @portfolio.id).order("id desc")
-
-    render 'api/portfolios/portfoliofiis.json.jbuilder'
+  def properties_chart
+    @categories = Category.all
+    @portfolio_properties = PortfolioProperty.all.where(:portfolio_id => @portfolio.id).order("total_today asc")
+    render 'api/portfolios/properties_chart.json.jbuilder'
   end
 
-  def portfoliocriptos
-    @portfoliocriptos = Portfoliocripto.all.where(:portfolio_id => @portfolio.id).order("id desc")
-
-    render 'api/portfolios/portfoliocriptos.json.jbuilder'
+  def fixed_incomes_chart
+    @categories = Category.all
+    @portfolio_fixed_incomes = PortfolioFixedIncome.all.where(:portfolio_id => @portfolio.id).order("total_today asc")
+    render 'api/portfolios/fixed_incomes_chart.json.jbuilder'
   end
+
 
   # POST /portfolios
   def create

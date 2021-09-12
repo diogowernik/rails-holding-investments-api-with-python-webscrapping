@@ -1,2 +1,0 @@
-class Etf < ApplicationRecord
-end

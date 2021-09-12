@@ -1,0 +1,36 @@
+<div class="float-right"><%= link_to new_admin_international_path do %>
+	<button class="btn btn-outline-success">
+		<em class="fa fa-plus-circle"></em> &nbsp; Novo 
+	</button><% end %>
+</div>
+<h3 class="h3-custom mb-4" id="minhas-paginas">
+	<em class="fa fa-vcard-o text-success"></em> &nbsp; ETF
+</h3>
+<div class="table-responsive mt-2">
+    <table id="" class="display table table-striped w-100" cellspacing="0">
+      <thead>
+        <tr>
+          <th>title</th>
+          <th>categorias</th>
+          <th>ticker</th>
+          <th>Preço</th>
+          <th>Url</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @internationals.each do |international| %>
+          <tr>
+            <td><%= international.title %></td>
+            <td><%= international.international_category.title %></td>
+            <td><%= international.ticker %></td>
+            <td><%= international.price %></td>
+            <td><%= international.slug %></td>
+            <td> <%= link_to 'Edit', edit_admin_international_path(international.id) %> | <%= link_to 'Destroy', admin_international_path(international.id), method: :delete %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+

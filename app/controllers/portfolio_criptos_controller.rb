@@ -29,7 +29,7 @@ class PortfolioCriptosController < ApplicationController
 
     respond_to do |format|
       if @portfolio_cripto.save
-        format.html { redirect_to portfolio_path(@portfolio_cripto.portfolio.id), notice: 'Portfolio cripto was successfully created.' }
+        format.html { redirect_to portfolio_criptos_management_path(@portfolio_cripto.portfolio.id), notice: 'Portfolio cripto was successfully created.' }
         format.json { render :show, status: :created, location: @portfolio_cripto }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class PortfolioCriptosController < ApplicationController
   def update
     respond_to do |format|
       if @portfolio_cripto.update(portfolio_cripto_params)
-        format.html { redirect_to portfolio_path(@portfolio_cripto.portfolio.id), notice: 'Portfolio cripto was successfully updated.' }
+        format.html { redirect_to portfolio_criptos_management_path(@portfolio_cripto.portfolio.id), notice: 'Portfolio cripto was successfully updated.' }
         format.json { render :show, status: :ok, location: @portfolio_cripto }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class PortfolioCriptosController < ApplicationController
   def destroy
     @portfolio_cripto.destroy
     respond_to do |format|
-      format.html { redirect_to portfolio_path(@portfolio_cripto.portfolio.id), notice: 'Portfolio cripto was successfully destroyed.' }
+      format.html { redirect_to portfolio_criptos_management_path(@portfolio_cripto.portfolio.id), notice: 'Portfolio cripto was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

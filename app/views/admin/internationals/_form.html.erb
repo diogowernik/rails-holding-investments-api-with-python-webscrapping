@@ -1,0 +1,43 @@
+<%= simple_form_for([:admin, international]) do |form| %>
+  <% if international.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(international.errors.count, "error") %> prohibited this international from being saved:</h2>
+
+      <ul>
+      <% international.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="row">
+  <div class="col-md-3">
+    <%= form.label :international_category_id %> 
+    <%= form.select :international_category_id, InternationalCategory.all.collect {|d| [d.title, d.id]}, {}, {class: 'form-control'} %>
+  </div>
+  <div class="col-md-3">
+      <%= form.label :title %>
+      <%= form.text_field :title, class: 'form-control' %>
+    </div>
+  <div class="col-md-3">
+      <%= form.label :slug %>
+      <%= form.text_field :slug, class: 'form-control' %>
+  </div>
+    <div class="col-md-3">
+      <%= form.label :ticker %>
+      <%= form.text_field :ticker, class: 'form-control' %>
+    </div>
+  <div class="col-md-3">
+      <%= form.label :price %>
+      <%= form.text_field :price, class: 'form-control' %>
+  </div>
+
+</div>
+<div class="row">
+    <div class="col-md-3 mt-4">
+		<div class="form-group">
+                <%= form.submit 'Enviar', class: 'btn btn-block btn-primary' %>
+         </div>
+     </div>
+</div>
+<% end %>

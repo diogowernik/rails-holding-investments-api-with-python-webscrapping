@@ -1,0 +1,106 @@
+<div class="col-xl-5">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="mt-5">Internacional do Portfolio</h4>
+                <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Qnt</th>
+                            <th>Preço medio</th>
+                            <th>Custo Total</th>
+                            <th>Total Hoje</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @portfolio_internationals.each do |portfolio_international| %>
+                        <tr>
+                            <td><%= portfolio_international.international.title %></td>
+                            <td><%= number_with_precision(portfolio_international.shares_amount, precision: 0) %></td>
+                            <td><%= number_with_precision(portfolio_international.share_cost, precision: 4, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_international.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_international.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= link_to 'E', edit_portfolio_international_path(portfolio_international) %> | <%= link_to 'D', portfolio_international_path(portfolio_international), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+
+        </div>
+    </div>
+</div>
+<div class="col-xl-7">
+    <div class="card">
+        <div class="card-body">
+            <div id="chart">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+  var options = {
+    series: [],
+    legend: {
+      show: true,
+      position: 'bottom',
+      horizontalAlign: 'left',
+      fontSize: '14px',
+      fontFamily: 'Helvetica, Arial',
+      fontWeight: 400,
+      width:'20px',
+    },
+    theme: {
+      mode: 'light', 
+    //   palette: 'palette6', 
+    },
+  dataLabels: {
+    enabled: true,
+    style: {
+      fontSize: '12px',
+    },
+    formatter: function(text, op) {
+      return [text, op.value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0, maximumFractionDigits: 0 })]
+    },
+    offsetY: -4
+  },
+  chart: {
+    height: 310,
+    type: 'treemap',
+    toolbar: {
+      show: false}
+  },
+  colors: [
+    '#3B93A5',
+    '#F7B844',
+    '#38BC6A',
+    '#EC3C65',
+    '#748C38',
+    '#8A1459',
+    '#71A021',
+    '#1E5D8C',
+    '#421243',
+    '#7F94B0',
+    '#EF6537',
+    '#C0ADDB'
+    ],
+    plotOptions: {
+        treemap: {
+            distributed: true,
+            enableShades: false
+        }
+    }
+};
+
+var chart = new ApexCharts(document.querySelector("#chart"), options);
+chart.render();
+
+var url = "/api/portfolio/<%= @portfolio.id %>/internationals_chart";
+$.getJSON(url, function (response) {
+ chart.updateSeries(response);
+});
+
+
+</script>

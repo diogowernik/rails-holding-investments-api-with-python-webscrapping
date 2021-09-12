@@ -28,7 +28,7 @@ class PortfolioBrStocksController < ApplicationController
 
     respond_to do |format|
       if @portfolio_br_stock.save
-        format.html { redirect_to portfolio_path(@portfolio_br_stock.portfolio.id), notice: 'Portfolio br stock was successfully created.' }
+        format.html { redirect_to portfolio_br_stocks_management_path(@portfolio_br_stock.portfolio.id), notice: 'Portfolio br stock was successfully created.' }
         format.json { render :show, status: :created, location: @portfolio_br_stock }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class PortfolioBrStocksController < ApplicationController
   def update
     respond_to do |format|
       if @portfolio_br_stock.update(portfolio_br_stock_params)
-        format.html { redirect_to portfolio_path(@portfolio_br_stock.portfolio.id), notice: 'Portfolio br stock was successfully updated.' }
+        format.html { redirect_to portfolio_br_stocks_management_path(@portfolio_br_stock.portfolio.id), notice: 'Portfolio br stock was successfully updated.' }
         format.json { render :show, status: :ok, location: @portfolio_br_stock }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class PortfolioBrStocksController < ApplicationController
   def destroy
     @portfolio_br_stock.destroy
     respond_to do |format|
-      format.html { redirect_to portfolio_path(@portfolio_br_stock.portfolio.id), notice: 'Portfolio br stock was successfully destroyed.' }
+      format.html { redirect_to portfolio_br_stocks_management_path(@portfolio_br_stock.portfolio.id), notice: 'Portfolio br stock was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

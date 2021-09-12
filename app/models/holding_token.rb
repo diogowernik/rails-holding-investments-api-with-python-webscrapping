@@ -1,2 +1,0 @@
-class HoldingToken < ApplicationRecord
-end

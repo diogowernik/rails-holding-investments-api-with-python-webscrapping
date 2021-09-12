@@ -47,12 +47,12 @@ json.array! @categories do |category|
             end
         end
     end
-    if @portfolio_currencies.any?
+    if @portfolio_internationals.any?
         if category.id == 6
             json.set! :name, 'Internacional'
-            json.data @portfolio_currencies do |portfolio_currency|
-                json.x portfolio_currency.currency.ticker
-                json.y portfolio_currency.total_today
+            json.data @portfolio_internationals do |portfolio_international|
+                json.x portfolio_international.international.title
+                json.y portfolio_international.total_today
             end
         end
     end

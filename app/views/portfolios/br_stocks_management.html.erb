@@ -8,6 +8,8 @@
                         <th>Ticker</th>
                         <th>Qnt</th>
                         <th>Preço medio</th>
+                        <th>Total Hoje</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -16,6 +18,8 @@
                         <td><%= portfolio_br_stock.br_stock.ticker %></td>
                         <td><%= number_with_precision(portfolio_br_stock.shares_amount, precision: 0) %></td>
                         <td><%= number_with_precision(portfolio_br_stock.share_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                        <td><%= number_with_precision(portfolio_br_stock.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
+                        <td><%= link_to 'E', edit_portfolio_br_stock_path(portfolio_br_stock) %> | <%= link_to 'D', portfolio_br_stock_path(portfolio_br_stock), method: :delete, data: { confirm: 'Are you sure?' } %></td>
                     </tr>
                     <% end %>
                 </tbody>

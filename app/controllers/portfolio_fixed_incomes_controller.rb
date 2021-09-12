@@ -28,7 +28,7 @@ class PortfolioFixedIncomesController < ApplicationController
 
     respond_to do |format|
       if @portfolio_fixed_income.save
-        format.html { redirect_to @portfolio_fixed_income, notice: 'Portfolio fixed income was successfully created.' }
+        format.html { redirect_to portfolio_fixed_incomes_management_path(@portfolio_fixed_income.portfolio.id), notice: 'Portfolio fixed income was successfully created.' }
         format.json { render :show, status: :created, location: @portfolio_fixed_income }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class PortfolioFixedIncomesController < ApplicationController
   def update
     respond_to do |format|
       if @portfolio_fixed_income.update(portfolio_fixed_income_params)
-        format.html { redirect_to @portfolio_fixed_income, notice: 'Portfolio fixed income was successfully updated.' }
+        format.html { redirect_to portfolio_fixed_incomes_management_path(@portfolio_fixed_income.portfolio.id), notice: 'Portfolio fixed income was successfully updated.' }
         format.json { render :show, status: :ok, location: @portfolio_fixed_income }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class PortfolioFixedIncomesController < ApplicationController
   def destroy
     @portfolio_fixed_income.destroy
     respond_to do |format|
-      format.html { redirect_to portfolio_fixed_incomes_url, notice: 'Portfolio fixed income was successfully destroyed.' }
+      format.html { redirect_to portfolio_fixed_incomes_management_path(@portfolio_fixed_income.portfolio.id), notice: 'Portfolio fixed income was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

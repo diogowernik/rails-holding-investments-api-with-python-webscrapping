@@ -1,29 +1,57 @@
-<div id="chart2"><div>
+<div id="chart2"></div>
 
 <script>
 
 var options = {
-          series: [44, 55, 13, 43, 22],
-          chart: {
-          width: 380,
-          type: 'pie',
-        },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-        responsive: [{
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
-            },
-            legend: {
-              position: 'bottom'
-            }
-          }
-        }]
-        };
+  
+  chart: {
+  height: 500,
+  type: 'pie',
+},
+colors: [
+// '#3B93A5',
+    '#F7B844',
+    '#1E5D8C',
+    '#5C388E',
+    '#748C38',
+    '#8A1459',
+    '#421243',
+    '#7F94B0',
+    '#EF6537',
+],
+legend: {
+show: true,
+position: 'bottom',
+horizontalAlign: 'left',
+fontSize: '14px',
+fontFamily: 'Helvetica, Arial',
+fontWeight: 400,
+width:'20px',
+},
+dataLabels: {
+enabled: true,
+style: {
+fontSize: '12px',
+},
+},
 
-        var chart2 = new ApexCharts(document.querySelector("#chart2"), options);
-        chart2.render();
+series: [7.4, 39.4, 9.6, 4.3, 34.0, 5.3],
+labels: ['Ações Brasileiras', 'Fundos Imobiliários', 'Internacional', 'Renda Fixa', 'Imoveis', 'Criptomoedas'],
+responsive: [{
+  breakpoint: 480,
+  options: {
+    chart: {
+      width: 200
+    },
+    legend: {
+      position: 'bottom'
+    }
+  }
+}]
+};
+
+var chart2 = new ApexCharts(document.querySelector("#chart2"), options);
+chart2.render();
 
 </script>
 

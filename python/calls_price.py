@@ -22,7 +22,7 @@ conn = create_connection('../db/development.sqlite3')
 cursor = conn.cursor()
 
 app_calls = pd.read_sql_query("SELECT ticker, price FROM Calls WHERE is_disable = false ORDER BY ticker", conn, index_col="ticker")
-print(app_calls)
+# print(app_calls)
 
 url = 'https://www.tradergrafico.com.br/opcoes/'
 header = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36"}
@@ -35,9 +35,12 @@ tradergrafico_calls['price'] = tradergrafico_calls['price'].str[3:]
 tradergrafico_calls['price'] = tradergrafico_calls['price'].str.replace(',', '.')
 # print(tradergrafico_calls.head())
 
+
 for index, row in app_calls.iterrows():
+    # if app_calls.index in tradergrafico_calls.index:
     app_calls.loc[index]['price'] = tradergrafico_calls.loc[index]['price']
-# print(app_calls)
+
+print(app_calls)
 
 for index, row in app_calls.iterrows():
     query = f"Update Calls set price = ? where ticker = ?"

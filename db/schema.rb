@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_06_180005) do
+ActiveRecord::Schema.define(version: 2021_09_12_173942) do
 
   create_table "br_stocks", force: :cascade do |t|
     t.string "ticker"
@@ -53,24 +53,6 @@ ActiveRecord::Schema.define(version: 2021_09_06_180005) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "currencies", force: :cascade do |t|
-    t.string "ticker"
-    t.string "title"
-    t.string "slug"
-    t.decimal "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "etfs", force: :cascade do |t|
-    t.string "ticker"
-    t.string "title"
-    t.string "slug"
-    t.decimal "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "expirations", force: :cascade do |t|
     t.string "title"
     t.string "slug"
@@ -96,13 +78,22 @@ ActiveRecord::Schema.define(version: 2021_09_06_180005) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "holding_tokens", force: :cascade do |t|
+  create_table "international_categories", force: :cascade do |t|
+    t.string "title"
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "internationals", force: :cascade do |t|
+    t.integer "international_category_id"
     t.string "ticker"
     t.string "title"
     t.string "slug"
     t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["international_category_id"], name: "index_internationals_on_international_category_id"
   end
 
   create_table "months", force: :cascade do |t|
@@ -161,36 +152,6 @@ ActiveRecord::Schema.define(version: 2021_09_06_180005) do
     t.index ["portfolio_id"], name: "index_portfolio_criptos_on_portfolio_id"
   end
 
-  create_table "portfolio_currencies", force: :cascade do |t|
-    t.integer "category_id"
-    t.integer "portfolio_id"
-    t.integer "currency_id"
-    t.decimal "shares_amount"
-    t.decimal "share_cost"
-    t.decimal "total_cost"
-    t.decimal "total_today"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_portfolio_currencies_on_category_id"
-    t.index ["currency_id"], name: "index_portfolio_currencies_on_currency_id"
-    t.index ["portfolio_id"], name: "index_portfolio_currencies_on_portfolio_id"
-  end
-
-  create_table "portfolio_etfs", force: :cascade do |t|
-    t.integer "category_id"
-    t.integer "portfolio_id"
-    t.integer "etf_id"
-    t.decimal "shares_amount"
-    t.decimal "share_cost"
-    t.decimal "total_cost"
-    t.decimal "total_today"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_portfolio_etfs_on_category_id"
-    t.index ["etf_id"], name: "index_portfolio_etfs_on_etf_id"
-    t.index ["portfolio_id"], name: "index_portfolio_etfs_on_portfolio_id"
-  end
-
   create_table "portfolio_fiis", force: :cascade do |t|
     t.integer "category_id"
     t.integer "portfolio_id"
@@ -221,19 +182,34 @@ ActiveRecord::Schema.define(version: 2021_09_06_180005) do
     t.index ["portfolio_id"], name: "index_portfolio_fixed_incomes_on_portfolio_id"
   end
 
-  create_table "portfolio_holding_tokens", force: :cascade do |t|
+  create_table "portfolio_internationals", force: :cascade do |t|
     t.integer "category_id"
     t.integer "portfolio_id"
-    t.integer "holding_token_id"
+    t.integer "international_id"
     t.decimal "shares_amount"
     t.decimal "share_cost"
     t.decimal "total_cost"
     t.decimal "total_today"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_portfolio_holding_tokens_on_category_id"
-    t.index ["holding_token_id"], name: "index_portfolio_holding_tokens_on_holding_token_id"
-    t.index ["portfolio_id"], name: "index_portfolio_holding_tokens_on_portfolio_id"
+    t.index ["category_id"], name: "index_portfolio_internationals_on_category_id"
+    t.index ["international_id"], name: "index_portfolio_internationals_on_international_id"
+    t.index ["portfolio_id"], name: "index_portfolio_internationals_on_portfolio_id"
+  end
+
+  create_table "portfolio_internationas", force: :cascade do |t|
+    t.integer "category_id"
+    t.integer "portfolio_id"
+    t.integer "stock_id"
+    t.decimal "shares_amount"
+    t.decimal "share_cost"
+    t.decimal "total_cost"
+    t.decimal "total_today"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_portfolio_internationas_on_category_id"
+    t.index ["portfolio_id"], name: "index_portfolio_internationas_on_portfolio_id"
+    t.index ["stock_id"], name: "index_portfolio_internationas_on_stock_id"
   end
 
   create_table "portfolio_properties", force: :cascade do |t|

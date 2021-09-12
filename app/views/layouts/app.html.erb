@@ -98,22 +98,15 @@
                                                 </div> 
                                                 <div class="list-group-item list-group-item-action">
                                                     <div class="media">
-                                                        <%= link_to new_portfolio_etf_path, class: "dropdown-item" do %>
-                                                            Adicionar Etf
+                                                        <%= link_to new_portfolio_international_path, class: "dropdown-item" do %>
+                                                            Adicionar Invest. Exterior
                                                         <% end %>                                                                      
                                                     </div>
                                                 </div> 
                                                 <div class="list-group-item list-group-item-action">
                                                     <div class="media">
-                                                        <%= link_to new_portfolio_currency_path, class: "dropdown-item" do %>
-                                                            Adicionar Moeda Estrangeira
-                                                        <% end %>                                                                      
-                                                    </div>
-                                                </div> 
-                                                <div class="list-group-item list-group-item-action">
-                                                    <div class="media">
-                                                        <%= link_to new_portfolio_stock_path, class: "dropdown-item" do %>
-                                                            Adicionar Ações Estrangeiras
+                                                        <%= link_to new_portfolio_fixed_income_path, class: "dropdown-item" do %>
+                                                            Adicionar Renda Fixa
                                                         <% end %>                                                                      
                                                     </div>
                                                 </div>                                            
@@ -166,11 +159,29 @@
                                         <% end %>
                                     </li>
                                     <li class="nav-item">
-                                        <%= link_to portfolio_international_path do %>
+                                        <%= link_to portfolio_internationals_management_path do %>
                                             <button 
                                             class="btn btn-outline-primary ml-3
-                                            <%= 'active' if current_page?(portfolio_international_path) %>" >
+                                            <%= 'active' if current_page?(portfolio_internationals_management_path) %>" >
                                                 Internacional
+                                            </button>
+                                        <% end %>
+                                    </li>
+                                    <li class="nav-item">
+                                        <%= link_to portfolio_fixed_incomes_management_path do %>
+                                            <button 
+                                            class="btn btn-outline-primary ml-3
+                                            <%= 'active' if current_page?(portfolio_fixed_incomes_management_path) %>" >
+                                                Renda Fixa
+                                            </button>
+                                        <% end %>
+                                    </li>
+                                    <li class="nav-item">
+                                        <%= link_to portfolio_properties_management_path do %>
+                                            <button 
+                                            class="btn btn-outline-primary ml-3
+                                            <%= 'active' if current_page?(portfolio_properties_management_path) %>" >
+                                                Imóveis
                                             </button>
                                         <% end %>
                                     </li>
@@ -183,6 +194,8 @@
                                             </button>
                                         <% end %>
                                     </li>
+                                    
+                                    
                                     
                                 </ul>
                                 <ul class="navbar-nav ml-3">

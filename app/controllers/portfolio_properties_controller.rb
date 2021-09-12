@@ -28,7 +28,7 @@ class PortfolioPropertiesController < ApplicationController
 
     respond_to do |format|
       if @portfolio_property.save
-        format.html { redirect_to portfolio_path(@portfolio_property.portfolio.id), notice: 'Portfolio property was successfully created.' }
+        format.html { redirect_to portfolio_properties_management_path(@portfolio_property.portfolio.id), notice: 'Portfolio property was successfully created.' }
         format.json { render :show, status: :created, location: @portfolio_property }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class PortfolioPropertiesController < ApplicationController
   def update
     respond_to do |format|
       if @portfolio_property.update(portfolio_property_params)
-        format.html { redirect_to portfolio_path(@portfolio_property.portfolio.id), notice: 'Portfolio property was successfully updated.' }
+        format.html { redirect_to portfolio_properties_management_path(@portfolio_property.portfolio.id), notice: 'Portfolio property was successfully updated.' }
         format.json { render :show, status: :ok, location: @portfolio_property }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class PortfolioPropertiesController < ApplicationController
   def destroy
     @portfolio_property.destroy
     respond_to do |format|
-      format.html { redirect_to portfolio_path(@portfolio_property.portfolio.id), notice: 'Portfolio property was successfully destroyed.' }
+      format.html { redirect_to portfolio_properties_management_path(@portfolio_property.portfolio.id), notice: 'Portfolio property was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

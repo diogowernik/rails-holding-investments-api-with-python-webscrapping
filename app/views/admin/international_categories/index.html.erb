@@ -1,0 +1,30 @@
+<div class="float-right"><%= link_to new_admin_international_category_path do %>
+	<button class="btn btn-outline-success">
+		<em class="fa fa-plus-circle"></em> &nbsp; Novo 
+	</button><% end %>
+</div>
+<h3 class="h3-custom mb-4" id="minhas-paginas">
+	<em class="fa fa-vcard-o text-success"></em> &nbsp; international_categories
+</h3>
+<div class="table-responsive mt-2">
+    <table id="" class="display table table-striped w-100" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Url</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @international_categories.each do |international_category| %>
+          <tr>
+            <td><%= international_category.title %></td>
+            <td><%= international_category.slug %></td>
+            <td> <%= link_to 'Edit', edit_admin_international_category_path(international_category.id) %> | <%= link_to 'Destroy', admin_international_category_path(international_category.id), method: :delete %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+

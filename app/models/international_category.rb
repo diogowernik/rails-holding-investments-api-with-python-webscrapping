@@ -1,0 +1,2 @@
+class InternationalCategory < ApplicationRecord
+end
