@@ -1,0 +1,25 @@
+<div class="col-xl-12">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="mt-1">Radar de Fundos Imobiliários</h4>
+                <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>Cotação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @fiis.each do |fii| %>
+                        <tr>
+                            <td><%= fii.ticker %></td>
+                            <td><%= number_with_precision(fii.price, precision: 2, separator: ",", delimiter: ".") %></td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+        </div>
+    </div>
+</div>
+
+

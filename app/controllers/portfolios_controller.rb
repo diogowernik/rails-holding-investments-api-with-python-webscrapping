@@ -47,6 +47,7 @@ class PortfoliosController < ApplicationController
   def fiis_management
     @portfolios = Portfolio.all
     @portfolio_fiis = PortfolioFii.all.where(:portfolio_id => @portfolio.id)
+    @fiis = Fii.all
     render layout: "app" 
   end
 
