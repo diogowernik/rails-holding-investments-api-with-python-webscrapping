@@ -71,8 +71,50 @@ def get_derivatives_price(conn, table):
         params = (row['price'], index,)
         cursor.execute(query, params)
     conn.commit()
-        
-    # cursor.close()
-    # conn.close()
 
     print(f'updated {table} with success')
+
+def get_criptos_price(conn, table):
+    cursor = conn.cursor()
+
+    app_criptos_list = pd.read_sql_query(f"SELECT slug FROM {table} ORDER BY slug", conn)
+    app_criptos_list = app_criptos_list["slug"].tolist()
+    app_criptos_list = ','.join(app_criptos_list)
+    # print(app_criptos_list)
+
+    criptos_price = pd.read_json(f'https://api.coingecko.com/api/v3/simple/price?ids={app_criptos_list}&vs_currencies=brl').T.reset_index()
+    criptos_price.columns = ["slug", "price"]
+    criptos_price = criptos_price.set_index('slug')
+    # print(criptos_price)
+
+    app_criptos = pd.read_sql_query(f"SELECT slug, price FROM {table} ORDER BY slug", conn, index_col="slug")
+    # print(app_criptos)
+
+    for index, row in app_criptos.iterrows():
+        app_criptos.loc[index]['price'] = criptos_price.loc[index]['price']
+    # print(app_criptos)
+
+    for index, row in app_criptos.iterrows():
+        query = f"Update {table} set price = ? where slug = ?"
+        params = (row['price'], index,)
+        cursor.execute(query, params)
+    conn.commit()
+
+    print(f'updated {table} with success')
+
+def update_total_today(conn, asset_table, portfolio_table, asset_id):
+    cursor = conn.cursor()
+
+    portfolio_assets = pd.read_sql_query(f"SELECT {portfolio_table}.id, {asset_table}.ticker, {portfolio_table}.shares_amount, {asset_table}.price, {portfolio_table}.total_today FROM {asset_table} INNER JOIN {portfolio_table} ON {asset_table}.id={portfolio_table}.{asset_id};", conn , index_col="id")
+
+    update_total_today = portfolio_assets["price"] * portfolio_assets["shares_amount"]
+    portfolio_assets["total_today"] = update_total_today
+
+    for index, row in portfolio_assets.iterrows():
+        portfolio_assets.loc[index]['total_today'] = portfolio_assets.loc[index]['total_today']
+        query = f"Update {portfolio_table} set total_today = ? where id = ?"
+        params = (row['total_today'], index,)
+        cursor.execute(query, params)
+    conn.commit()
+
+    print(f'updated total_today from {portfolio_table} with success')

@@ -1,15 +1,124 @@
-5<div class="col-xl-4">
-    <div class="card">
-        
-        <div class="card-body">
-            <%= render 'piechart' %>
-
-
+<div class="col-xl-3">
+    <div class="card">  
+        <div class="card-body" style="height:480px">
+            <table id="" class="table table-striped w-100" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Resumo</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Fiis:</td>
+                        <td class="text-right">R$ <%= number_with_precision(@fiis_total, precision: 0, separator: ",", delimiter: ".")%></td>
+                    </tr>
+                    <tr>
+                        <td>Criptomoedas:</td>
+                        <td class="text-right">R$ <%= number_with_precision(@portfolio_criptos.sum(:total_today), precision: 0, separator: ",", delimiter: ".") %></td>
+                    </tr>
+                    <tr>
+                        <td>Ações:</td>
+                        <td class="text-right">R$ <%= number_with_precision( @portfolio_br_stocks.sum(:total_today), precision: 0, separator: ",", delimiter: ".") %></td>
+                    </tr>
+                    <tr>
+                        <td>Imóveis:</td>
+                        <td class="text-right">R$ <%= number_with_precision(@portfolio_properties.sum(:total_today), precision: 0, separator: ",", delimiter: ".")  %></td>
+                    </tr>
+                    <tr>
+                        <td>Renda Fixa:</td>
+                        <td class="text-right">R$ <%= number_with_precision(@portfolio_fixed_incomes.sum(:total_today), precision: 0, separator: ",", delimiter: ".") %></td>
+                    </tr>
+                    <tr>
+                        <td>Internacional:</td>
+                        <td class="text-right">R$ <%= number_with_precision(@portfolio_internationals.sum(:total_today), precision: 0, separator: ",", delimiter: ".") %></td>
+                    </tr>
+                    <tr>
+                        <td> Outros bens</td>
+                        <td class="text-right"> </td>
+                    </tr>
+                    <tr>
+                        <td> Equities</td>
+                        <td class="text-right"> </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <h4 class="mt-2">
+                    Total: <span class="float-right text-primary"> R$ <%= number_with_precision(@total, precision: 0, separator: ",", delimiter: ".") %> </span>
+                </h4>
+            </div>
       </div>
     </div>
 </div>
 
-<div class="col-xl-7">
+<div class="col-xl-5">
+    <div class="card">    
+        <div class="card-body">
+            <%= pie_chart @portfolio_pie_chart, legend: "bottom", height: "452px" %>
+      </div>
+    </div>
+</div>
+
+<div class="col-xl-4">
+    <div class="card">    
+        <div class="card-body" style="height:480px">
+            Advetisment
+      </div>
+    </div>
+</div>
+
+<div class="col-xl-3">
+    <div class="card">  
+        <div class="card-body" style="height:480px">
+            <table id="" class="table table-striped w-100" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Dividendos</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Fiis:</td>
+                        <td class="text-right"></td>
+                    </tr>
+                    <tr>
+                        <td>Criptomoedas:</td>
+                        <td class="text-right"></td>
+                    </tr>
+                    <tr>
+                        <td>Ações:</td>
+                        <td class="text-right"></td>
+                    </tr>
+                    <tr>
+                        <td>Imóveis:</td>
+                        <td class="text-right"></td>
+                    </tr>
+                    <tr>
+                        <td>Equities:</td>
+                        <td class="text-right"></td>
+                    </tr>
+                    <tr>
+                        <td>Internacional:</td>
+                        <td class="text-right"></td>
+                    </tr>
+                    <tr>
+                        <td>Derivativos</td>
+                        <td class="text-right"> </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <h4 class="mt-4">
+                    Total: <span class="float-right text-primary">  </span>
+                </h4>
+            </div>
+      </div>
+    </div>
+</div>
+
+<div class="col-xl-9">
     <div class="card">
         
         <div class="card-body">

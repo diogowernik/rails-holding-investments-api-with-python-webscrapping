@@ -1,3 +1,49 @@
-<%= render 'portfolios/fiis/radar' %>
-<%= render 'portfolios/fiis/table' %>
-<%= render 'portfolios/fiis/chart' %>
+<div class="col-xl-12">
+    <div class="card">
+        <section id="tabs" class="project-tab">
+
+            <nav>
+                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-table-tab" data-toggle="tab" href="#nav-table" role="tab" aria-controls="nav-table" aria-selected="true">Composição</a>
+                    <a class="nav-item nav-link" id="nav-subscriptions-tab" data-toggle="tab" href="#nav-subscriptions" role="tab" aria-controls="nav-subscriptions" aria-selected="false">Subscrições</a>
+                    <a class="nav-item nav-link" id="nav-chart-tab" data-toggle="tab" href="#nav-chart" role="tab" aria-controls="nav-chart" aria-selected="false">Gráfico</a>
+                    <a class="nav-item nav-link" id="nav-radar-tab" data-toggle="tab" href="#nav-radar" role="tab" aria-controls="nav-radar" aria-selected="false">Radar</a>
+                    <%# <a class="nav-item nav-link" id="nav-dividends-tab" data-toggle="tab" href="#nav-dividends" role="tab" aria-controls="nav-dividends" aria-selected="false">Dividendos</a>
+                    <a class="nav-item nav-link" id="nav-trades-tab" data-toggle="tab" href="#nav-trades" role="tab" aria-controls="nav-trades" aria-selected="false">Trades</a>
+                    <a class="nav-item nav-link" id="nav-tokens-tab" data-toggle="tab" href="#nav-tokens" role="tab" aria-controls="nav-tokens" aria-selected="false">Sistema de Tokens</a>
+                    <a class="nav-item nav-link" id="nav-taxes-tab" data-toggle="tab" href="#nav-taxes" role="tab" aria-controls="nav-taxes" aria-selected="false">Impostos</a> %>
+                </div>
+            </nav>
+            
+            <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-table" role="tabpanel" aria-labelledby="nav-table-tab">
+                        <%= render 'portfolios/fiis/table' %>
+                    </div>
+                    <div class="tab-pane fade" id="nav-subscriptions" role="tabpanel" aria-labelledby="nav-subscriptions-tab">
+                        <%= render 'portfolios/fiis/subscriptions' %>
+                    </div> 
+                    <div class="tab-pane fade" id="nav-chart" role="tabpanel" aria-labelledby="nav-chart-tab">
+                        <%= render 'portfolios/fiis/chart' %>
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-radar" role="tabpanel" aria-labelledby="nav-radar-tab">
+                        <%= render 'portfolios/fiis/radar' %>
+                    </div> 
+                
+                    <%# <div class="tab-pane fade" id="nav-dividends" role="tabpanel" aria-labelledby="nav-dividends-tab">
+                        Dividendos
+                    </div> 
+                    <div class="tab-pane fade" id="nav-trades" role="tabpanel" aria-labelledby="nav-trades-tab">
+                        Trades
+                    </div> 
+                    <div class="tab-pane fade" id="nav-tokens" role="tabpanel" aria-labelledby="nav-tokens-tab">
+                        Sistema de Tokens
+                    </div> 
+                    <div class="tab-pane fade" id="nav-taxes" role="tabpanel" aria-labelledby="nav-taxes-tab">
+                        Impostos
+                    </div>  %>
+            </div>
+            
+        </section>
+    </div>
+</div>

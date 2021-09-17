@@ -1,0 +1,39 @@
+<div class="col-xl-5">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="mt-1">Renda Fixa / Garantias</h4>
+                <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>Qnt</th>
+                            <th>Preço medio</th>
+                            <th>Custo Total</th>
+                            <th>Total Hoje</th>
+                            <th>Garantia?</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @portfolio_fixed_incomes.each do |portfolio_fixed_income| %>
+                        <tr>
+                            <td><%= portfolio_fixed_income.fixed_income.ticker %></td>
+                            <td><%= number_with_precision(portfolio_fixed_income.shares_amount, precision: 0) %></td>
+                            <td><%= number_with_precision(portfolio_fixed_income.share_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_fixed_income.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_fixed_income.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><% if portfolio_fixed_income.is_derivative_warranty? %><em class="fa fa-check text-success text-center"> </em> <% end %></td>
+                            <td><%= link_to 'E', edit_portfolio_fixed_income_path(portfolio_fixed_income) %> | <%= link_to 'D', portfolio_fixed_income_path(portfolio_fixed_income), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+        <div class="mt-3 text-right"> 
+            Garantia total disponível:
+            <span class="text-primary">
+                <%= number_to_currency(@portfolio_fixed_incomes.sum(:total_today), unit: "R$ ", separator: ",", delimiter: ".", strip_insignificant_zeros: true) %>
+            </span>
+        </div>
+        </div>
+    </div>
+</div>

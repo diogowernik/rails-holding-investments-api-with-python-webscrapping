@@ -20,7 +20,6 @@ Rails.application.routes.draw do
   get 'portfolio/:id/criptos_management', to: 'portfolios#criptos_management', as: 'portfolio_criptos_management'
   get 'portfolio/:id/fixed_incomes_management', to: 'portfolios#fixed_incomes_management', as: 'portfolio_fixed_incomes_management'
   get 'portfolio/:id/properties_management', to: 'portfolios#properties_management', as: 'portfolio_properties_management'
-  get 'portfolio/:id/subscriptions_management', to: 'portfolios#subscriptions_management', as: 'portfolio_subscriptions_management'
 
 
   root to: 'portfolios#index'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_12_173942) do
+ActiveRecord::Schema.define(version: 2021_09_13_174201) do
 
   create_table "br_stocks", force: :cascade do |t|
     t.string "ticker"
@@ -177,6 +177,7 @@ ActiveRecord::Schema.define(version: 2021_09_12_173942) do
     t.decimal "total_today"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_derivative_warranty"
     t.index ["category_id"], name: "index_portfolio_fixed_incomes_on_category_id"
     t.index ["fixed_income_id"], name: "index_portfolio_fixed_incomes_on_fixed_income_id"
     t.index ["portfolio_id"], name: "index_portfolio_fixed_incomes_on_portfolio_id"
@@ -240,6 +241,7 @@ ActiveRecord::Schema.define(version: 2021_09_12_173942) do
     t.integer "situation_id"
     t.decimal "price"
     t.decimal "total_price"
+    t.decimal "total_strike"
     t.index ["category_id"], name: "index_portfolio_puts_on_category_id"
     t.index ["portfolio_id"], name: "index_portfolio_puts_on_portfolio_id"
     t.index ["put_id"], name: "index_portfolio_puts_on_put_id"

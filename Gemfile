@@ -18,6 +18,7 @@ gem 'awesome_nested_set', '~> 3.2.0'
 gem 'bootstrap-sass'
 gem 'x-editable-rails'
 gem 'simple_form'
+gem 'chartkick'
 
 
 group :development, :test do

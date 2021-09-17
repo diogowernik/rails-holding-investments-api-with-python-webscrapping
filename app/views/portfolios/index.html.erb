@@ -29,7 +29,7 @@
                       <tbody>
                         <% @portfolios.each do |portfolio| %>
                           <tr>
-                            <td><a href="/portfolios/1" target="_blank"> <%= portfolio.title %> </a></td>
+                            <td><a href="/portfolios/<%= portfolio.id %>" target="_blank"> <%= portfolio.title %> </a></td>
                             <td><%= portfolio.slug %></td>
                             <td><%= link_to 'Edit', edit_portfolio_path(portfolio) %></td>
                             <td><%= link_to 'Destroy', portfolio, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -69,6 +69,6 @@ class PortfolioFixedIncomesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def portfolio_fixed_income_params
-      params.require(:portfolio_fixed_income).permit(:category_id, :portfolio_id, :fixed_income_id, :shares_amount, :share_cost, :total_cost, :total_today)
+      params.require(:portfolio_fixed_income).permit(:category_id, :portfolio_id, :fixed_income_id, :shares_amount, :share_cost, :total_cost, :total_today, :is_derivative_warranty)
     end
 end

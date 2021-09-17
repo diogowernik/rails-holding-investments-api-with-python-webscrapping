@@ -19,10 +19,17 @@ conn = create_connection('../db/development.sqlite3')
 while True:
     
 
-    uf.get_yahoo_price(conn, 'br_stocks')
+    
     uf.get_yahoo_price(conn, 'fiis')
+    uf.get_yahoo_price(conn, 'br_stocks')
+    uf.get_criptos_price(conn, 'criptos')
+
     uf.get_derivatives_price(conn, 'calls')
     uf.get_derivatives_price(conn, 'puts')
+    
+    uf.update_total_today(conn, 'fiis', 'portfolio_fiis', 'fii_id')
+    uf.update_total_today(conn, 'br_stocks', 'portfolio_br_stocks', 'br_stock_id')
+    uf.update_total_today(conn, 'criptos', 'portfolio_criptos', 'cripto_id')
 
     print('próxima atualização em 5 minutos')
     time.sleep(300)

@@ -10,10 +10,37 @@ class PortfoliosController < ApplicationController
   # GET /portfolios/1.json
   def show
     @portfolios = Portfolio.all
+
     @portfolio_criptos = PortfolioCripto.all.where(:portfolio_id => @portfolio.id)
     @portfolio_fiis = PortfolioFii.all.where(:portfolio_id => @portfolio.id)
+    @portfolio_subscriptions = PortfolioSubscription.all.where(:portfolio_id => @portfolio.id)
+    @portfolio_fixed_incomes = PortfolioFixedIncome.all.where(:portfolio_id => @portfolio.id)
     @portfolio_br_stocks = PortfolioBrStock.all.where(:portfolio_id => @portfolio.id)
     @portfolio_properties = PortfolioProperty.all.where(:portfolio_id => @portfolio.id)
+    @portfolio_internationals = PortfolioInternational.all.where(:portfolio_id => @portfolio.id)
+
+    @categories = Category.all
+
+    @total = @portfolio_fiis.sum(:total_today) + 
+    @portfolio_subscriptions.sum(:total_today) +
+    @portfolio_criptos.sum(:total_today) +
+    @portfolio_br_stocks.sum(:total_today) +
+    @portfolio_properties.sum(:total_today) +
+    @portfolio_fixed_incomes.sum(:total_today) +
+    @portfolio_internationals.sum(:total_today)
+
+    @fiis_total = @portfolio_fiis.sum(:total_today) + 
+    @portfolio_subscriptions.sum(:total_today)
+
+    @portfolio_pie_chart = [
+      ["Fiis", @fiis_total/@total], 
+      ["Criptos", @portfolio_criptos.sum(:total_today)/@total],
+      ["Ações", @portfolio_br_stocks.sum(:total_today)/@total],
+      ["Imóveis", @portfolio_properties.sum(:total_today)/@total],
+      ["Renda Fixa", @portfolio_fixed_incomes.sum(:total_today)/@total],
+      ["Internacional", @portfolio_internationals.sum(:total_today)/@total],
+    ] 
+
     render layout: "app" 
   end
 
@@ -35,6 +62,7 @@ class PortfoliosController < ApplicationController
     @portfolio_open_puts = PortfolioPut.all.where(:portfolio_id => @portfolio.id).where(:situation_id => 1)
     @portfolio_puts = PortfolioPut.all.where(:portfolio_id => @portfolio.id).where("situation_id = 2 or situation_id = 3 or situation_id = 4")
     @portfolio_br_stocks = PortfolioBrStock.all.where(:portfolio_id => @portfolio.id)
+    @portfolio_fixed_incomes = PortfolioFixedIncome.all.where(:portfolio_id => @portfolio.id).where(:is_derivative_warranty => true)
     render layout: "app" 
   end
 
@@ -47,6 +75,7 @@ class PortfoliosController < ApplicationController
   def fiis_management
     @portfolios = Portfolio.all
     @portfolio_fiis = PortfolioFii.all.where(:portfolio_id => @portfolio.id)
+    @portfolio_subscriptions = PortfolioSubscription.all.where(:portfolio_id => @portfolio.id)
     @fiis = Fii.all
     render layout: "app" 
   end
@@ -54,12 +83,6 @@ class PortfoliosController < ApplicationController
   def criptos_management
     @portfolios = Portfolio.all
     @portfolio_criptos = PortfolioCripto.all.where(:portfolio_id => @portfolio.id)
-    render layout: "app" 
-  end
-
-  def subscriptions_management
-    @portfolios = Portfolio.all
-    @portfolio_subscriptions = PortfolioSubscription.all.where(:portfolio_id => @portfolio.id)
     render layout: "app" 
   end
 
@@ -78,14 +101,6 @@ class PortfoliosController < ApplicationController
   def internationals_management
     @portfolios = Portfolio.all
     @portfolio_internationals = PortfolioInternational.all.where(:portfolio_id => @portfolio.id)
-    render layout: "app" 
-  end
-
-  def radar
-    @portfolios = Portfolio.all
-    @criptos = Cripto.all
-    @fiis = Fii.all
-    @br_stocks = BrStock.all
     render layout: "app" 
   end
   

@@ -69,6 +69,6 @@ class PortfolioPutsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def portfolio_put_params
-      params.require(:portfolio_put).permit(:category_id, :portfolio_id, :put_id, :situation_id, :shares_amount, :price, :total_price, :share_cost, :total_cost, :total_today)
+      params.require(:portfolio_put).permit(:category_id, :portfolio_id, :put_id, :situation_id, :shares_amount, :price, :total_price, :share_cost, :total_cost, :total_today, :total_strike)
     end
 end

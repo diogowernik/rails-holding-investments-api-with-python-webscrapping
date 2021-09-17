@@ -11,6 +11,8 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %>  
+    <%= javascript_include_tag "chartkick", "chartkick" %>
   </head>
 
   <body>
@@ -19,7 +21,7 @@
             <div class="row">
                 <div class="col-xl-3">
                     <div class="card">  
-                        <nav class="navbar navbar-expand navbar-light bg-light">
+                        <nav class="navbar navbar-expand navbar-light bg-white">
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav mr-auto">
                                     <li class="nav-item dropdown">
@@ -123,7 +125,7 @@
                 </div>
                 <div class="col-xl-9">
                     <div class="card">
-                        <nav class="navbar navbar-expand navbar-light bg-light">
+                        <nav class="navbar navbar-expand navbar-light bg-white">
                             <%# <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button> %>
@@ -140,21 +142,22 @@
                                     </li>
                                 </ul>
                                 <ul class="navbar-nav ml-3">
-                                    <li class="nav-item">
-                                        <%= link_to portfolio_br_stocks_management_path do %>
-                                            <button 
-                                            class="btn btn-outline-primary ml-3
-                                            <%= 'active' if current_page?(portfolio_br_stocks_management_path) %>" >
-                                                Ações Br
-                                            </button>
-                                        <% end %>
-                                    </li>
+                                    
                                     <li class="nav-item">
                                         <%= link_to portfolio_fiis_management_path do %>
                                             <button 
                                             class="btn btn-outline-primary ml-3
                                             <%= 'active' if current_page?(portfolio_fiis_management_path) %>" >
                                                 Fiis
+                                            </button>
+                                        <% end %>
+                                    </li>
+                                    <li class="nav-item">
+                                        <%= link_to portfolio_br_stocks_management_path do %>
+                                            <button 
+                                            class="btn btn-outline-primary ml-3
+                                            <%= 'active' if current_page?(portfolio_br_stocks_management_path) %>" >
+                                                Ações Br
                                             </button>
                                         <% end %>
                                     </li>
@@ -214,15 +217,6 @@
                                             class="btn btn-outline-primary ml-3
                                             <%= 'active' if current_page?(portfolio_puts_management_path) %>" >
                                                 Puts
-                                            </button>
-                                        <% end %>
-                                    </li>
-                                    <li class="nav-item">
-                                        <%= link_to portfolio_subscriptions_management_path do %>
-                                            <button 
-                                            class="btn btn-outline-primary ml-3
-                                            <%= 'active' if current_page?(portfolio_subscriptions_management_path) %>" >
-                                                Subscrições 
                                             </button>
                                         <% end %>
                                     </li>

@@ -32,9 +32,12 @@
       <%= form.label :total_cost %>
       <%= form.text_field :total_cost, class: 'form-control' %>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-6">
       <%= form.label :total_today %>
       <%= form.text_field :total_today, class: 'form-control' %>
+  </div>
+    <div class="col-md-6 mt-3">
+      <%= form.input :is_derivative_warranty, inline_label: 'Garantia para Derivativos?', class: 'form-control' %>
   </div>
 
 </div>
