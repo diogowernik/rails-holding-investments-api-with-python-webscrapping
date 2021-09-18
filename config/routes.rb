@@ -22,6 +22,9 @@ Rails.application.routes.draw do
   get 'portfolio/:id/properties_management', to: 'portfolios#properties_management', as: 'portfolio_properties_management'
 
 
+  get 'portfolio_fiis/new/:portfolio_id', to: 'portfolio_fiis#new', as: 'new_fii_folio'
+
+
   root to: 'portfolios#index'
   devise_for :users
 

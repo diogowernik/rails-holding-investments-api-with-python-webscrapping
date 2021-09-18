@@ -19,6 +19,8 @@ gem 'bootstrap-sass'
 gem 'x-editable-rails'
 gem 'simple_form'
 gem 'chartkick'
+gem "select2-rails"
+
 
 
 group :development, :test do

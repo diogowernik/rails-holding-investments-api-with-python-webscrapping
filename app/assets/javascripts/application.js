@@ -17,8 +17,21 @@
 
 
 //= require jquery/dist/jquery.js
+//= require select2
 //= require bootstrap/dist/js/bootstrap.js
 //= require chosen-js/chosen.jquery.js
 //= require js/app_custom.js
 //= require sweetalert/dist/sweetalert.min.js
 
+// $(".select2").select2({
+// });
+
+// (function($){
+//     "use strict";
+//      $(document).on('ready', function(){
+//          $(".select2").select2({
+//              allowClear: true,
+//              theme: "bootstrap"
+//          });
+//      });
+//  }($));

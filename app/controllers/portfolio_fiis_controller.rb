@@ -16,6 +16,7 @@ class PortfolioFiisController < ApplicationController
   # GET /portfolio_fiis/new
   def new
     @portfolio_fii = PortfolioFii.new
+    @portfolio_id = params[:portfolio_id]
   end
 
   # GET /portfolio_fiis/1/edit

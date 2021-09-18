@@ -4,36 +4,32 @@
   <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
 
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-4 <% if !@portfolio_fii.new_record? %>d-none<% end %>">
     <%= form.label :fii_id %> 
-    <%= form.select :fii_id, Fii.all.collect {|d| [d.ticker, d.id]}, {}, {class: 'form-control'} %>
+    <%= form.select :fii_id, Fii.all.collect {|d| [d.ticker, d.id]}, {}, {class: 'form-control select2'} %>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-4 d-none">
     <%= form.label :portfolio_id %> 
-    <%= form.select :portfolio_id, Portfolio.all.collect {|d| [d.title, d.id]}, {}, {class: 'form-control'} %>
+    <%= form.select :portfolio_id, Portfolio.all.collect {|d| [d.title, d.id]}, {selected: @portfolio_id}, {class: 'form-control select2'} %>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-4 d-none">
     <%= form.label :category_id %> 
-    <%= form.select :category_id, Category.all.collect {|d| [d.title, d.id]}, {selected: 1}, {class: 'form-control'} %>
+    <%= form.select :category_id, Category.all.collect {|d| [d.title, d.id]}, {selected: 1}, {class: 'form-control select2'} %>
   </div>
-
-
-</div>
-<div class="row">
   <div class="col-md-4">
-      <%= form.label :shares_amount %>
+      Quantidade de Cotas
       <%= form.text_field :shares_amount, class: 'form-control' %>
   </div>
   <div class="col-md-4">
-      <%= form.label :share_cost %>
+      Preço por Cota
       <%= form.text_field :share_cost, class: 'form-control' %>
   </div>
-  <div class="col-md-4">
-      <%= form.label :total_cost %>
+  <div class="col-md-4 d-none">
+      Custo Total
       <%= form.text_field :total_cost, class: 'form-control' %>
   </div>
-  <div class="col-md-4">
-      <%= form.label :total_today %>
+  <div class="col-md-4 d-none">
+      Valor hoje
       <%= form.text_field :total_today, class: 'form-control' %>
   </div>
 
@@ -46,3 +42,25 @@
      </div>
 </div>
 <% end %>
+
+
+<script>
+$(".select2").select2({
+});
+
+
+</script>
+
+<script>
+$(document).ready(function(){
+    $('#portfolio_fii_shares_amount').keyup(calculate);
+    $('#portfolio_fii_share_cost').keyup(calculate);
+});
+
+function calculate(e)
+{
+    $('#portfolio_fii_total_cost').val($('#portfolio_fii_shares_amount').val() * $('#portfolio_fii_share_cost').val());
+    $('#portfolio_fii_total_today').val($('#portfolio_fii_shares_amount').val() * $('#portfolio_fii_share_cost').val());
+}
+</script>
+
