@@ -1,5 +1,11 @@
-<p id="notice"><%= notice %></p>
-<div id="chart"></div>
+<div class="col-xl-6">
+    <div class="card">
+        <div class="card-body">
+            <div id="chart">
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
   var options = {
@@ -15,7 +21,7 @@
     },
     theme: {
       mode: 'light', 
-      // palette: 'palette6', 
+    //   palette: 'palette6', 
     },
   dataLabels: {
     enabled: true,
@@ -34,21 +40,22 @@
       show: false}
   },
   colors: [
-    // '#3B93A5',
-    '#1E5D8C',
-    '#5C388E',
+    '#3B93A5',
     '#F7B844',
-    // '#1E5D8C',
-    
+    '#38BC6A',
+    '#EC3C65',
     '#748C38',
     '#8A1459',
+    '#71A021',
+    '#1E5D8C',
     '#421243',
     '#7F94B0',
     '#EF6537',
+    '#C0ADDB'
     ],
     plotOptions: {
         treemap: {
-            // distributed: true,
+            distributed: true,
             enableShades: false
         }
     }
@@ -57,7 +64,7 @@
 var chart = new ApexCharts(document.querySelector("#chart"), options);
 chart.render();
 
-var url = "/api/portfolios/<%= @portfolio.id %>";
+var url = "/api/portfolio/<%= @portfolio.id %>/br_stocks_chart";
 $.getJSON(url, function (response) {
  chart.updateSeries(response);
 });

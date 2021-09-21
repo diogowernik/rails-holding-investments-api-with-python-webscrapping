@@ -24,30 +24,30 @@ cursor = conn.cursor()
 
 
 
-url = 'https://www.clubefii.com.br/fundo_imobiliario_lista'
+url = 'https://www.clubefii.com.br/fiis/hcri11#proventos'
 header = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36"}
 r = requests.get(url, headers=header)
 
 clubefii_fiis = pd.read_html(r.text,  decimal='.', thousands='.')[0]
-clubefii_fiis = clubefii_fiis[['CÓDIGO', 'NOME']]
-clubefii_fiis.columns = ["ticker", "title"]
-clubefii_fiis = clubefii_fiis.set_index('ticker')
+# clubefii_fiis = clubefii_fiis[['CÓDIGO', 'NOME']]
+# clubefii_fiis.columns = ["ticker", "title"]
+# clubefii_fiis = clubefii_fiis.set_index('ticker')
 print(clubefii_fiis)
 
-app_fiis = pd.read_sql_query("SELECT ticker, title FROM Fiis ORDER BY ticker", conn, index_col="ticker")
-# print(app_fiis)
+# app_fiis = pd.read_sql_query("SELECT ticker, title FROM Fiis ORDER BY ticker", conn, index_col="ticker")
+# # print(app_fiis)
 
-for index, row in app_fiis.iterrows():
-    app_fiis.loc[index]['title'] = clubefii_fiis.loc[index]['title']
-# print(app_fiis)
+# for index, row in app_fiis.iterrows():
+#     app_fiis.loc[index]['title'] = clubefii_fiis.loc[index]['title']
+# # print(app_fiis)
 
-for index, row in app_fiis.iterrows():
-    query = f"Update Fiis set title = ? where ticker = ?"
-    params = (row['title'], index,)
-    cursor.execute(query, params)
-conn.commit()
+# for index, row in app_fiis.iterrows():
+#     query = f"Update Fiis set title = ? where ticker = ?"
+#     params = (row['title'], index,)
+#     cursor.execute(query, params)
+# conn.commit()
     
-cursor.close()
-conn.close()
+# cursor.close()
+# conn.close()
 
-print('updated fiis from clubefii with success')
+# print('updated fiis from clubefii with success')

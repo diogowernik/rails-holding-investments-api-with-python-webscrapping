@@ -31,5 +31,11 @@ while True:
     uf.update_total_today(conn, 'br_stocks', 'portfolio_br_stocks', 'br_stock_id')
     uf.update_total_today(conn, 'criptos', 'portfolio_criptos', 'cripto_id')
 
+    uf.update_fiis_table(conn, 'last_dividend')
+    uf.update_fiis_table(conn, 'last_yield')
+    uf.update_fiis_table(conn, 'six_m_yield')
+    uf.update_fiis_table(conn, 'twelve_m_yield')
+    uf.update_fiis_table(conn, 'p_vpa')
+
     print('próxima atualização em 5 minutos')
     time.sleep(300)

@@ -118,3 +118,45 @@ def update_total_today(conn, asset_table, portfolio_table, asset_id):
     conn.commit()
 
     print(f'updated total_today from {portfolio_table} with success')
+
+def update_fiis_table(conn, field):
+    cursor = conn.cursor()
+
+    url = 'https://www.fundsexplorer.com.br/ranking'
+    header = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36"}
+    r = requests.get(url, headers=header)
+
+    fiis = pd.read_html(r.text,  decimal=',')[0]
+    fiis= fiis[['Códigodo fundo', 'Setor', 'Dividendo', 'DividendYield', 'DY (6M)Acumulado', 'DY (12M)Acumulado', 'P/VPA', 'QuantidadeAtivos']]
+    fiis.columns = ['ticker', 'setor', 'last_dividend', 'last_yield','six_m_yield', 'twelve_m_yield', 'p_vpa', 'assets']
+    fiis['last_dividend'] = fiis['last_dividend'].str[3:]
+    fiis['last_dividend'] = fiis['last_dividend'].str.replace(',', '.')
+    fiis['last_yield'] = fiis['last_yield'].str.replace(',', '.')
+    fiis['last_yield'] = fiis['last_yield'].str.replace('%', '')
+    fiis['six_m_yield'] = fiis['six_m_yield'].str.replace(',', '.')
+    fiis['six_m_yield'] = fiis['six_m_yield'].str.replace('%', '')
+    fiis['twelve_m_yield'] = fiis['twelve_m_yield'].str.replace(',', '.')
+    fiis['twelve_m_yield'] = fiis['twelve_m_yield'].str.replace('%', '')
+    fiis['p_vpa'] = fiis['p_vpa'] / 100
+    fiis['setor'] = fiis['setor'].str.replace('Títulos e Val. Mob.', 'TVM')
+    fiis['setor'] = fiis['setor'].str.replace('Lajes Corporativas', 'Lajes')
+    fiis = fiis.set_index('ticker')
+
+    # print(fiis)
+
+
+    app_fiis = pd.read_sql_query(f"SELECT ticker, {field} FROM Fiis ORDER BY ticker", conn, index_col="ticker")
+    # print(app_fiis)
+
+    for index, row in app_fiis.iterrows():
+        try:
+            app_fiis.loc[index][f'{field}'] = fiis.loc[index][f'{field}']
+        except Exception as e:
+            print(f' Key Exception - {e}')
+            pass 
+
+    for index, row in app_fiis.iterrows():
+        query = f"Update Fiis set {field} = ? where ticker = ?"
+        params = (row[f'{field}'], index,)
+        cursor.execute(query, params)
+    conn.commit()

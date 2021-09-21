@@ -44,11 +44,6 @@ class PortfoliosController < ApplicationController
     render layout: "app" 
   end
 
-  def composition
-    @portfolios = Portfolio.all
-    render layout: "app" 
-  end
-
   def calls_management
     @portfolios = Portfolio.all
     @portfolio_open_calls = PortfolioCall.all.where(:portfolio_id => @portfolio.id).where(:situation_id => 1)
@@ -69,6 +64,12 @@ class PortfoliosController < ApplicationController
   def br_stocks_management
     @portfolios = Portfolio.all
     @portfolio_br_stocks = PortfolioBrStock.all.where(:portfolio_id => @portfolio.id)
+    @portfolio_open_puts = PortfolioPut.all.where(:portfolio_id => @portfolio.id).where(:situation_id => 1)
+    @portfolio_puts = PortfolioPut.all.where(:portfolio_id => @portfolio.id).where("situation_id = 2 or situation_id = 3 or situation_id = 4")
+    @portfolio_fixed_incomes = PortfolioFixedIncome.all.where(:portfolio_id => @portfolio.id).where(:is_derivative_warranty => true)
+    @portfolio_open_calls = PortfolioCall.all.where(:portfolio_id => @portfolio.id).where(:situation_id => 1)
+    @portfolio_calls = PortfolioCall.all.where(:portfolio_id => @portfolio.id).where("situation_id = 2 or situation_id = 3 or situation_id = 4")
+    
     render layout: "app" 
   end
 

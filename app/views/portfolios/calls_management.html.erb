@@ -1,181 +1,41 @@
 <div class="col-xl-12">
     <div class="card">
-        
-        <div class="card-body">
+        <section id="tabs" class="project-tab">
 
-            <h4>Calls Abertas</h4>
+            <nav>
+                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link" id="nav-subscriptions-tab" data-toggle="tab" href="#nav-subscriptions" role="tab" aria-controls="nav-subscriptions" aria-selected="false">Calls</a>
+                    <%# <a class="nav-item nav-link" id="nav-radar-tab" data-toggle="tab" href="#nav-radar" role="tab" aria-controls="nav-radar" aria-selected="false">Radar</a> %>
+                    <a class="nav-item nav-link" id="nav-dividends-tab" data-toggle="tab" href="#nav-dividends" role="tab" aria-controls="nav-dividends" aria-selected="false">Dividendos Sintético</a>
+                    <%# <a class="nav-item nav-link" id="nav-trades-tab" data-toggle="tab" href="#nav-trades" role="tab" aria-controls="nav-trades" aria-selected="false">Trades</a>
+                    <a class="nav-item nav-link" id="nav-tokens-tab" data-toggle="tab" href="#nav-tokens" role="tab" aria-controls="nav-tokens" aria-selected="false">Sistema de Tokens</a>
+                    <a class="nav-item nav-link" id="nav-taxes-tab" data-toggle="tab" href="#nav-taxes" role="tab" aria-controls="nav-taxes" aria-selected="false">Impostos</a> %>
+                </div>
+            </nav>
+            
+            <div class="tab-content" id="nav-tabContent">
 
-            <table class="display table table-striped table-bordered w-100" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Status</th>
-                        <th>Ticker</th>
-                        <th>Qnt</th>
-                        <th>Meu Premio</th>
-                        <th>Premio Hj</th>
-                        <th>Cotação Hj</th>
-                        <th>Strike</th>
-                        <th>PM final (Venda)</th>
-                        <th>Resultado</th>
-                        <th>Yield Sintético</th>
-                        <th>Vencimento</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% @portfolio_open_calls.each do |portfolio_call| %>
-                    <tr>
-                        <td><%= portfolio_call.situation.title %></td>     
-                        <td><%= portfolio_call.call.ticker %></td>                        
-                        <td><%= number_with_precision(portfolio_call.shares_amount, precision: 0) %>
-                        <td><%= number_with_precision(portfolio_call.price, precision: 2, separator: ",", delimiter: ".") %></td>
-                        <td <% if portfolio_call.call.price <= 0.09 %>class="text-primary"<% end %>
-                        ><%= number_with_precision(portfolio_call.call.price, precision: 2, separator: ",", delimiter: ".") %></td>
-                        <td ><%= number_with_precision(portfolio_call.call.br_stock.price, precision: 2, separator: ",", delimiter: ".") %></td>
-                        <td class="text-primary"><%= number_with_precision(portfolio_call.call.strike, precision: 2, separator: ",", delimiter: ".") %></td>
-                        <td class="text-primary"><%= number_with_precision(portfolio_call.call.strike + portfolio_call.price, precision: 2, separator: ",", delimiter: ".") %></td>
-                        <td class="text-primary"><%= number_with_precision(portfolio_call.total_price, precision: 2, separator: ",", delimiter: ".") %></td>
-                        <td class="text-primary"><%= number_with_precision((portfolio_call.total_price/(portfolio_call.shares_amount * portfolio_call.call.strike))*100, precision: 2, separator: ",", delimiter: ".") %></td>
-                        <td><%= portfolio_call.call.expiration.title %></td>
-                        <td><%= link_to 'E', edit_portfolio_call_path(portfolio_call) %> | <%= link_to 'D', portfolio_call_path(portfolio_call), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                    </tr>
-                    <% end %>
-                </tbody>
-            </table>
+                    <div class="tab-pane fade show active" id="nav-subscriptions" role="tabpanel" aria-labelledby="nav-calls-tab">
+                        <%= render 'portfolios/calls/table' %>
+                    </div> 
 
-        </div>
-    </div>
-</div>
-<div class="col-xl-5">
-    <div class="card">
-        <div class="card-body">
-            <h4 class="mt-5">Ações do Portfolio</h4>
-            <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Ticker</th>
-                        <th>Qnt</th>
-                        <th>Preço medio</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% @portfolio_br_stocks.each do |portfolio_br_stock| %>
-                    <tr>
-                        <td><%= portfolio_br_stock.br_stock.ticker %></td>
-                        <td><%= number_with_precision(portfolio_br_stock.shares_amount, precision: 0) %></td>
-                        <td><%= number_with_precision(portfolio_br_stock.share_cost, precision: 2, separator: ",", delimiter: ".") %></td>
-                    </tr>
-                    <% end %>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-<div class="col-xl-7">
-    <div class="card">
-        <div class="card-body">
-            <div id="chart">
+                    <%# <div class="tab-pane fade" id="nav-radar" role="tabpanel" aria-labelledby="nav-radar-tab">
+                    </div>  %>
+                
+                    <div class="tab-pane fade" id="nav-dividends" role="tabpanel" aria-labelledby="nav-dividends-tab">
+                        Dividendos
+                    </div> 
+                    <%# <div class="tab-pane fade" id="nav-trades" role="tabpanel" aria-labelledby="nav-trades-tab">
+                        Trades
+                    </div> 
+                    <div class="tab-pane fade" id="nav-tokens" role="tabpanel" aria-labelledby="nav-tokens-tab">
+                        Sistema de Tokens
+                    </div> 
+                    <div class="tab-pane fade" id="nav-taxes" role="tabpanel" aria-labelledby="nav-taxes-tab">
+                        Impostos
+                    </div>  %>
             </div>
-
-        </div>
+            
+        </section>
     </div>
 </div>
-
-<div class="col-xl-12">
-    <div class="card">
-        <div class="card-body">
-            <h4 class="mt-5">Calls Finalizadas</h4>
-
-            <table class="display table table-striped table-bordered w-100" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Status</th>
-                        <th>Ticker</th>
-                        <th>Resultado</th>
-                        <th>Yield Sintético</th>
-                        <th>Vencimento</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% @portfolio_calls.each do |portfolio_call| %>
-                    <tr>
-                        <td><%= portfolio_call.situation.title %></td>     
-                        <td><%= portfolio_call.call.ticker %></td>                        
-                        <td class="text-primary"><%= number_with_precision(portfolio_call.total_price, precision: 2, separator: ",", delimiter: ".") %></td>
-                        <td class="text-primary"><%= number_with_precision((portfolio_call.total_price/(portfolio_call.shares_amount * portfolio_call.call.strike))*100, precision: 2, separator: ",", delimiter: ".") %></td>
-                        <td><%= portfolio_call.call.expiration.title %></td>
-                        <td><%= link_to 'E', edit_portfolio_call_path(portfolio_call) %> | <%= link_to 'D', portfolio_call_path(portfolio_call), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                    </tr>
-                    <% end %>
-                </tbody>
-            </table>
-
-        </div>
-    </div>
-</div>
-
-<script>
-  var options = {
-    series: [],
-    legend: {
-      show: true,
-      position: 'bottom',
-      horizontalAlign: 'left',
-      fontSize: '14px',
-      fontFamily: 'Helvetica, Arial',
-      fontWeight: 400,
-      width:'20px',
-    },
-    theme: {
-      mode: 'light', 
-    //   palette: 'palette6', 
-    },
-  dataLabels: {
-    enabled: true,
-    style: {
-      fontSize: '12px',
-    },
-    formatter: function(text, op) {
-      return [text, op.value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0, maximumFractionDigits: 0 })]
-    },
-    offsetY: -4
-  },
-  chart: {
-    height: 310,
-    type: 'treemap',
-    toolbar: {
-      show: false}
-  },
-  colors: [
-    '#3B93A5',
-    '#F7B844',
-    '#ADD8C7',
-    '#EC3C65',
-    '#CDD7B6',
-    '#C1F666',
-    '#D43F97',
-    '#1E5D8C',
-    '#421243',
-    '#7F94B0',
-    '#EF6537',
-    '#C0ADDB'
-    ],
-    plotOptions: {
-        treemap: {
-            distributed: true,
-            enableShades: false
-        }
-    }
-};
-
-var chart = new ApexCharts(document.querySelector("#chart"), options);
-chart.render();
-
-var url = "/api/portfolio/<%= @portfolio.id %>/br_stocks_chart";
-$.getJSON(url, function (response) {
- chart.updateSeries(response);
-});
-
-
-</script>

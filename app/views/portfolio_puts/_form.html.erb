@@ -4,21 +4,27 @@
   <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
 
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-6">
     <%= form.label :situation_id %> 
-    <%= form.select :situation_id, Situation.all.collect {|d| [d.title, d.id]}, {}, {class: 'form-control'} %>
+    <%= form.select :situation_id, Situation.all.collect {|d| [d.title, d.id]}, {}, {class: 'form-control select2'} %>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-4">
     <%= form.label :put_id %> 
-    <%= form.select :put_id, Put.all.collect {|d| [d.ticker, d.id]}, {}, {class: 'form-control'} %>
+    <%= form.select :put_id, Put.all.collect {|d| [d.ticker, d.id]}, {}, {class: 'form-control select2'} %>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-2">
+    <label>Strike:</label>
+    <% if @portfolio_put.put_id? %>
+    <input disabled id="strike" value="<%= @portfolio_put.put.strike %>">
+    <% end %>
+  </div>
+  <div class="col-md-3 d-none">
     <%= form.label :portfolio_id %> 
-    <%= form.select :portfolio_id, Portfolio.all.collect {|d| [d.title, d.id]}, {}, {class: 'form-control'} %>
+    <%= form.select :portfolio_id, Portfolio.all.collect {|d| [d.title, d.id]}, {}, {class: 'form-control select2'} %>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-3 d-none">
     <%= form.label :category_id %> 
-    <%= form.select :category_id, Category.all.collect {|d| [d.title, d.id]}, {selected: 12}, {class: 'form-control'} %>
+    <%= form.select :category_id, Category.all.collect {|d| [d.title, d.id]}, {selected: 12}, {class: 'form-control select2'} %>
   </div>
 
 
@@ -49,3 +55,62 @@
      </div>
 </div>
 <% end %>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Calculadora de recompra</h4>
+    </div>
+    <div class="col-md-3">
+        <label>Recompra (preço aqui)</label>
+        <input id="buy-back-price" class="form-control">
+     </div>
+     <div class="col-md-3">
+        <label>lucro por ação (automático)</label>
+        <input disabled id="new-price" class="form-control">
+     </div>
+     <div class="col-md-3">
+        <label>lucro total (automático)</label>
+        <input disabled id="new-total" class="form-control">
+     </div>
+</div>
+
+
+
+
+<script>
+$(".select2").select2({
+});
+
+
+</script>
+
+<script>
+$(document).ready(function(){
+    $('#portfolio_put_shares_amount').keyup(calculate);
+    $('#portfolio_put_price').keyup(calculate);
+    $('#strike').keyup(calculate2);
+});
+
+function calculate(e)
+{
+    $('#portfolio_put_total_price').val($('#portfolio_put_shares_amount').val() * $('#portfolio_put_price').val());
+    $('#portfolio_put_total_strike').val($('#portfolio_put_shares_amount').val() * $('#strike').val());
+}
+</script>
+
+<script>
+$(document).ready(function(){
+    $('#portfolio_put_shares_amount').keyup(calculate2);
+    $('#portfolio_put_price').keyup(calculate2);
+    $('#buy-back-price').keyup(calculate2);
+    $('#new_total').keyup(calculate2);
+    $('#new_price').keyup(calculate2);
+});
+
+function calculate2(e)
+{
+    $('#new-total').val($('#portfolio_put_shares_amount').val() * ( $('#portfolio_put_price').val() - $('#buy-back-price').val() ) );
+    $('#new-price').val($('#portfolio_put_price').val() - $('#buy-back-price').val());
+}
+</script>
