@@ -1,5 +1,5 @@
 class Api::PortfoliosController < ApiController
-  before_action :set_portfolio, only: [:show, :update, :destroy, :fiis_chart, :fixed_incomes_chart, :properties_chart, :criptos_chart, :br_stocks_chart, :internationals_chart, :portfoliofiis, :portfoliocriptos]
+  before_action :set_portfolio, only: [:show, :update, :destroy, :fiis_chart, :fixed_incomes_chart, :goods_chart, :properties_chart, :criptos_chart, :br_stocks_chart, :internationals_chart, :portfoliofiis, :portfoliocriptos]
 
   # GET /portfolios
   def index
@@ -11,6 +11,7 @@ class Api::PortfoliosController < ApiController
   def show
     @categories = Category.all.order("custom_order desc")
     @portfolio_fiis = PortfolioFii.all.where(:portfolio_id => @portfolio.id).order("id desc")
+    @portfolio_goods = PortfolioGood.all.where(:portfolio_id => @portfolio.id).order("id desc")
     @portfolio_subscriptions = PortfolioSubscription.all.where(:portfolio_id => @portfolio.id).order("id desc")
     @portfolio_criptos = PortfolioCripto.all.where(:portfolio_id => @portfolio.id).order("id desc")
     @portfolio_br_stocks = PortfolioBrStock.all.where(:portfolio_id => @portfolio.id).order("id desc")
@@ -30,6 +31,12 @@ class Api::PortfoliosController < ApiController
     @categories = Category.all
     @portfolio_criptos = PortfolioCripto.all.where(:portfolio_id => @portfolio.id).order("total_today asc")
     render 'api/portfolios/criptos_chart.json.jbuilder'
+  end
+
+  def goods_chart
+    @categories = Category.all
+    @portfolio_goods = PortfolioGood.all.where(:portfolio_id => @portfolio.id).order("total_today asc")
+    render 'api/portfolios/goods_chart.json.jbuilder'
   end
 
   def fiis_chart

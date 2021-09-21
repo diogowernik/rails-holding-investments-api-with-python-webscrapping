@@ -1,5 +1,5 @@
 class PortfoliosController < ApplicationController
-  before_action :set_portfolio, only: [:show, :edit, :update, :destroy, :br_stocks_management, :fiis_management, :subscriptions_management, :properties_management, :fixed_incomes_management , :criptos_management, :internationals_management, :calls_management, :puts_management]
+  before_action :set_portfolio, only: [:show, :edit, :update, :destroy, :br_stocks_management, :fiis_management, :subscriptions_management, :properties_management, :goods_management, :fixed_incomes_management , :criptos_management, :internationals_management, :calls_management, :puts_management]
   # GET /portfolios
   # GET /portfolios.json
   def index
@@ -18,6 +18,7 @@ class PortfoliosController < ApplicationController
     @portfolio_br_stocks = PortfolioBrStock.all.where(:portfolio_id => @portfolio.id)
     @portfolio_properties = PortfolioProperty.all.where(:portfolio_id => @portfolio.id)
     @portfolio_internationals = PortfolioInternational.all.where(:portfolio_id => @portfolio.id)
+    @portfolio_goods = PortfolioGood.all.where(:portfolio_id => @portfolio.id)
 
     @categories = Category.all
 
@@ -27,7 +28,8 @@ class PortfoliosController < ApplicationController
     @portfolio_br_stocks.sum(:total_today) +
     @portfolio_properties.sum(:total_today) +
     @portfolio_fixed_incomes.sum(:total_today) +
-    @portfolio_internationals.sum(:total_today)
+    @portfolio_internationals.sum(:total_today) +
+    @portfolio_goods.sum(:total_today)
 
     @fiis_total = @portfolio_fiis.sum(:total_today) + 
     @portfolio_subscriptions.sum(:total_today)
@@ -39,6 +41,7 @@ class PortfoliosController < ApplicationController
       ["Imóveis", @portfolio_properties.sum(:total_today)/@total],
       ["Renda Fixa", @portfolio_fixed_incomes.sum(:total_today)/@total],
       ["Internacional", @portfolio_internationals.sum(:total_today)/@total],
+      ["Outros Bens", @portfolio_goods.sum(:total_today)/@total],
     ] 
 
     render layout: "app" 
@@ -84,6 +87,12 @@ class PortfoliosController < ApplicationController
   def criptos_management
     @portfolios = Portfolio.all
     @portfolio_criptos = PortfolioCripto.all.where(:portfolio_id => @portfolio.id)
+    render layout: "app" 
+  end
+
+  def goods_management
+    @portfolios = Portfolio.all
+    @portfolio_goods = PortfolioGood.all.where(:portfolio_id => @portfolio.id)
     render layout: "app" 
   end
 

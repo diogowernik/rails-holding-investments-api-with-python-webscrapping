@@ -1,14 +1,14 @@
 
-<%= simple_form_for(@portfolio_fii) do |form| %>
+<%= simple_form_for(@portfolio_good) do |form| %>
   <%= form.error_notification %>
   <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
 
 <div class="row">
-  <div class="col-md-4 <% if !@portfolio_fii.new_record? %>d-none<% end %>">
-    <%= form.label :fii_id %> 
-    <%= form.select :fii_id, Fii.all.collect {|d| [d.ticker, d.id]}, {}, {class: 'form-control select2'} %>
+  <div class="col-md-4 <% if !@portfolio_good.new_record? %>d-none<% end %>">
+    <%= form.label :good_id %> 
+    <%= form.select :good_id, Good.all.collect {|d| [d.ticker, d.id]}, {}, {class: 'form-control select2'} %>
   </div>
-  <% if @portfolio_fii.new_record? %>
+  <% if @portfolio_good.new_record? %>
     <div class="col-md-4">
       <%= form.label :portfolio_id %> 
       <%= form.select :portfolio_id, Portfolio.all.collect {|d| [d.title, d.id]}, {selected: @portfolio_id}, {class: 'form-control select2'} %>
@@ -21,7 +21,7 @@
   <% end %>
   <div class="col-md-4 d-none">
     <%= form.label :category_id %> 
-    <%= form.select :category_id, Category.all.collect {|d| [d.title, d.id]}, {selected: 1}, {class: 'form-control select2'} %>
+    <%= form.select :category_id, Category.all.collect {|d| [d.title, d.id]}, {selected: 7}, {class: 'form-control select2'} %>
   </div>
   <div class="col-md-4">
       Quantidade de Cotas
@@ -60,14 +60,14 @@ $(".select2").select2({
 
 <script>
 $(document).ready(function(){
-    $('#portfolio_fii_shares_amount').keyup(calculate);
-    $('#portfolio_fii_share_cost').keyup(calculate);
+    $('#portfolio_good_shares_amount').keyup(calculate);
+    $('#portfolio_good_share_cost').keyup(calculate);
 });
 
 function calculate(e)
 {
-    $('#portfolio_fii_total_cost').val($('#portfolio_fii_shares_amount').val() * $('#portfolio_fii_share_cost').val());
-    $('#portfolio_fii_total_today').val($('#portfolio_fii_shares_amount').val() * $('#portfolio_fii_share_cost').val());
+    $('#portfolio_good_total_cost').val($('#portfolio_good_shares_amount').val() * $('#portfolio_good_share_cost').val());
+    $('#portfolio_good_total_today').val($('#portfolio_good_shares_amount').val() * $('#portfolio_good_share_cost').val());
 }
 </script>
 

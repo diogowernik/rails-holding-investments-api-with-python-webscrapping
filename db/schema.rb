@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_18_175507) do
+ActiveRecord::Schema.define(version: 2021_09_21_152208) do
 
   create_table "br_stocks", force: :cascade do |t|
     t.string "ticker"
@@ -81,6 +81,15 @@ ActiveRecord::Schema.define(version: 2021_09_18_175507) do
   end
 
   create_table "fixed_incomes", force: :cascade do |t|
+    t.string "ticker"
+    t.string "title"
+    t.string "slug"
+    t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "goods", force: :cascade do |t|
     t.string "ticker"
     t.string "title"
     t.string "slug"
@@ -192,6 +201,21 @@ ActiveRecord::Schema.define(version: 2021_09_18_175507) do
     t.index ["category_id"], name: "index_portfolio_fixed_incomes_on_category_id"
     t.index ["fixed_income_id"], name: "index_portfolio_fixed_incomes_on_fixed_income_id"
     t.index ["portfolio_id"], name: "index_portfolio_fixed_incomes_on_portfolio_id"
+  end
+
+  create_table "portfolio_goods", force: :cascade do |t|
+    t.integer "category_id"
+    t.integer "portfolio_id"
+    t.integer "good_id"
+    t.decimal "shares_amount"
+    t.decimal "share_cost"
+    t.decimal "total_cost"
+    t.decimal "total_today"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_portfolio_goods_on_category_id"
+    t.index ["good_id"], name: "index_portfolio_goods_on_good_id"
+    t.index ["portfolio_id"], name: "index_portfolio_goods_on_portfolio_id"
   end
 
   create_table "portfolio_internationals", force: :cascade do |t|

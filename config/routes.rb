@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :portfolio_goods
   resources :portfolio_internationals
   resources :portfolio_stocks
   resources :portfolio_subscriptions
@@ -20,9 +21,11 @@ Rails.application.routes.draw do
   get 'portfolio/:id/criptos_management', to: 'portfolios#criptos_management', as: 'portfolio_criptos_management'
   get 'portfolio/:id/fixed_incomes_management', to: 'portfolios#fixed_incomes_management', as: 'portfolio_fixed_incomes_management'
   get 'portfolio/:id/properties_management', to: 'portfolios#properties_management', as: 'portfolio_properties_management'
+  get 'portfolio/:id/goods_management', to: 'portfolios#goods_management', as: 'portfolio_goods_management'
 
 
   get 'portfolio_fiis/new/:portfolio_id', to: 'portfolio_fiis#new', as: 'new_fii_folio'
+  get 'portfolio_goods/new/:portfolio_id', to: 'portfolio_goods#new', as: 'new_good_folio'
 
 
   root to: 'portfolios#index'
@@ -41,36 +44,23 @@ Rails.application.routes.draw do
     resources :months
     resources :properties
     resources :expirations
-      resources :subscriptions
-      resources :fixed_incomes
+    resources :subscriptions
+    resources :fixed_incomes
     resources :situations
     resources :internationals
     resources :international_categories
+    resources :goods
   end
 
   namespace :api do
-    resources :years
-    resources :criptos
-    resources :movements
-    resources :categories
     resources :portfolios
-    resources :fiis
-    resources :portfoliocriptos
-    resources :portfoliofiis
-
-    get 'portfolio/options', to: 'portfolios#options', as: 'portfolio_options'
-    get 'category/options', to: 'categories#options', as: 'category_options'
-    get 'fii/options', to: 'fiis#options', as: 'fii_options'
-    get 'cripto/options', to: 'criptos#options', as: 'cripto_options'
-    get 'portfolio/portfoliofiis/:id', to: 'portfolios#portfoliofiis', as: 'portfolio_portfoliofiis'
-    get 'portfolio/portfoliocriptos/:id', to: 'portfolios#portfoliocriptos', as: 'portfolio_portfoliocriptos'
     get 'portfolio/:id/br_stocks_chart', to: 'portfolios#br_stocks_chart', as: 'portfolio_br_stocks_chart'
     get 'portfolio/:id/criptos_chart', to: 'portfolios#criptos_chart', as: 'portfolio_criptos_chart'
     get 'portfolio/:id/fiis_chart', to: 'portfolios#fiis_chart', as: 'portfolio_fiis_chart'
     get 'portfolio/:id/internationals_chart', to: 'portfolios#internationals_chart', as: 'portfolio_internationals_chart'
     get 'portfolio/:id/fixed_incomes_chart', to: 'portfolios#fixed_incomes_chart', as: 'portfolio_fixed_incomes_chart'
-
     get 'portfolio/:id/properties_chart', to: 'portfolios#properties_chart', as: 'portfolio_properties_chart'
+    get 'portfolio/:id/goods_chart', to: 'portfolios#goods_chart', as: 'portfolio_goods_chart'
 
   end
 end

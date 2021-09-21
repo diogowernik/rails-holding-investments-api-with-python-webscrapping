@@ -55,6 +55,13 @@
                                                             Adicionar Fundo Imobiliário
                                                         <% end %>  
                                                     </div>
+                                                </div>    
+                                                <div class="list-group-item list-group-item-action">
+                                                    <div class="media">
+                                                        <%= link_to new_good_folio_path(@portfolio.id), class: "dropdown-item" do %>
+                                                            Adicionar Outros Bens Novo
+                                                        <% end %>  
+                                                    </div>
                                                 </div>                                            
                                                 <div class="list-group-item list-group-item-action">
                                                     <div class="media">
@@ -69,7 +76,7 @@
                                                             Adicionar Ação Brasileira
                                                         <% end %>                                                                      
                                                     </div>
-                                                </div>   
+                                                </div>     
                                                 <div class="list-group-item list-group-item-action">
                                                     <div class="media">
                                                         <%= link_to new_portfolio_property_path, class: "dropdown-item" do %>
@@ -194,6 +201,15 @@
                                             class="btn btn-outline-primary ml-3
                                             <%= 'active' if current_page?(portfolio_criptos_management_path) %>" >
                                                 Criptos
+                                            </button>
+                                        <% end %>
+                                    </li>
+                                    <li class="nav-item">
+                                        <%= link_to portfolio_goods_management_path do %>
+                                            <button 
+                                            class="btn btn-outline-primary ml-3
+                                            <%= 'active' if current_page?(portfolio_goods_management_path) %>" >
+                                                Outros Bens
                                             </button>
                                         <% end %>
                                     </li>

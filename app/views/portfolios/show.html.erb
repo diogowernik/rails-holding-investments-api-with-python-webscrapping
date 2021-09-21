@@ -35,7 +35,7 @@
                     </tr>
                     <tr>
                         <td> Outros bens</td>
-                        <td class="text-right"> </td>
+                        <td class="text-right">R$ <%= number_with_precision(@portfolio_goods.sum(:total_today), precision: 0, separator: ",", delimiter: ".") %> </td>
                     </tr>
                     <tr>
                         <td> Equities</td>
