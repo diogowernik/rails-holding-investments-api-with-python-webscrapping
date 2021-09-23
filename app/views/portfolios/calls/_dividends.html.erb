@@ -1,0 +1,33 @@
+<div class="col-xl-12">
+    <div class="card">
+        <section id="tabs" class="project-tab">
+
+            <nav>
+                <div class="nav nav-tabs nav-pills" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active show" id="nav-by-stock-tab" data-toggle="tab" href="#nav-by-stock" role="tab" aria-controls="nav-by-stock" aria-selected="false">Por Ação</a>
+                    <a class="nav-item nav-link" id="nav-by-expiration-tab" data-toggle="tab" href="#nav-by-expiration" role="tab" aria-controls="nav-by-expiration" aria-selected="false">Por Vencimento</a>
+
+                </div>
+            </nav>
+            
+            <div class="tab-content" id="nav-tabContent">
+
+                    <div class="tab-pane fade show active" id="nav-by-stock" role="tabpanel" aria-labelledby="nav-calls-tab">
+                        <%= render 'portfolios/calls/by_stock' %>
+                    </div> 
+
+                    
+                
+                    <div class="tab-pane fade" id="nav-by-expiration" role="tabpanel" aria-labelledby="nav-by-expiration-tab">
+                        <%= render 'portfolios/calls/by_expiration' %>
+                        
+                    </div> 
+                    
+            </div>
+            
+        </section>
+    </div>
+</div>
+
+
+                    

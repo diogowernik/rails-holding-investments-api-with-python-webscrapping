@@ -15,6 +15,20 @@
                 <%= number_with_precision(portfolio_br_stock.share_cost, precision: 2, separator: ",", delimiter: ".") %>                
                 <span>
                 </p>
+                <% @portfolio_open_calls.where(:br_stock_id => portfolio_br_stock.br_stock.id).each do |portfolio_call| %>
+                    <p class="text-primary mt-2">
+                        <%= portfolio_call.call.ticker %>
+                        <span class="float-right">
+                        <%= number_with_precision(portfolio_call.shares_amount, precision: 0) %>   
+                        </span>
+                    </p>                        
+                <% end %>
+                <p>
+                    <h4 class="text-primary">
+                    <%= number_with_precision(portfolio_br_stock.shares_amount - @portfolio_open_calls.where(:br_stock_id => portfolio_br_stock.br_stock.id).sum(:shares_amount), precision: 0) %>
+                    Calls disponíveis
+                    </h4>
+                </p>
             </div>
         </div>
     </div>
@@ -26,7 +40,15 @@
             
             <div class="card-body">
 
+
                 <h4>Calls Abertas</h4>
+                <p>
+                <h4 class="m-4">
+                Lucro em aberto = 
+                <span class="text-primary">
+                <%= number_to_currency(@portfolio_open_calls.sum(:total_price), unit: "R$ ", separator: ",", delimiter: ".", strip_insignificant_zeros: true) %></h4>
+                </span>
+                </p>
 
                 <table class="display table table-striped table-bordered w-100" cellspacing="0">
                     <thead>
@@ -74,6 +96,13 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="mt-5">Calls Finalizadas</h4>
+                <p>
+                <h4 class="m-4">
+                Lucro Realizado = 
+                <span class="text-primary">
+                <%= number_to_currency(@portfolio_calls.sum(:total_price), unit: "R$ ", separator: ",", delimiter: ".", strip_insignificant_zeros: true) %></h4>
+                </span>
+                </p>
 
                 <table class="display table table-striped table-bordered w-100" cellspacing="0">
                     <thead>
@@ -90,7 +119,7 @@
                         <% @portfolio_calls.each do |portfolio_call| %>
                         <tr>
                             <td><%= portfolio_call.situation.title %></td>     
-                            <td><%= portfolio_call.call.ticker %></td>                        
+                            <td><%= portfolio_call.call.ticker %></td>                         
                             <td class="text-primary"><%= number_with_precision(portfolio_call.total_price, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td class="text-primary"><%= number_with_precision((portfolio_call.total_price/(portfolio_call.shares_amount * portfolio_call.call.strike))*100, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td><%= portfolio_call.call.expiration.title %></td>
@@ -99,7 +128,7 @@
                         <% end %>
                     </tbody>
                 </table>
-
+                
             </div>
         </div>
     </div>

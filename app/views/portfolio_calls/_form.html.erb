@@ -27,6 +27,16 @@
     <%= form.select :category_id, Category.all.collect {|d| [d.title, d.id]}, {selected: 11}, {class: 'form-control select2'} %>
   </div>
 
+    <div class="col-md-3">
+    <%= form.label :br_stock_id %> 
+    <%= form.select :br_stock_id, BrStock.all.collect {|d| [d.ticker, d.id]}, {}, {class: 'form-control select2'} %>
+  </div>
+
+  <div class="col-md-3">
+    <%= form.label :expiration_id %> 
+    <%= form.select :expiration_id, Expiration.all.collect {|d| [d.title, d.id]}, {}, {class: 'form-control select2'} %>
+  </div>
+
 
 </div>
 <div class="row">

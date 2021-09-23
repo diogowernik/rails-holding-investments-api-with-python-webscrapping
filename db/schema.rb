@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_21_152208) do
+ActiveRecord::Schema.define(version: 2021_09_22_190326) do
 
   create_table "br_stocks", force: :cascade do |t|
     t.string "ticker"
@@ -151,8 +151,13 @@ ActiveRecord::Schema.define(version: 2021_09_21_152208) do
     t.integer "situation_id"
     t.decimal "price"
     t.decimal "total_price"
+    t.decimal "profit"
+    t.integer "br_stock_id"
+    t.integer "expiration_id"
+    t.index ["br_stock_id"], name: "index_portfolio_calls_on_br_stock_id"
     t.index ["call_id"], name: "index_portfolio_calls_on_call_id"
     t.index ["category_id"], name: "index_portfolio_calls_on_category_id"
+    t.index ["expiration_id"], name: "index_portfolio_calls_on_expiration_id"
     t.index ["portfolio_id"], name: "index_portfolio_calls_on_portfolio_id"
     t.index ["situation_id"], name: "index_portfolio_calls_on_situation_id"
   end
@@ -277,6 +282,7 @@ ActiveRecord::Schema.define(version: 2021_09_21_152208) do
     t.decimal "price"
     t.decimal "total_price"
     t.decimal "total_strike"
+    t.decimal "profit"
     t.index ["category_id"], name: "index_portfolio_puts_on_category_id"
     t.index ["portfolio_id"], name: "index_portfolio_puts_on_portfolio_id"
     t.index ["put_id"], name: "index_portfolio_puts_on_put_id"

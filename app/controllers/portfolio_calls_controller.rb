@@ -69,6 +69,6 @@ class PortfolioCallsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def portfolio_call_params
-      params.require(:portfolio_call).permit(:category_id, :portfolio_id, :situation_id, :call_id, :shares_amount, :price, :total_price, :share_cost, :total_cost, :total_today)
+      params.require(:portfolio_call).permit(:category_id, :portfolio_id, :situation_id, :call_id, :br_stock_id, :expiration_id, :profit, :shares_amount, :price, :total_price, :share_cost, :total_cost, :total_today)
     end
 end
