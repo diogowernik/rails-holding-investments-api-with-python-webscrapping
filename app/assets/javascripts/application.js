@@ -22,6 +22,8 @@
 //= require chosen-js/chosen.jquery.js
 //= require js/app_custom.js
 //= require sweetalert/dist/sweetalert.min.js
+//= require chartkick
+//= require Chart.bundle
 
 // $(".select2").select2({
 // });
