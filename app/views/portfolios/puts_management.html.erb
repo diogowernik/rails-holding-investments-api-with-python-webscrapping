@@ -72,8 +72,10 @@
 <div class="col-xl-12">
     <div class="card">
         <div class="card-body">
-            <h4 class="mt-5">Puts Finalizadas</h4>
-
+            <h4 class="">Puts Finalizadas 
+            </br></br> Lucro até o momento:
+            <span class="text-primary"><%= @portfolio_puts.sum((:total_price)) %></span>
+            </h4>
             <table class="display table table-striped table-bordered w-100" cellspacing="0">
                 <thead>
                     <tr>

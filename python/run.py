@@ -37,5 +37,5 @@ while True:
     uf.update_fiis_table(conn, 'twelve_m_yield')
     uf.update_fiis_table(conn, 'p_vpa')
 
-    print('próxima atualização em 5 minutos')
-    time.sleep(300)
+    print('próxima atualização em 15 minutos')
+    time.sleep(900)
