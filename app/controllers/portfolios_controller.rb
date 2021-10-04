@@ -35,13 +35,13 @@ class PortfoliosController < ApplicationController
     @portfolio_subscriptions.sum(:total_today)
 
     @portfolio_pie_chart = [
-      ["Fiis", @fiis_total/@total], 
-      ["Criptos", @portfolio_criptos.sum(:total_today)/@total],
-      ["Ações", @portfolio_br_stocks.sum(:total_today)/@total],
-      ["Imóveis", @portfolio_properties.sum(:total_today)/@total],
-      ["Renda Fixa", @portfolio_fixed_incomes.sum(:total_today)/@total],
-      ["Internacional", @portfolio_internationals.sum(:total_today)/@total],
-      ["Outros Bens", @portfolio_goods.sum(:total_today)/@total],
+      ["Fiis", @fiis_total], 
+      ["Criptos", @portfolio_criptos.sum(:total_today)],
+      ["Ações", @portfolio_br_stocks.sum(:total_today)],
+      ["Imóveis", @portfolio_properties.sum(:total_today)],
+      ["Renda Fixa", @portfolio_fixed_incomes.sum(:total_today)],
+      ["Internacional", @portfolio_internationals.sum(:total_today)],
+      ["Outros Bens", @portfolio_goods.sum(:total_today)],
     ] 
 
     render layout: "app" 

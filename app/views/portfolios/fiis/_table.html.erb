@@ -10,6 +10,8 @@
                             <th>Cotação</th>
                             <th>Preço medio</th>
                             <th>Custo Total</th>
+                            <th>Dividendos</th>
+                            <th>Trade</th>
                             <th>Total Hoje</th>
                             <th></th>
                         </tr>
@@ -22,6 +24,8 @@
                             <td><%= number_with_precision(portfolio_fii.fii.price, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td><%= number_with_precision(portfolio_fii.share_cost, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td><%= number_with_precision(portfolio_fii.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_fii.dividends_profit, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_fii.trade_profit, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td><%= number_with_precision(portfolio_fii.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td><%= link_to 'E', edit_portfolio_fii_path(portfolio_fii) %> | <%= link_to 'D', portfolio_fii_path(portfolio_fii), method: :delete, data: { confirm: 'Are you sure?' } %></td>
                         </tr>

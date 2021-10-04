@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_22_190326) do
+ActiveRecord::Schema.define(version: 2021_10_04_181323) do
 
   create_table "br_stocks", force: :cascade do |t|
     t.string "ticker"
@@ -133,6 +133,9 @@ ActiveRecord::Schema.define(version: 2021_09_22_190326) do
     t.decimal "total_today"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "dividend_profit"
+    t.decimal "trade_profit"
+    t.decimal "derivatives_profit"
     t.index ["br_stock_id"], name: "index_portfolio_br_stocks_on_br_stock_id"
     t.index ["category_id"], name: "index_portfolio_br_stocks_on_category_id"
     t.index ["portfolio_id"], name: "index_portfolio_br_stocks_on_portfolio_id"
@@ -172,6 +175,8 @@ ActiveRecord::Schema.define(version: 2021_09_22_190326) do
     t.decimal "total_today"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "dividends_profit"
+    t.decimal "trade_profit"
     t.index ["category_id"], name: "index_portfolio_criptos_on_category_id"
     t.index ["cripto_id"], name: "index_portfolio_criptos_on_cripto_id"
     t.index ["portfolio_id"], name: "index_portfolio_criptos_on_portfolio_id"
@@ -187,6 +192,8 @@ ActiveRecord::Schema.define(version: 2021_09_22_190326) do
     t.decimal "total_today"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "dividends_profit"
+    t.decimal "trade_profit"
     t.index ["category_id"], name: "index_portfolio_fiis_on_category_id"
     t.index ["fii_id"], name: "index_portfolio_fiis_on_fii_id"
     t.index ["portfolio_id"], name: "index_portfolio_fiis_on_portfolio_id"

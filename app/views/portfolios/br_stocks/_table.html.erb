@@ -10,6 +10,9 @@
                             <th>Cotação</th>
                             <th>Preço medio</th>
                             <th>Custo Total</th>
+                            <th>Dividendos</th>
+                            <th>Trade</th>
+                            <th>Sintéticos</th>
                             <th>Total Hoje</th>
                             <th></th>
                         </tr>
@@ -22,6 +25,9 @@
                             <td><%= number_with_precision(portfolio_br_stock.br_stock.price, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td><%= number_with_precision(portfolio_br_stock.share_cost, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td><%= number_with_precision(portfolio_br_stock.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_br_stock.dividend_profit, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_br_stock.trade_profit, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_br_stock.derivatives_profit, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td><%= number_with_precision(portfolio_br_stock.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td><%= link_to 'E', edit_portfolio_br_stock_path(portfolio_br_stock) %> | <%= link_to 'D', portfolio_br_stock_path(portfolio_br_stock), method: :delete, data: { confirm: 'Are you sure?' } %></td>
                         </tr>

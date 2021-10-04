@@ -74,7 +74,7 @@ class PortfolioCriptosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def portfolio_cripto_params
-      params.require(:portfolio_cripto).permit(:category_id, :portfolio_id, :cripto_id, :shares_amount, :share_cost, :total_cost, :total_today)
+      params.require(:portfolio_cripto).permit(:category_id, :portfolio_id, :cripto_id, :shares_amount, :share_cost, :total_cost, :dividends_profit, :trade_profit, :total_today)
     end
 end
 

@@ -69,6 +69,6 @@ class PortfolioBrStocksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def portfolio_br_stock_params
-      params.require(:portfolio_br_stock).permit(:category_id, :portfolio_id, :br_stock_id, :shares_amount, :share_cost, :total_cost, :total_today)
+      params.require(:portfolio_br_stock).permit(:category_id, :portfolio_id, :br_stock_id, :shares_amount, :share_cost, :total_cost, :dividend_profit, :trade_profit, :derivatives_profit, :total_today)
     end
 end

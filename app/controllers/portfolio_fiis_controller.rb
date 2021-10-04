@@ -75,6 +75,6 @@ class PortfolioFiisController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def portfolio_fii_params
-      params.require(:portfolio_fii).permit(:category_id, :portfolio_id, :fii_id, :shares_amount, :share_cost, :total_cost, :total_today)
+      params.require(:portfolio_fii).permit(:category_id, :portfolio_id, :fii_id, :shares_amount, :share_cost, :total_cost, :dividends_profit, :trade_profit, :total_today)
     end
 end
