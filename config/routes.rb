@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'pages/home'
   resources :portfolio_goods
   resources :portfolio_internationals
   resources :portfolio_stocks
@@ -28,7 +29,7 @@ Rails.application.routes.draw do
   get 'portfolio_goods/new/:portfolio_id', to: 'portfolio_goods#new', as: 'new_good_folio'
 
 
-  root to: 'portfolios#index'
+  root to: 'pages#home'
   devise_for :users
 
   namespace :admin do
