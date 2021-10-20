@@ -9,7 +9,7 @@ class Api::PortfoliosController < ApiController
 
   # GET /portfolios/1
   def show
-    @categories = Category.all.order("custom_order desc")
+    @categories = Category.all.order("custom_order asc")
     @portfolio_fiis = PortfolioFii.all.where(:portfolio_id => @portfolio.id).order("id desc")
     @portfolio_goods = PortfolioGood.all.where(:portfolio_id => @portfolio.id).order("id desc")
     @portfolio_subscriptions = PortfolioSubscription.all.where(:portfolio_id => @portfolio.id).order("id desc")

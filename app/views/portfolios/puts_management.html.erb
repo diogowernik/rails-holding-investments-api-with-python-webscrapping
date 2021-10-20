@@ -1,106 +1,42 @@
+
 <div class="col-xl-12">
     <div class="card">
-        
-        <div class="card-body">
+        <section id="tabs" class="project-tab">
 
-            <h4>Puts Abertas</h4>
+            <nav>
+                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active show" id="nav-subscriptions-tab" data-toggle="tab" href="#nav-subscriptions" role="tab" aria-controls="nav-subscriptions" aria-selected="false">Puts</a>
+                    <%# <a class="nav-item nav-link" id="nav-radar-tab" data-toggle="tab" href="#nav-radar" role="tab" aria-controls="nav-radar" aria-selected="false">Radar</a> %>
+                    <a class="nav-item nav-link" id="nav-dividends-tab" data-toggle="tab" href="#nav-dividends" role="tab" aria-controls="nav-dividends" aria-selected="false">Dividendos Sintético</a>
+                    <%# <a class="nav-item nav-link" id="nav-trades-tab" data-toggle="tab" href="#nav-trades" role="tab" aria-controls="nav-trades" aria-selected="false">Trades</a>
+                    <a class="nav-item nav-link" id="nav-tokens-tab" data-toggle="tab" href="#nav-tokens" role="tab" aria-controls="nav-tokens" aria-selected="false">Sistema de Tokens</a>
+                    <a class="nav-item nav-link" id="nav-taxes-tab" data-toggle="tab" href="#nav-taxes" role="tab" aria-controls="nav-taxes" aria-selected="false">Impostos</a> %>
+                </div>
+            </nav>
+            
+            <div class="tab-content" id="nav-tabContent">
 
-            <table class="display table table-striped table-bordered w-100" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Status</th>
-                        <th>Ticker</th>
-                        <th>Qnt</th>
-                        <th>Meu Premio</th>
-                        <th>Premio Hj</th>
+                    <div class="tab-pane fade show active" id="nav-subscriptions" role="tabpanel" aria-labelledby="nav-puts-tab">
+                        <%= render 'portfolios/puts/table' %>
+                    </div> 
 
-                        <th>PM final (compra)</th>
-                        <th>Strike</th>
-                        <th>Cotação Hj</th>
-                        
-                        <th>Resultado</th>
-                        <th>Yield Sintético</th>
-                        <th>Vencimento</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% @portfolio_open_puts.each do |portfolio_put| %>
-                    <tr>
-                        <td><%= portfolio_put.situation.title %></td>     
-                        <td><%= portfolio_put.put.ticker %></td>                        
-                        <td><%= number_with_precision(portfolio_put.shares_amount, precision: 0) %>
-                        <td><%= number_with_precision(portfolio_put.price, precision: 2, separator: ",", delimiter: ".") %></td>
-                        <td <% if portfolio_put.put.price <= 0.09 %>class="text-primary"<% end %>
-                        ><%= number_with_precision(portfolio_put.put.price, precision: 2, separator: ",", delimiter: ".") %></td>
-                        
-                        <td class="text-primary"><%= number_with_precision(portfolio_put.put.strike - portfolio_put.price, precision: 2, separator: ",", delimiter: ".") %></td>
-                        <td class="text-primary"><%= number_with_precision(portfolio_put.put.strike, precision: 2, separator: ",", delimiter: ".") %></td>
-                        <td ><%= number_with_precision(portfolio_put.put.br_stock.price, precision: 2, separator: ",", delimiter: ".") %></td>                                                
-                        
-                        <td class="text-primary"><%= number_with_precision(portfolio_put.total_price, precision: 2, separator: ",", delimiter: ".") %></td>
-                        <td class="text-primary"><%= number_with_precision((portfolio_put.total_price/(portfolio_put.shares_amount * portfolio_put.put.strike))*100, precision: 2, separator: ",", delimiter: ".") %></td>
-                        <td><%= portfolio_put.put.expiration.title %></td>
-                        <td><%= link_to 'E', edit_portfolio_put_path(portfolio_put) %> | <%= link_to 'D', portfolio_put_path(portfolio_put), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                    </tr>
-                    <% end %>
-                </tbody>
-            </table>
-
-        </div>
-    </div>
-</div>
-<div class="col-xl-12">
-    <div class="card">
-        <div class="card-body">
-            <div> 
-                <h4> 
-                    Garantia total disponível:
-                    <span class="text-primary">
-                        <%= number_to_currency(@portfolio_fixed_incomes.sum(:total_today), unit: "R$ ", separator: ",", delimiter: ".", strip_insignificant_zeros: true) %>
-                    </span>
-                    /
-                    Garantia total utilizada:
-                    <span class="text-primary">
-                        <%= number_to_currency(@portfolio_open_puts.sum(:total_strike), unit: "R$ ", separator: ",", delimiter: ".", strip_insignificant_zeros: true) %>
-                    </span>
-                </h4>
+                    <%# <div class="tab-pane fade" id="nav-radar" role="tabpanel" aria-labelledby="nav-radar-tab">
+                    </div>  %>
+                
+                    <div class="tab-pane fade" id="nav-dividends" role="tabpanel" aria-labelledby="nav-dividends-tab">
+                        <%= render 'portfolios/puts/dividends' %>
+                    </div> 
+                    <%# <div class="tab-pane fade" id="nav-trades" role="tabpanel" aria-labelledby="nav-trades-tab">
+                        Trades
+                    </div> 
+                    <div class="tab-pane fade" id="nav-tokens" role="tabpanel" aria-labelledby="nav-tokens-tab">
+                        Sistema de Tokens
+                    </div> 
+                    <div class="tab-pane fade" id="nav-taxes" role="tabpanel" aria-labelledby="nav-taxes-tab">
+                        Impostos
+                    </div>  %>
             </div>
-        </div>
-    </div>
-</div>
-<div class="col-xl-12">
-    <div class="card">
-        <div class="card-body">
-            <h4 class="">Puts Finalizadas 
-            </br></br> Lucro até o momento:
-            <span class="text-primary"><%= @portfolio_puts.sum((:total_price)) %></span>
-            </h4>
-            <table class="display table table-striped table-bordered w-100" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Status</th>
-                        <th>Ticker</th>
-                        <th>Resultado</th>
-                        <th>Yield Sintético</th>
-                        <th>Vencimento</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% @portfolio_puts.each do |portfolio_put| %>
-                    <tr>
-                        <td><%= portfolio_put.situation.title %></td>     
-                        <td><%= portfolio_put.put.ticker %></td>                        
-                        <td class="text-primary"><%= number_with_precision(portfolio_put.total_price, precision: 2, separator: ",", delimiter: ".") %></td>
-                        <td class="text-primary"><%= number_with_precision((portfolio_put.total_price/(portfolio_put.shares_amount * portfolio_put.put.strike))*100, precision: 2, separator: ",", delimiter: ".") %></td>
-                        <td><%= portfolio_put.put.expiration.title %></td>
-                        <td><%= link_to 'E', edit_portfolio_put_path(portfolio_put) %> | <%= link_to 'D', portfolio_put_path(portfolio_put), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                    </tr>
-                    <% end %>
-                </tbody>
-            </table>
-
-        </div>
+            
+        </section>
     </div>
 </div>

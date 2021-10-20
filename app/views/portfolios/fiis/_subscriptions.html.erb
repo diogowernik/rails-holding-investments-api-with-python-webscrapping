@@ -18,7 +18,7 @@
                     <tr>
                         <td><%= portfolio_subscription.subscription.ticker %></td>
                         <td><%= number_with_precision(portfolio_subscription.shares_amount, precision: 0) %></td>
-                        <td><%= number_with_precision(portfolio_subscription.share_cost, precision: 4, separator: ",", delimiter: ".") %></td>
+                        <td><%= number_with_precision(portfolio_subscription.share_cost, precision: 2, separator: ",", delimiter: ".") %></td>
                         <td><%= number_with_precision(portfolio_subscription.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
                         <td><%= number_with_precision(portfolio_subscription.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
                         <td><%= link_to 'Edit', edit_portfolio_subscription_path(portfolio_subscription) %> | <%= link_to 'Destroy', portfolio_subscription_path(portfolio_subscription), method: :delete, data: { confirm: 'Are you sure?' } %></td>

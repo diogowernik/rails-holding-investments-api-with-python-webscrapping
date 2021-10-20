@@ -62,7 +62,10 @@ class PortfoliosController < ApplicationController
     @portfolios = Portfolio.all
     @portfolio_open_puts = PortfolioPut.all.where(:portfolio_id => @portfolio.id).where(:situation_id => 1)
     @portfolio_puts = PortfolioPut.all.where(:portfolio_id => @portfolio.id).where("situation_id = 2 or situation_id = 3 or situation_id = 4")
+    @puts = PortfolioPut.all.where(:portfolio_id => @portfolio.id)
     @portfolio_br_stocks = PortfolioBrStock.all.where(:portfolio_id => @portfolio.id)
+    @br_stocks = BrStock.all
+    @expirations = Expiration.all.order("id desc")
     @portfolio_fixed_incomes = PortfolioFixedIncome.all.where(:portfolio_id => @portfolio.id).where(:is_derivative_warranty => true)
     render layout: "app" 
   end
@@ -75,7 +78,9 @@ class PortfoliosController < ApplicationController
     @portfolio_fixed_incomes = PortfolioFixedIncome.all.where(:portfolio_id => @portfolio.id).where(:is_derivative_warranty => true)
     @portfolio_open_calls = PortfolioCall.all.where(:portfolio_id => @portfolio.id).where(:situation_id => 1)
     @portfolio_calls = PortfolioCall.all.where(:portfolio_id => @portfolio.id).where("situation_id = 2 or situation_id = 3 or situation_id = 4")
-    
+    @calls = PortfolioCall.all.where(:portfolio_id => @portfolio.id)
+    @br_stocks = BrStock.all
+    @expirations = Expiration.all.order("id desc")
     render layout: "app" 
   end
 

@@ -26,9 +26,18 @@
     <%= form.label :category_id %> 
     <%= form.select :category_id, Category.all.collect {|d| [d.title, d.id]}, {selected: 12}, {class: 'form-control select2'} %>
   </div>
+  <div class="col-md-3">
+    <%= form.label :br_stock_id %> 
+    <%= form.select :br_stock_id, BrStock.all.collect {|d| [d.ticker, d.id]}, {}, {class: 'form-control select2'} %>
+  </div>
+
+  <div class="col-md-3">
+    <%= form.label :expiration_id %> 
+    <%= form.select :expiration_id, Expiration.all.collect {|d| [d.title, d.id]}, {}, {class: 'form-control select2'} %>
+  </div>
 
 
-</div>
+</div> 
 <div class="row">
   <div class="col-md-4">
       <%= form.label :shares_amount %>

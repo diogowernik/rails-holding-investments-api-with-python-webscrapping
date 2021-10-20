@@ -6,8 +6,8 @@
             <nav>
                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-table-tab" data-toggle="tab" href="#nav-table" role="tab" aria-controls="nav-table" aria-selected="true">Composição</a>
-                    <a class="nav-item nav-link" id="nav-subscriptions-tab" data-toggle="tab" href="#nav-subscriptions" role="tab" aria-controls="nav-subscriptions" aria-selected="false">Calls</a>
-                    <a class="nav-item nav-link" id="nav-chart-tab" data-toggle="tab" href="#nav-chart" role="tab" aria-controls="nav-chart" aria-selected="false">Gráfico</a>
+                    <a class="nav-item nav-link" id="nav-subscriptions-tab" data-toggle="tab" href="#nav-subscriptions" role="tab" aria-controls="nav-subscriptions" aria-selected="false">Div. Sintéticos (Calls)</a>
+                    <%# <a class="nav-item nav-link" id="nav-chart-tab" data-toggle="tab" href="#nav-chart" role="tab" aria-controls="nav-chart" aria-selected="false">Gráfico</a> %>
                     <%# <a class="nav-item nav-link" id="nav-radar-tab" data-toggle="tab" href="#nav-radar" role="tab" aria-controls="nav-radar" aria-selected="false">Radar</a> %>
                     <%# <a class="nav-item nav-link" id="nav-dividends-tab" data-toggle="tab" href="#nav-dividends" role="tab" aria-controls="nav-dividends" aria-selected="false">Dividendos</a>
                     <a class="nav-item nav-link" id="nav-trades-tab" data-toggle="tab" href="#nav-trades" role="tab" aria-controls="nav-trades" aria-selected="false">Trades</a>
@@ -21,11 +21,11 @@
                         <%= render 'portfolios/br_stocks/table' %>
                     </div>
                     <div class="tab-pane fade" id="nav-subscriptions" role="tabpanel" aria-labelledby="nav-calls-tab">
-                        <%= render 'portfolios/calls/table' %>
+                        <%= render 'portfolios/calls/dividends' %>
                     </div> 
-                    <div class="tab-pane fade" id="nav-chart" role="tabpanel" aria-labelledby="nav-chart-tab">
-                        <%= render 'portfolios/br_stocks/chart' %>
-                    </div>
+                    <%# <div class="tab-pane fade" id="nav-chart" role="tabpanel" aria-labelledby="nav-chart-tab"> %>
+                        <%#= render 'portfolios/br_stocks/chart' %>
+                    <%# </div> %>
 
                     <%# <div class="tab-pane fade" id="nav-radar" role="tabpanel" aria-labelledby="nav-radar-tab">
                     </div>  %>

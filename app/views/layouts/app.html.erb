@@ -9,10 +9,13 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <%# <link href="../assets/css/style.css" rel="stylesheet"> %>
   </head>
 
   <body>
@@ -131,115 +134,42 @@
                     </div>
                 </div>
                 <div class="col-xl-9">
-                    <div class="card">
-                        <nav class="navbar navbar-expand navbar-light bg-white">
-                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button> 
-                            <div class="collapse navbar-collapse" id="navbarNav">
-                                <ul class="navbar-nav">
-                                    
-                                    <li class="nav-item">
-                                        <%= link_to portfolio_path do %>
-                                            <button class="btn btn-outline-primary 
-                                            <%= 'active' if current_page?(portfolio_path) %>">
-                                                Dashboard
-                                            </button>
-                                        <% end %>
-                                    </li>
-                                </ul>
-                                <ul class="navbar-nav ml-3">
-                                    
-                                    <li class="nav-item">
-                                        <%= link_to portfolio_fiis_management_path do %>
-                                            <button 
-                                            class="btn btn-outline-primary ml-3
-                                            <%= 'active' if current_page?(portfolio_fiis_management_path) %>" >
-                                                Fiis
-                                            </button>
-                                        <% end %>
-                                    </li>
-                                    <li class="nav-item">
-                                        <%= link_to portfolio_br_stocks_management_path do %>
-                                            <button 
-                                            class="btn btn-outline-primary ml-3
-                                            <%= 'active' if current_page?(portfolio_br_stocks_management_path) %>" >
-                                                Ações Br
-                                            </button>
-                                        <% end %>
-                                    </li>
-                                    <li class="nav-item">
-                                        <%= link_to portfolio_internationals_management_path do %>
-                                            <button 
-                                            class="btn btn-outline-primary ml-3
-                                            <%= 'active' if current_page?(portfolio_internationals_management_path) %>" >
-                                                Internacional
-                                            </button>
-                                        <% end %>
-                                    </li>
-                                    <li class="nav-item">
-                                        <%= link_to portfolio_fixed_incomes_management_path do %>
-                                            <button 
-                                            class="btn btn-outline-primary ml-3
-                                            <%= 'active' if current_page?(portfolio_fixed_incomes_management_path) %>" >
-                                                Renda Fixa
-                                            </button>
-                                        <% end %>
-                                    </li>
-                                    <li class="nav-item">
-                                        <%= link_to portfolio_properties_management_path do %>
-                                            <button 
-                                            class="btn btn-outline-primary ml-3
-                                            <%= 'active' if current_page?(portfolio_properties_management_path) %>" >
-                                                Imóveis
-                                            </button>
-                                        <% end %>
-                                    </li>
-                                    <li class="nav-item">
-                                        <%= link_to portfolio_criptos_management_path do %>
-                                            <button 
-                                            class="btn btn-outline-primary ml-3
-                                            <%= 'active' if current_page?(portfolio_criptos_management_path) %>" >
-                                                Criptos
-                                            </button>
-                                        <% end %>
-                                    </li>
-                                    <li class="nav-item">
-                                        <%= link_to portfolio_goods_management_path do %>
-                                            <button 
-                                            class="btn btn-outline-primary ml-3
-                                            <%= 'active' if current_page?(portfolio_goods_management_path) %>" >
-                                                Outros Bens
-                                            </button>
-                                        <% end %>
-                                    </li>
-                                    
-                                    
-                                    
-                                </ul>
-                                <ul class="navbar-nav ml-3">
-                                     <li class="nav-item">
-                                        <%= link_to portfolio_calls_management_path do %>
-                                            <button 
-                                            class="btn btn-outline-primary ml-3
-                                            <%= 'active' if current_page?(portfolio_calls_management_path) %>" >
-                                                Calls
-                                            </button>
-                                        <% end %>
-                                    </li>
-                                    <li class="nav-item">
-                                        <%= link_to portfolio_puts_management_path do %>
-                                            <button 
-                                            class="btn btn-outline-primary ml-3
-                                            <%= 'active' if current_page?(portfolio_puts_management_path) %>" >
-                                                Puts
-                                            </button>
-                                        <% end %>
-                                    </li>
-                                </ul>
-                            </div>
-                        </nav>
-                    
+                    <div class="card card-default">
+                        <div class="card-body">
+                            <%= link_to portfolio_path do %>
+                            <button type="button" class="mb-1 mr-3 btn btn-outline-primary <%= 'active' if current_page?(portfolio_path) %>">Dashboard</button>
+
+                            <% end %>
+                            <%= link_to portfolio_fiis_management_path do %>
+                            <button type="button" class="mb-1 mr-1 btn btn-outline-primary <%= 'active' if current_page?(portfolio_fiis_management_path) %>">Fiis</button>
+                            <% end %>
+                            <%= link_to portfolio_br_stocks_management_path do %>
+                            <button type="button" class="mb-1 mr-1 btn btn-outline-primary <%= 'active' if current_page?(portfolio_br_stocks_management_path) %>">Ações Br</button>
+                            <% end %>
+                            <%= link_to portfolio_internationals_management_path do %>
+                            <button type="button" class="mb-1 mr-1 btn btn-outline-primary <%= 'active' if current_page?(portfolio_internationals_management_path) %>">Internacional</button>
+                            <% end %>
+                            <%= link_to portfolio_fixed_incomes_management_path do %>
+                            <button type="button" class="mb-1 mr-1 btn btn-outline-primary <%= 'active' if current_page?(portfolio_fixed_incomes_management_path) %>">Renda Fixa</button>
+                            <% end %>
+                            <%= link_to portfolio_properties_management_path do %>
+                            <button type="button" class="mb-1 mr-1 btn btn-outline-primary <%= 'active' if current_page?(portfolio_properties_management_path) %>">Imóveis</button>
+                            <% end %>
+                            <%= link_to portfolio_criptos_management_path do %>
+                            <button type="button" class="mb-1 mr-1 btn btn-outline-primary <%= 'active' if current_page?(portfolio_criptos_management_path) %>">Criptos</button>
+                            <% end %>
+                            <%= link_to portfolio_goods_management_path do %>
+                            <button type="button" class="mb-1 mr-1 btn btn-outline-primary <%= 'active' if current_page?(portfolio_goods_management_path) %>">Outros Bens</button>
+                            <% end %>
+
+                            <%= link_to portfolio_calls_management_path do %>
+                            <button type="button" class="mb-1 ml-2 mr-1 btn btn-outline-primary <%= 'active' if current_page?(portfolio_calls_management_path) %>">Calls</button>
+                            <% end %>
+                            <%= link_to portfolio_puts_management_path do %>
+                            <button type="button" class="mb-1 mr-1 btn btn-outline-primary <%= 'active' if current_page?(portfolio_puts_management_path) %>">Puts</button>
+                            <% end %>
+                            
+                        </div>
                     </div>
                 </div>
             </div>

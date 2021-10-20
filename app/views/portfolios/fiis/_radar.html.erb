@@ -1,7 +1,58 @@
 <div class="col-xl-12">
     <div class="card">
         <div class="card-body">
-            <h4 class="mt-1">Radar de Fundos Imobiliários</h4>
+            <h4 class="mt-1">Radar de Fundos Imobiliários (Top High)</h4>
+                <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>Cotação</th>
+                            <th>Ultimo Yield</th>
+                            <th>Yield 6m</th>
+                            <th>Yield 12m</th>
+                            <th>P/VPA</th>
+                            <th>Setor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @fiis.where("p_vpa <= ?", 1.05).where("six_m_yield >= ?", 6).where("twelve_m_yield >= ?", 12).each do |fii| %>
+                        <tr>
+                            <td><%= fii.ticker %></td>
+                            <td><%= number_with_precision(fii.price, precision: 2, separator: ",", delimiter: ".") %></td>
+
+                            <td <% if (fii.last_dividend/fii.price)*100 >= 1 %> class="bg-primary-light" <% end %> >
+                            <%= number_to_percentage((fii.last_dividend/fii.price)*100, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td 
+                            <% if fii.six_m_yield.present? %>
+                            <% if fii.six_m_yield >= 6 %> class="bg-primary-light" <% end %>
+                            <% end %>
+                            >
+                            <%= number_to_percentage(fii.six_m_yield, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td
+                            <% if fii.twelve_m_yield.present? %>
+                            <% if fii.twelve_m_yield >= 12 %> class="bg-primary-light" <% end %>
+                            <% end %>
+                            >
+                            <%= number_to_percentage(fii.twelve_m_yield, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td
+                            <% if fii.p_vpa.present? %>
+                            <% if fii.p_vpa <= 1.05 %> class="bg-primary-light" <% end %>
+                            <% end %>
+                            >
+                            <%= number_with_precision(fii.p_vpa, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= fii.setor %></td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+        </div>
+    </div>
+</div>
+
+<div class="col-xl-12">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="mt-1">Radar de Fundos Imobiliários (No Radar)</h4>
                 <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
                     <thead>
                         <tr>

@@ -11,31 +11,45 @@
                 <tbody>
                     <tr>
                         <td>Fiis:</td>
-                        <td class="text-right">R$ <%= number_with_precision(@fiis_total, precision: 0, separator: ",", delimiter: ".")%></td>
+                        <td class="text-right">R$ <%= number_with_precision(@fiis_total, precision: 0, separator: ",", delimiter: ".")%>
+                        (<%= number_with_precision(@fiis_total/@total * 100, precision: 2, separator: ",")%> %)
+                        </td>
                     </tr>
                     <tr>
                         <td>Criptomoedas:</td>
-                        <td class="text-right">R$ <%= number_with_precision(@portfolio_criptos.sum(:total_today), precision: 0, separator: ",", delimiter: ".") %></td>
+                        <td class="text-right">R$ <%= number_with_precision(@portfolio_criptos.sum(:total_today), precision: 0, separator: ",", delimiter: ".") %>
+                        (<%= number_with_precision(@portfolio_criptos.sum(:total_today)/@total * 100, precision: 2, separator: ",")%> %)
+                        </td>
                     </tr>
                     <tr>
                         <td>Ações:</td>
-                        <td class="text-right">R$ <%= number_with_precision( @portfolio_br_stocks.sum(:total_today), precision: 0, separator: ",", delimiter: ".") %></td>
+                        <td class="text-right">R$ <%= number_with_precision( @portfolio_br_stocks.sum(:total_today), precision: 0, separator: ",", delimiter: ".") %>
+                        (<%= number_with_precision(@portfolio_br_stocks.sum(:total_today)/@total * 100, precision: 2, separator: ",")%> %)
+                        </td>
                     </tr>
                     <tr>
                         <td>Imóveis:</td>
-                        <td class="text-right">R$ <%= number_with_precision(@portfolio_properties.sum(:total_today), precision: 0, separator: ",", delimiter: ".")  %></td>
+                        <td class="text-right">R$ <%= number_with_precision(@portfolio_properties.sum(:total_today), precision: 0, separator: ",", delimiter: ".")  %>
+                        (<%= number_with_precision(@portfolio_properties.sum(:total_today)/@total * 100, precision: 2, separator: ",")%> %)
+                        </td>
                     </tr>
                     <tr>
                         <td>Renda Fixa:</td>
-                        <td class="text-right">R$ <%= number_with_precision(@portfolio_fixed_incomes.sum(:total_today), precision: 0, separator: ",", delimiter: ".") %></td>
+                        <td class="text-right">R$ <%= number_with_precision(@portfolio_fixed_incomes.sum(:total_today), precision: 0, separator: ",", delimiter: ".") %>
+                        (<%= number_with_precision(@portfolio_fixed_incomes.sum(:total_today)/@total * 100, precision: 2, separator: ",")%> %)
+                        </td>
                     </tr>
                     <tr>
                         <td>Internacional:</td>
-                        <td class="text-right">R$ <%= number_with_precision(@portfolio_internationals.sum(:total_today), precision: 0, separator: ",", delimiter: ".") %></td>
+                        <td class="text-right">R$ <%= number_with_precision(@portfolio_internationals.sum(:total_today), precision: 0, separator: ",", delimiter: ".") %>
+                        (<%= number_with_precision(@portfolio_internationals.sum(:total_today)/@total * 100, precision: 2, separator: ",")%> %)
+                        </td>
                     </tr>
                     <tr>
                         <td> Outros bens</td>
-                        <td class="text-right">R$ <%= number_with_precision(@portfolio_goods.sum(:total_today), precision: 0, separator: ",", delimiter: ".") %> </td>
+                        <td class="text-right">R$ <%= number_with_precision(@portfolio_goods.sum(:total_today), precision: 0, separator: ",", delimiter: ".") %> 
+                        (<%= number_with_precision(@portfolio_goods.sum(:total_today)/@total * 100, precision: 2, separator: ",")%> %)
+                        </td>
                     </tr>
                     <tr>
                         <td> Equities</td>
@@ -52,18 +66,19 @@
     </div>
 </div>
 
-<div class="col-xl-5">
+<div class="col-xl-4">
     <div class="card">    
         <div class="card-body">
-            <%= pie_chart @portfolio_pie_chart, legend: "bottom", height: "452px", colors: ["#1E5D8C","#F7B844","#5C388E","#748C38", "#8A1459", "#421243","#7F94B0", "#EF6537" ] %>
+            <%#= pie_chart @portfolio_pie_chart, legend: "bottom", height: "452px", colors: ["#1E5D8C","#F7B844","#5C388E","#748C38", "#8A1459", "#421243","#7F94B0", "#EF6537" ] %>
+            <%= render 'portfolios/show/piechart' %>
       </div>
     </div>
 </div>
 
-<div class="col-xl-4">
+<div class="col-xl-5">
     <div class="card">    
         <div class="card-body" style="height:480px">
-            Advetisment
+            <%= render 'portfolios/show/timeline' %>
       </div>
     </div>
 </div>
@@ -71,6 +86,12 @@
 <div class="col-xl-3">
     <div class="card">  
         <div class="card-body" style="height:480px">
+            <select name="months" id="months" class="float-right">
+                <option value="out21">Out/21</option>
+                <option value="nov21">Nov/21</option>
+                <option value="dez21">Dez/21</option>
+                <option value="jan22">Jan/22</option>
+            </select>
             <table id="" class="table table-striped w-100" cellspacing="0">
                 <thead>
                     <tr>
@@ -81,37 +102,37 @@
                 <tbody>
                     <tr>
                         <td>Fiis:</td>
-                        <td class="text-right"></td>
+                        <td class="text-right">R$ 3.500</td>
                     </tr>
                     <tr>
                         <td>Criptomoedas:</td>
-                        <td class="text-right"></td>
+                        <td class="text-right">R$ 550</td>
                     </tr>
                     <tr>
                         <td>Ações:</td>
-                        <td class="text-right"></td>
+                        <td class="text-right">R$ 418</td>
                     </tr>
                     <tr>
                         <td>Imóveis:</td>
-                        <td class="text-right"></td>
+                        <td class="text-right">R$ 565</td>
                     </tr>
                     <tr>
                         <td>Equities:</td>
-                        <td class="text-right"></td>
+                        <td class="text-right">R$ 0</td>
                     </tr>
                     <tr>
                         <td>Internacional:</td>
-                        <td class="text-right"></td>
+                        <td class="text-right">R$ 0</td>
                     </tr>
                     <tr>
                         <td>Derivativos</td>
-                        <td class="text-right"> </td>
+                        <td class="text-right">R$ 1.300 </td>
                     </tr>
                 </tbody>
             </table>
             <div>
                 <h4 class="mt-4">
-                    Total: <span class="float-right text-primary">  </span>
+                    Total: <span class="float-right text-primary"> R$ 6.324 </span>
                 </h4>
             </div>
       </div>
@@ -123,7 +144,7 @@
         
         <div class="card-body">
 
-            <%= render 'treemap' %>
+            <%= render 'portfolios/show/treemap' %>
 
         </div>
     </div>

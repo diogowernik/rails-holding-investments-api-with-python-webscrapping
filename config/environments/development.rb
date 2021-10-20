@@ -62,4 +62,6 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   
   config.action_mailer.default_url_options = { host: 'portaisdobem.org', port: 9292 }
+
+  config.public_file_server.enabled = true
 end

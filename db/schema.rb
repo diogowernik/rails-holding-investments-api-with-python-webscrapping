@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_04_181323) do
+ActiveRecord::Schema.define(version: 2021_10_20_003239) do
 
   create_table "br_stocks", force: :cascade do |t|
     t.string "ticker"
@@ -290,7 +290,11 @@ ActiveRecord::Schema.define(version: 2021_10_04_181323) do
     t.decimal "total_price"
     t.decimal "total_strike"
     t.decimal "profit"
+    t.integer "br_stock_id"
+    t.integer "expiration_id"
+    t.index ["br_stock_id"], name: "index_portfolio_puts_on_br_stock_id"
     t.index ["category_id"], name: "index_portfolio_puts_on_category_id"
+    t.index ["expiration_id"], name: "index_portfolio_puts_on_expiration_id"
     t.index ["portfolio_id"], name: "index_portfolio_puts_on_portfolio_id"
     t.index ["put_id"], name: "index_portfolio_puts_on_put_id"
     t.index ["situation_id"], name: "index_portfolio_puts_on_situation_id"

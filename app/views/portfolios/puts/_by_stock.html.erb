@@ -19,14 +19,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% @calls.where(:br_stock_id => stock.id).each do |call| %>
+                    <% @puts.where(:br_stock_id => stock.id).each do |put| %>
                     <tr>
-                        <td><%= call.situation.title %></td>     
-                        <td><%= call.call.ticker %></td>                         
-                        <td class="text-primary"><%= number_with_precision(call.total_price, precision: 2, separator: ",", delimiter: ".") %></td>
-                        <td class="text-primary"><%= number_with_precision((call.total_price/(call.shares_amount * call.call.strike))*100, precision: 2, separator: ",", delimiter: ".") %></td>
-                        <td><%= call.call.expiration.title %></td>
-                        <td><%= link_to 'E', edit_portfolio_call_path(call) %> | <%= link_to 'D', portfolio_call_path(call), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                        <td><%= put.situation.title %></td>     
+                        <td><%= put.put.ticker %></td>                         
+                        <td class="text-primary"><%= number_with_precision(put.total_price, precision: 2, separator: ",", delimiter: ".") %></td>
+                        <td class="text-primary"><%= number_with_precision((put.total_price/(put.shares_amount * put.put.strike))*100, precision: 2, separator: ",", delimiter: ".") %></td>
+                        <td><%= put.put.expiration.title %></td>
+                        <td><%= link_to 'E', edit_portfolio_put_path(put) %> | <%= link_to 'D', portfolio_put_path(put), method: :delete, data: { confirm: 'Are you sure?' } %></td>
                     </tr>
                     <% end %>
                 </tbody>
@@ -36,7 +36,7 @@
             <h4 class="ml-2">
             Lucro total:
             <span class="text-primary">
-                <%= number_to_currency(@calls.where(:br_stock_id => stock.id).sum(:total_price), unit: "R$ ", separator: ",", delimiter: ".", strip_insignificant_zeros: true) %></h4>
+                <%= number_to_currency(@puts.where(:br_stock_id => stock.id).sum(:total_price), unit: "R$ ", separator: ",", delimiter: ".", strip_insignificant_zeros: true) %></h4>
             </span>
         </div>
     </div>
