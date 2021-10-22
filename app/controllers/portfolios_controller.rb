@@ -95,6 +95,7 @@ class PortfoliosController < ApplicationController
   def criptos_management
     @portfolios = Portfolio.all
     @portfolio_criptos = PortfolioCripto.all.where(:portfolio_id => @portfolio.id)
+    @cripto_dividends = CriptoDividend.all.where(:portfolio_id => @portfolio.id)
     render layout: "app" 
   end
 

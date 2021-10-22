@@ -8,17 +8,7 @@ var options = {
   height: 480,
   type: 'pie',
 },
-colors: [
-    '#3B93A5',
-    '#F7B844',
-    '#1E5D8C',
-    '#5C388E',
-    '#748C38',
-    '#8A1459',
-    '#421243',
-    '#7F94B0',
-    '#EF6537',
-],
+
 legend: {
 show: true,
 position: 'bottom',
@@ -35,8 +25,44 @@ fontSize: '12px',
 },
 },
 
-series: [7.23, 33.71, 10.77, 1.02, 39.27, 3.92, 4.08],
-labels: ['Ações Brasileiras', 'Fundos Imobiliários', 'Internacional', 'Renda Fixa', 'Imoveis', 'Criptomoedas', 'Outros Bens' ],
+series: [
+  <%= number_with_precision(@portfolio_fixed_incomes.sum(:total_today)/@total * 100, precision: 2, separator: ".")%>,
+  <%= number_with_precision(@portfolio_criptos.sum(:total_today)/@total * 100, precision: 2, separator: ".")%>, 
+  <%= number_with_precision(@portfolio_goods.sum(:total_today)/@total * 100, precision: 2, separator: ".")%>,
+
+  <%= number_with_precision( @portfolio_br_stocks.sum(:total_today)/@total * 100, precision: 2, separator: ".") %>, 
+  <%= number_with_precision(@portfolio_internationals.sum(:total_today)/@total * 100, precision: 2, separator: ".")%>,
+  <%= number_with_precision(@fiis_total/@total * 100, precision: 2, separator: ".")%>, 
+
+  <%= number_with_precision(@portfolio_properties.sum(:total_today)/@total * 100, precision: 2, separator: ".")  %>, 
+  
+],
+labels: [
+  'Renda Fixa', 
+  'Criptomoedas', 
+  'Outros Bens', 
+
+  'Ações Brasileiras', 
+  'Internacional', 
+  'Fundos Imobiliários', 
+
+  'Imoveis', 
+
+],
+colors: [
+  '#5C388E',
+  '#8A1459',
+  '#421243',
+
+  '#3B93A5',
+  '#1E5D8C',
+  '#F7B844',
+
+  '#748C38',
+  
+  '#7F94B0',
+  '#EF6537',
+],
 responsive: [{
   breakpoint: 480,
   options: {
@@ -52,6 +78,11 @@ responsive: [{
 
 var chart2 = new ApexCharts(document.querySelector("#chart2"), options);
 chart2.render();
+
+// var url = "https://run.mocky.io/v3/796b60e0-5c95-43e3-b846-be052dec81f2";
+// $.getJSON(url, function (response) {
+//  chart.updateSeries(response);
+// });
 
 </script>
 

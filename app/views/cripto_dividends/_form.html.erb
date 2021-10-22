@@ -1,0 +1,79 @@
+
+<%= simple_form_for(@cripto_dividend) do |form| %>
+  <%= form.error_notification %>
+  <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
+
+
+<div class="row">
+  <div class="col-md-4">
+    <%= form.label :cripto_id %> 
+    <%= form.select :cripto_id, Cripto.all.collect {|d| [d.ticker, d.id]}, {}, {class: 'form-control'} %>
+  </div>
+  <div class="col-md-4">
+    <%= form.label :portfolio_cripto_id %> 
+    <%= form.select :portfolio_cripto_id, PortfolioCripto.all.collect {|d| [d.cripto.ticker, d.id]}, {}, {class: 'form-control'} %>
+  </div>
+  <div class="col-md-4">
+    <%= form.label :portfolio_id %> 
+    <%= form.select :portfolio_id, Portfolio.all.collect {|d| [d.title, d.id]}, {}, {class: 'form-control'} %>
+  </div>
+  <div class="col-md-4 d-none">
+    <%= form.label :category_id %> 
+    <%= form.select :category_id, Category.all.collect {|d| [d.title, d.id]}, {selected: 2}, {class: 'form-control'} %>
+  </div>
+</div>
+
+<div class="row mt-5 mb-5">
+  <div class="col-md-12">
+  <h4> Datas </h4>
+  </div>
+  <div class="col-md-3">
+      Data-com
+      <%= form.input :record_date, label_html: { class: 'd-none' }, class: 'form-control' %>
+  </div>
+  <div class="col-md-3">
+      Data de pagamento
+      <%= form.input :pay_date, as: :date, html5: true, label_html: { class: 'd-none' }, class: 'form-control'  %>
+  </div>
+    <div class="col-md-3">
+      Pagamento mes 
+    <%= form.select :month_id, Month.all.collect {|d| [d.title, d.id]}, {}, {class: 'form-control'} %>
+  </div>
+  <div class="col-md-3">
+      Pagamento ano
+    <%= form.select :year_id, Year.all.collect {|d| [d.title, d.id]}, {}, {class: 'form-control'} %>
+  </div>
+</div>
+
+<div class="row mt-2">
+  <div class="col-md-6">
+      Dividendo por moeda
+      <%= form.text_field :value_per_share, class: 'form-control' %>
+  </div>
+  
+  <div class="col-md-6">
+      yield on cost
+      <%= form.text_field :yield_on_cost, class: 'form-control' %>
+  </div>
+  <div class="col-md-4">
+      Dividendos em Criptos
+      <%= form.text_field :total, class: 'form-control' %>
+  </div>
+  <div class="col-md-4">
+      Dividendos em Dolares
+      <%= form.text_field :usd_total, class: 'form-control' %>
+  </div>
+  <div class="col-md-4">
+      Dividendos em Reais
+      <%= form.text_field :brl_total, class: 'form-control' %>
+  </div>
+
+</div>
+<div class="row">
+    <div class="col-md-3 mt-4">
+		<div class="form-group">
+                <%= form.submit 'Enviar', class: 'btn btn-block btn-primary' %>
+         </div>
+     </div>
+</div>
+<% end %>

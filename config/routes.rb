@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :cripto_dividends
   get 'pages/home'
   resources :portfolio_goods
   resources :portfolio_internationals
@@ -62,6 +63,7 @@ Rails.application.routes.draw do
     get 'portfolio/:id/fixed_incomes_chart', to: 'portfolios#fixed_incomes_chart', as: 'portfolio_fixed_incomes_chart'
     get 'portfolio/:id/properties_chart', to: 'portfolios#properties_chart', as: 'portfolio_properties_chart'
     get 'portfolio/:id/goods_chart', to: 'portfolios#goods_chart', as: 'portfolio_goods_chart'
+    get 'portfolio/:id/pie_chart', to: 'portfolios#pie_chart', as: 'portfolio_pie_chart'
 
   end
 end

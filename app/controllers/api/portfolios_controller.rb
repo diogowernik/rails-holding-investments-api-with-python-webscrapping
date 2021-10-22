@@ -1,5 +1,5 @@
 class Api::PortfoliosController < ApiController
-  before_action :set_portfolio, only: [:show, :update, :destroy, :fiis_chart, :fixed_incomes_chart, :goods_chart, :properties_chart, :criptos_chart, :br_stocks_chart, :internationals_chart, :portfoliofiis, :portfoliocriptos]
+  before_action :set_portfolio, only: [:show, :update, :destroy, :fiis_chart, :fixed_incomes_chart, :pie_chart, :goods_chart, :properties_chart, :criptos_chart, :br_stocks_chart, :internationals_chart, :portfoliofiis, :portfoliocriptos]
 
   # GET /portfolios
   def index
@@ -19,6 +19,32 @@ class Api::PortfoliosController < ApiController
     @portfolio_internationals = PortfolioInternational.all.where(:portfolio_id => @portfolio.id).order("total_today asc")
     @portfolio_fixed_incomes = PortfolioFixedIncome.all.where(:portfolio_id => @portfolio.id).order("id desc")
     render 'api/portfolios/show.json.jbuilder'
+  end
+
+  def pie_chart
+    @portfolio_criptos = PortfolioCripto.all.where(:portfolio_id => @portfolio.id)
+    @portfolio_fiis = PortfolioFii.all.where(:portfolio_id => @portfolio.id)
+    @portfolio_subscriptions = PortfolioSubscription.all.where(:portfolio_id => @portfolio.id)
+    @portfolio_fixed_incomes = PortfolioFixedIncome.all.where(:portfolio_id => @portfolio.id)
+    @portfolio_br_stocks = PortfolioBrStock.all.where(:portfolio_id => @portfolio.id)
+    @portfolio_properties = PortfolioProperty.all.where(:portfolio_id => @portfolio.id)
+    @portfolio_internationals = PortfolioInternational.all.where(:portfolio_id => @portfolio.id)
+    @portfolio_goods = PortfolioGood.all.where(:portfolio_id => @portfolio.id)
+
+    @categories = Category.all
+
+    @total = @portfolio_fiis.sum(:total_today) + 
+    @portfolio_subscriptions.sum(:total_today) +
+    @portfolio_criptos.sum(:total_today) +
+    @portfolio_br_stocks.sum(:total_today) +
+    @portfolio_properties.sum(:total_today) +
+    @portfolio_fixed_incomes.sum(:total_today) +
+    @portfolio_internationals.sum(:total_today) +
+    @portfolio_goods.sum(:total_today)
+
+    @fiis_total = @portfolio_fiis.sum(:total_today) + 
+    @portfolio_subscriptions.sum(:total_today)
+    render 'api/portfolios/pie_chart.json.jbuilder'
   end
 
   def br_stocks_chart

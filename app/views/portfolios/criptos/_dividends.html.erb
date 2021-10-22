@@ -1,0 +1,44 @@
+<div class="col-xl-12">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="mt-5">Criptomoedas do Portfolio</h4>
+                <table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>Criptos Investidas</th>
+                            <th>Month</th>
+                            <th>Year</th>
+                            <th>Data-com</th>
+                            <th>Pagamento</th>
+                            <th>Div. por moeda</th>
+                            <th>Div. em Cripto</th>
+                            <th>Div. em Brl</th>
+                            <th>Div. em Usd</th>
+                            <th>Yield on cost</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @cripto_dividends.each do |cripto_dividend| %>
+                        <tr>
+                            <td><%= cripto_dividend.portfolio_cripto.cripto.ticker %></td>
+                            <td><%= cripto_dividend.portfolio_cripto.shares_amount %></td>
+                            <td><%= cripto_dividend.month.title %></td>
+                            <td><%= cripto_dividend.year.title %></td>
+                            <td><%= cripto_dividend.record_date %></td>
+                            <td><%= cripto_dividend.pay_date %></td>
+                            <td><%= cripto_dividend.value_per_share %> (<%= cripto_dividend.portfolio_cripto.cripto.ticker %>)</td>
+                            <td><%= cripto_dividend.total %>   (<%= cripto_dividend.portfolio_cripto.cripto.ticker %>)</td>
+                            <td><%= cripto_dividend.brl_total %></td>
+                            <td><%= cripto_dividend.usd_total %></td>
+                            <td><%= cripto_dividend.yield_on_cost %></td>
+                            
+                            <td><%= link_to 'E', edit_cripto_dividend_path(cripto_dividend) %> / <%= link_to 'D', cripto_dividend_path(cripto_dividend), method: :delete, data: { confirm: 'Certeza?' } %></td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+        </div>
+    </div>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_20_003239) do
+ActiveRecord::Schema.define(version: 2021_10_21_155651) do
 
   create_table "br_stocks", force: :cascade do |t|
     t.string "ticker"
@@ -42,6 +42,30 @@ ActiveRecord::Schema.define(version: 2021_10_20_003239) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "custom_order"
+  end
+
+  create_table "cripto_dividends", force: :cascade do |t|
+    t.integer "category_id"
+    t.integer "month_id"
+    t.integer "year_id"
+    t.date "record_date"
+    t.date "pay_date"
+    t.decimal "value_per_share"
+    t.decimal "total"
+    t.decimal "yield_on_cost"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "portfolio_id"
+    t.integer "portfolio_cripto_id"
+    t.integer "cripto_id"
+    t.decimal "brl_total"
+    t.decimal "usd_total"
+    t.index ["category_id"], name: "index_cripto_dividends_on_category_id"
+    t.index ["cripto_id"], name: "index_cripto_dividends_on_cripto_id"
+    t.index ["month_id"], name: "index_cripto_dividends_on_month_id"
+    t.index ["portfolio_cripto_id"], name: "index_cripto_dividends_on_portfolio_cripto_id"
+    t.index ["portfolio_id"], name: "index_cripto_dividends_on_portfolio_id"
+    t.index ["year_id"], name: "index_cripto_dividends_on_year_id"
   end
 
   create_table "criptos", force: :cascade do |t|
