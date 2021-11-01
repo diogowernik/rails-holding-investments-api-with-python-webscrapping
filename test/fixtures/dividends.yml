@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  month: one
+  year: one
+  fiis: 9.99
+  criptos: 9.99
+  br_stocks: 9.99
+  properties: 9.99
+  equities: 9.99
+  international: 9.99
+  derivatives: 9.99
+
+two:
+  month: two
+  year: two
+  fiis: 9.99
+  criptos: 9.99
+  br_stocks: 9.99
+  properties: 9.99
+  equities: 9.99
+  international: 9.99
+  derivatives: 9.99

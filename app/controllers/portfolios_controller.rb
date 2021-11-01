@@ -20,7 +20,11 @@ class PortfoliosController < ApplicationController
     @portfolio_internationals = PortfolioInternational.all.where(:portfolio_id => @portfolio.id)
     @portfolio_goods = PortfolioGood.all.where(:portfolio_id => @portfolio.id)
 
+    @dividends = Dividend.all.where(:portfolio_id => @portfolio.id)
+
     @categories = Category.all
+    @years = Year.all
+    @months = Month.all
 
     @total = @portfolio_fiis.sum(:total_today) + 
     @portfolio_subscriptions.sum(:total_today) +

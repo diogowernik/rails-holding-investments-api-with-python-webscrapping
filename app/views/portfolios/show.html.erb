@@ -85,57 +85,7 @@
 
 <div class="col-xl-3">
     <div class="card">  
-        <div class="card-body" style="height:480px">
-            <select name="months" id="months" class="float-right">
-                <option value="out21">Out/21</option>
-                <option value="nov21">Nov/21</option>
-                <option value="dez21">Dez/21</option>
-                <option value="jan22">Jan/22</option>
-            </select>
-            <table id="" class="table table-striped w-100" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Dividendos</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Fiis:</td>
-                        <td class="text-right">R$ 3.500</td>
-                    </tr>
-                    <tr>
-                        <td>Criptomoedas:</td>
-                        <td class="text-right">R$ 550</td>
-                    </tr>
-                    <tr>
-                        <td>Ações:</td>
-                        <td class="text-right">R$ 418</td>
-                    </tr>
-                    <tr>
-                        <td>Imóveis:</td>
-                        <td class="text-right">R$ 565</td>
-                    </tr>
-                    <tr>
-                        <td>Equities:</td>
-                        <td class="text-right">R$ 0</td>
-                    </tr>
-                    <tr>
-                        <td>Internacional:</td>
-                        <td class="text-right">R$ 0</td>
-                    </tr>
-                    <tr>
-                        <td>Derivativos</td>
-                        <td class="text-right">R$ 1.300 </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div>
-                <h4 class="mt-4">
-                    Total: <span class="float-right text-primary"> R$ 6.324 </span>
-                </h4>
-            </div>
-      </div>
+        <%= render 'portfolios/show/dividends' %>
     </div>
 </div>
 

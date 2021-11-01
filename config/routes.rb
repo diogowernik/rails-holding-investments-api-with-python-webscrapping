@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :orders
+  resources :dividends
   resources :cripto_dividends
   get 'pages/home'
   resources :portfolio_goods

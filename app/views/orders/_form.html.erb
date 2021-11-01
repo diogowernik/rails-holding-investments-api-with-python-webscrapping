@@ -1,0 +1,21 @@
+
+<%= simple_form_for(@order) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.association :portfolio %>
+    <%= f.association :year %>
+    <%= f.association :month %>
+    <%= f.input :total_today %>
+    <%= f.input :order_value %>
+    <%= f.input :order_type %>
+    <%= f.input :tokens_amount %>
+    <%= f.input :token_price %>
+    <%= f.input :month_profit %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

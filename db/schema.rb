@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_21_155651) do
+ActiveRecord::Schema.define(version: 2021_11_01_233243) do
 
   create_table "br_stocks", force: :cascade do |t|
     t.string "ticker"
@@ -75,6 +75,24 @@ ActiveRecord::Schema.define(version: 2021_10_21_155651) do
     t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "dividends", force: :cascade do |t|
+    t.integer "month_id"
+    t.integer "year_id"
+    t.decimal "fiis"
+    t.decimal "criptos"
+    t.decimal "br_stocks"
+    t.decimal "properties"
+    t.decimal "equities"
+    t.decimal "international"
+    t.decimal "derivatives"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "portfolio_id"
+    t.index ["month_id"], name: "index_dividends_on_month_id"
+    t.index ["portfolio_id"], name: "index_dividends_on_portfolio_id"
+    t.index ["year_id"], name: "index_dividends_on_year_id"
   end
 
   create_table "expirations", force: :cascade do |t|
@@ -145,6 +163,23 @@ ActiveRecord::Schema.define(version: 2021_10_21_155651) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "portfolio_id"
+    t.integer "year_id"
+    t.integer "month_id"
+    t.decimal "total_today"
+    t.decimal "order_value"
+    t.string "order_type"
+    t.decimal "tokens_amount"
+    t.decimal "token_price"
+    t.decimal "month_profit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["month_id"], name: "index_orders_on_month_id"
+    t.index ["portfolio_id"], name: "index_orders_on_portfolio_id"
+    t.index ["year_id"], name: "index_orders_on_year_id"
   end
 
   create_table "portfolio_br_stocks", force: :cascade do |t|

@@ -3,7 +3,149 @@
 
 <script>
   var options = {
-    series: [],
+    series: [
+   {
+      "name":"Renda Fixa",
+      "data":[
+         <% if @portfolio_fixed_incomes.any? %>
+          <% @portfolio_fixed_incomes.each do |portfolio_fixed_income| %>
+          {
+              "x":"<%= portfolio_fixed_income.fixed_income.ticker %>",
+              "y":"<%= portfolio_fixed_income.total_today%>"
+          },
+          <% end %>
+        <% else %>
+        {
+            "x":"NONE",
+            "y":"0"
+         }
+        <% end %> 
+      ]
+   },
+   {
+      "name":"Criptomoedas",
+      "data":[
+         <% if @portfolio_criptos.any? %>
+          <% @portfolio_criptos.each do |portfolio_cripto| %>
+          {
+              "x":"<%= portfolio_cripto.cripto.ticker %>",
+              "y":"<%= portfolio_cripto.total_today%>"
+          },
+          <% end %>
+        <% else %>
+        {
+            "x":"NONE",
+            "y":"0"
+         }
+        <% end %> 
+      ]
+   },
+   {
+      "name":"Outros Bens",
+      "data":[
+        <% if @portfolio_goods.any? %>
+          <% @portfolio_goods.each do |portfolio_good| %>
+          {
+              "x":"<%= portfolio_good.good.ticker %>",
+              "y":"<%= portfolio_good.total_today%>"
+          },
+          <% end %>
+        <% else %>
+        {
+            "x":"NONE",
+            "y":"0"
+         }
+        <% end %>  
+      ]
+   },
+   {
+      "name":"Ações Brasileiras",
+      "data":[
+         <% if @portfolio_br_stocks.any? %>
+          <% @portfolio_br_stocks.each do |portfolio_br_stock| %>
+          {
+              "x":"<%= portfolio_br_stock.br_stock.ticker %>",
+              "y":"<%= portfolio_br_stock.total_today%>"
+          },
+          <% end %>
+        <% else %>
+        {
+            "x":"NONE",
+            "y":"0"
+         }
+        <% end %>  
+      ]
+   },
+   {
+      "name":"Internacional",
+      "data":[
+         <% if @portfolio_internationals.any? %>
+          <% @portfolio_internationals.each do |portfolio_international| %>
+          {
+              "x":"<%= portfolio_international.international.title %>",
+              "y":"<%= portfolio_international.total_today%>"
+          },
+          <% end %>
+        <% else %>
+        {
+            "x":"NONE",
+            "y":"0"
+         }
+        <% end %>  
+      ]
+   },
+   {
+      "name":"Fundos Imobiliários",
+      "data":[
+         <% if @portfolio_subscriptions.any? %>
+          <% @portfolio_subscriptions.each do |portfolio_subscription| %>
+          {
+              "x":"<%= portfolio_subscription.subscription.ticker %>",
+              "y":"<%= portfolio_subscription.total_today %>"
+          },
+          <% end %>
+        <% else %>
+        {
+            "x":"NONE",
+            "y":"0"
+         },
+        <% end %>  
+         <% if @portfolio_fiis.any? %>
+          <% @portfolio_fiis.each do |portfolio_fii| %>
+          {
+              "x":"<%= portfolio_fii.fii.ticker %>",
+              "y":"<%= portfolio_fii.total_today%>"
+          },
+          <% end %>
+        <% else %>
+        {
+            "x":"NONE",
+            "y":"0"
+         }
+        <% end %>  
+
+      ]
+   },
+   {
+      "name":"Imóveis",
+      "data":[
+         <% if @portfolio_properties.any? %>
+          <% @portfolio_properties.each do |portfolio_property| %>
+          {
+              "x":"<%= portfolio_property.property.ticker %>",
+              "y":"<%= portfolio_property.total_today%>"
+          },
+          <% end %>
+        <% else %>
+        {
+            "x":"NONE",
+            "y":"0"
+         }
+        <% end %> 
+      ]
+   },
+   
+],
     legend: {
       show: true,
       position: 'bottom',
@@ -34,18 +176,18 @@
       show: false}
   },
 colors: [
-    '#3B93A5',
-    '#8A1459',
-    '#F7B844',
-    '#F7B844',
-    '#421243',
-    '#748C38',
-    '#1E5D8C',
-    '#5C388E',
-    
-    
-    // '#7F94B0',
-    // '#EF6537',
+  '#5C388E',
+  '#8A1459',
+  '#421243',
+
+  '#3B93A5',
+  '#1E5D8C',
+  '#F7B844',
+
+  '#748C38',
+  
+  '#7F94B0',
+  '#EF6537',
 ],
     plotOptions: {
         treemap: {
@@ -58,10 +200,10 @@ colors: [
 var chart = new ApexCharts(document.querySelector("#chart"), options);
 chart.render();
 
-var url = "/api/portfolios/<%= @portfolio.id %>";
-$.getJSON(url, function (response) {
- chart.updateSeries(response);
-});
+// var url = "/api/portfolios/<%= @portfolio.id %>";
+// $.getJSON(url, function (response) {
+//  chart.updateSeries(response);
+// });
 
 
 </script>

@@ -7,6 +7,7 @@
                         <tr>
                             <th>Ticker</th>
                             <th>Qnt</th>
+                            <th>Cotação</th>
                             <th>Preço medio</th>
                             <th>Custo Total</th>
                             <th>Dividendos</th>
@@ -20,11 +21,12 @@
                         <tr>
                             <td><%= portfolio_cripto.cripto.ticker %></td>
                             <td><%= number_with_precision(portfolio_cripto.shares_amount, precision: 4) %></td>
-                            <td><%= number_with_precision(portfolio_cripto.share_cost, precision: 4, separator: ",", delimiter: ".") %></td>
-                            <td><%= number_with_precision(portfolio_cripto.total_cost, precision: 4, separator: ",", delimiter: ".") %></td>
-                            <td><%= number_with_precision(portfolio_cripto.dividends_profit, precision: 4, separator: ",", delimiter: ".") %></td>
-                            <td><%= number_with_precision(portfolio_cripto.trade_profit, precision: 4, separator: ",", delimiter: ".") %></td>
-                            <td><%= number_with_precision(portfolio_cripto.total_today, precision: 4, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_cripto.cripto.price, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_cripto.share_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_cripto.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_cripto.dividends_profit, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_cripto.trade_profit, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td><%= number_with_precision(portfolio_cripto.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td><%= link_to 'E', edit_portfolio_cripto_path(portfolio_cripto) %> | <%= link_to 'D', portfolio_cripto_path(portfolio_cripto), method: :delete, data: { confirm: 'Are you sure?' } %></td>
                         </tr>
                         <% end %>

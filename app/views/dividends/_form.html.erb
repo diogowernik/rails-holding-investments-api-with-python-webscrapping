@@ -1,0 +1,22 @@
+
+<%= simple_form_for(@dividend) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.association :month %>
+    <%= f.association :year %>
+    <%= f.association :portfolio %>
+    <%= f.input :fiis %>
+    <%= f.input :criptos %>
+    <%= f.input :br_stocks %>
+    <%= f.input :properties %>
+    <%= f.input :equities %>
+    <%= f.input :international %>
+    <%= f.input :derivatives %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

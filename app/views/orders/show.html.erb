@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Portfolio:</strong>
+  <%= @order.portfolio %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @order.year %>
+</p>
+
+<p>
+  <strong>Month:</strong>
+  <%= @order.month %>
+</p>
+
+<p>
+  <strong>Total today:</strong>
+  <%= @order.total_today %>
+</p>
+
+<p>
+  <strong>Order value:</strong>
+  <%= @order.order_value %>
+</p>
+
+<p>
+  <strong>Order type:</strong>
+  <%= @order.order_type %>
+</p>
+
+<p>
+  <strong>Tokens amount:</strong>
+  <%= @order.tokens_amount %>
+</p>
+
+<p>
+  <strong>Token price:</strong>
+  <%= @order.token_price %>
+</p>
+
+<p>
+  <strong>Month profit:</strong>
+  <%= @order.month_profit %>
+</p>
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>

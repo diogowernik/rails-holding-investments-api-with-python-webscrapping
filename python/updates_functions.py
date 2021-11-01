@@ -91,7 +91,12 @@ def get_criptos_price(conn, table):
     # print(app_criptos)
 
     for index, row in app_criptos.iterrows():
-        app_criptos.loc[index]['price'] = criptos_price.loc[index]['price']
+        try:
+            app_criptos.loc[index]['price'] = criptos_price.loc[index]['price']
+        except Exception as e:
+            # print(f' Key Exception - {e}')
+            pass
+        
     # print(app_criptos)
 
     for index, row in app_criptos.iterrows():

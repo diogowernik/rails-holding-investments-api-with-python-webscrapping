@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Dividends</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>portfolio</th>
+      <th>Month</th>
+      <th>Year</th>
+      <th>Fiis</th>
+      <th>Criptos</th>
+      <th>Br stocks</th>
+      <th>Properties</th>
+      <th>Equities</th>
+      <th>International</th>
+      <th>Derivatives</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @dividends.each do |dividend| %>
+      <tr>
+        <td><%= dividend.portfolio.title %></td>
+        <td><%= dividend.month.title %></td>
+        <td><%= dividend.year.title %></td>
+        <td><%= dividend.fiis %></td>
+        <td><%= dividend.criptos %></td>
+        <td><%= dividend.br_stocks %></td>
+        <td><%= dividend.properties %></td>
+        <td><%= dividend.equities %></td>
+        <td><%= dividend.international %></td>
+        <td><%= dividend.derivatives %></td>
+        <td><%= link_to 'Show', dividend %></td>
+        <td><%= link_to 'Edit', edit_dividend_path(dividend) %></td>
+        <td><%= link_to 'Destroy', dividend, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Dividend', new_dividend_path %>

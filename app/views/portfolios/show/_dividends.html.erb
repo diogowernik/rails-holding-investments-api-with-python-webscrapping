@@ -1,0 +1,78 @@
+<div class="card-body" style="height:520px">
+    <%# <select name="months" id="months" class="float-right">
+        <option value="out21">Out/21</option>
+        <option value="nov21">Nov/21</option>
+        <option value="dez21">Dez/21</option>
+        <option value="jan22">Jan/22</option>
+    </select> %>
+    <section id="tabs" class="project-tab">
+        <nav>
+            <div class="nav nav-tabs nav-pills" id="nav-tab" role="tablist">
+                <% @years.each do |year| %>
+                    <% @months.each do |month| %>
+                            <% @dividends.where(:year_id => year.id).where(:month_id => month.id).each do |dividend| %>
+                                <a class="nav-item nav-link <% if dividend.month.id == 11 %> active show <% end %>" id="nav-by-<%= dividend.month.title %>-tab" data-toggle="tab" href="#nav-by-<%= dividend.month.title %>" role="tab" aria-controls="nav-by-<%= dividend.month.title %>" aria-selected="false">
+                                    <%= dividend.month.title %>/<%= dividend.year.title %>
+                                </a>
+                            <% end %>
+                    <% end %>
+                <% end %>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+        <% @years.each do |year| %>
+            <% @months.each do |month| %>
+                    <% @dividends.where(:year_id => year.id).where(:month_id => month.id).each do |dividend| %>
+                        <div class="tab-pane fade <% if dividend.month.id == 11 %> show active <% end %>" id="nav-by-<%= dividend.month.title %>" role="tabpanel" aria-labelledby="nav-calls-tab">
+                            <table id="" class="table table-striped w-100" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Dividendos</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Fiis:</td>
+                                        <td class="text-right">R$ <%= dividend.fiis %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Criptomoedas:</td>
+                                        <td class="text-right">R$ <%= dividend.criptos %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ações:</td>
+                                        <td class="text-right">R$ <%= dividend.br_stocks %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Imóveis:</td>
+                                        <td class="text-right">R$ <%= dividend.properties %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Equities:</td>
+                                        <td class="text-right">R$ 0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Internacional:</td>
+                                        <td class="text-right">R$ 0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Derivativos</td>
+                                        <td class="text-right">R$ <%= dividend.derivatives %> </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div>
+                                <h4 class="mt-4">
+                                    Total: <span class="float-right text-primary"> R$ <%= dividend.fiis + dividend.criptos + dividend.br_stocks + dividend.properties + dividend.derivatives %> </span>
+                                </h4>
+                            </div>
+                        </div> 
+                        
+                        
+                    <% end %>
+            <% end %>
+        <% end %>
+        </div> 
+    </section> 
+</div>
