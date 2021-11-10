@@ -21,6 +21,7 @@ class PortfoliosController < ApplicationController
     @portfolio_goods = PortfolioGood.all.where(:portfolio_id => @portfolio.id)
 
     @dividends = Dividend.all.where(:portfolio_id => @portfolio.id)
+    @orders = Order.all.where(:portfolio_id => @portfolio.id)
 
     @categories = Category.all
     @years = Year.all

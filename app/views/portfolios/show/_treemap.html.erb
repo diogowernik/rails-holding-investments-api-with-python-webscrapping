@@ -9,10 +9,12 @@
       "data":[
          <% if @portfolio_fixed_incomes.any? %>
           <% @portfolio_fixed_incomes.each do |portfolio_fixed_income| %>
+            <% if portfolio_fixed_income.shares_amount != 0 %>
           {
               "x":"<%= portfolio_fixed_income.fixed_income.ticker %>",
               "y":"<%= portfolio_fixed_income.total_today%>"
           },
+          <% end %>
           <% end %>
         <% else %>
         {
@@ -29,7 +31,7 @@
           <% @portfolio_criptos.each do |portfolio_cripto| %>
           {
               "x":"<%= portfolio_cripto.cripto.ticker %>",
-              "y":"<%= portfolio_cripto.total_today%>"
+              "y":"<%= number_with_precision(portfolio_cripto.total_today, precision: 0)%>"
           },
           <% end %>
         <% else %>
@@ -47,7 +49,7 @@
           <% @portfolio_goods.each do |portfolio_good| %>
           {
               "x":"<%= portfolio_good.good.ticker %>",
-              "y":"<%= portfolio_good.total_today%>"
+              "y":"<%= portfolio_good.total_today %>"
           },
           <% end %>
         <% else %>
@@ -65,7 +67,7 @@
           <% @portfolio_br_stocks.each do |portfolio_br_stock| %>
           {
               "x":"<%= portfolio_br_stock.br_stock.ticker %>",
-              "y":"<%= portfolio_br_stock.total_today%>"
+              "y":"<%= number_with_precision(portfolio_br_stock.total_today, precision: 0) %>"
           },
           <% end %>
         <% else %>
@@ -112,10 +114,12 @@
         <% end %>  
          <% if @portfolio_fiis.any? %>
           <% @portfolio_fiis.each do |portfolio_fii| %>
+            <% if portfolio_fii.shares_amount != 0 %>
           {
               "x":"<%= portfolio_fii.fii.ticker %>",
-              "y":"<%= portfolio_fii.total_today%>"
+              "y":"<%= number_with_precision(portfolio_fii.total_today, precision: 0)%>"
           },
+            <% end %>
           <% end %>
         <% else %>
         {

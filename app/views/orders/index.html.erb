@@ -1,8 +1,13 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+    <h3 class="h3-custom" id="minhas-paginas">
+        <em class="fa fa-pencil text-success"></em> &nbsp; Tokens
+    </h3>
+    <div class="card card-default">
+    <div class="card-body">
 
 <h1>Orders</h1>
 
-<table>
+<table id="" class="display table table-striped table-bordered w-100" cellspacing="0">
   <thead>
     <tr>
       <th>Portfolio</th>
@@ -21,18 +26,17 @@
   <tbody>
     <% @orders.each do |order| %>
       <tr>
-        <td><%= order.portfolio %></td>
-        <td><%= order.year %></td>
-        <td><%= order.month %></td>
+        <td><%= order.portfolio.title %></td>
+        <td><%= order.year.title %></td>
+        <td><%= order.month.title %></td>
         <td><%= order.total_today %></td>
         <td><%= order.order_value %></td>
         <td><%= order.order_type %></td>
         <td><%= order.tokens_amount %></td>
         <td><%= order.token_price %></td>
         <td><%= order.month_profit %></td>
-        <td><%= link_to 'Show', order %></td>
-        <td><%= link_to 'Edit', edit_order_path(order) %></td>
-        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        
+        <td><%= link_to 'E', edit_order_path(order) %> / <%= link_to 'D', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -41,3 +45,7 @@
 <br>
 
 <%= link_to 'New Order', new_order_path %>
+
+</div>
+    </div>
+</div>

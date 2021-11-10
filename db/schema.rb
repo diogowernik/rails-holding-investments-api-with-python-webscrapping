@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_01_233243) do
+ActiveRecord::Schema.define(version: 2021_11_06_020605) do
 
   create_table "br_stocks", force: :cascade do |t|
     t.string "ticker"
@@ -445,6 +445,8 @@ ActiveRecord::Schema.define(version: 2021_11_01_233243) do
     t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "fii_id"
+    t.index ["fii_id"], name: "index_subscriptions_on_fii_id"
   end
 
   create_table "users", force: :cascade do |t|

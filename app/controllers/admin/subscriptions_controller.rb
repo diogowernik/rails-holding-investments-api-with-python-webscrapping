@@ -69,6 +69,6 @@ class Admin::SubscriptionsController < AdminController
 
     # Only allow a list of trusted parameters through.
     def subscription_params
-      params.require(:subscription).permit(:ticker, :title, :slug, :price)
+      params.require(:subscription).permit(:ticker, :title, :slug, :price, :fii_id)
     end
 end

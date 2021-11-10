@@ -7,7 +7,11 @@
                     <tr>
                         <th>Ticker</th>
                         <th>Qnt</th>
+                        <th>Cotação</th>
                         <th>Preço medio</th>
+
+                        <th>Lucro</th>
+
                         <th>Custo Total</th>
                         <th>Total Hoje</th>
                         <th></th>
@@ -18,7 +22,18 @@
                     <tr>
                         <td><%= portfolio_subscription.subscription.ticker %></td>
                         <td><%= number_with_precision(portfolio_subscription.shares_amount, precision: 0) %></td>
+                        <td><%= number_with_precision(portfolio_subscription.subscription.fii.price, precision: 2, separator: ",", delimiter: ".") %></td>
                         <td><%= number_with_precision(portfolio_subscription.share_cost, precision: 2, separator: ",", delimiter: ".") %></td>
+
+                        <td 
+                        <% if ((portfolio_subscription.subscription.fii.price/portfolio_subscription.share_cost) * 100) - 100 >= 0 %>
+                           class="text-primary"
+                        <% else %>
+                            class="text-warning"
+                        <% end %> >
+                        
+                        <%= number_with_precision(((portfolio_subscription.subscription.fii.price/portfolio_subscription.share_cost) * 100) - 100, precision: 2, separator: ",", delimiter: ".") %> %</td>
+
                         <td><%= number_with_precision(portfolio_subscription.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
                         <td><%= number_with_precision(portfolio_subscription.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
                         <td><%= link_to 'Edit', edit_portfolio_subscription_path(portfolio_subscription) %> | <%= link_to 'Destroy', portfolio_subscription_path(portfolio_subscription), method: :delete, data: { confirm: 'Are you sure?' } %></td>
