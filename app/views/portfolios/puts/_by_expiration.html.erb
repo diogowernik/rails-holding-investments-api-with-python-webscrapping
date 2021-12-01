@@ -1,5 +1,19 @@
 <div class="col-xl-12 mt-3">
+<span class="ml-1"><b>Resumo</b></span>
+<div class="row">
     <% @expirations.each do |expiration| %>
+    <div class="col-md-1 mt-3">    
+        <div class="card border pl-3 pt-3"> 
+            <p><b><%= expiration.slug %></b></p>
+            <p class="text-primary"><%= number_to_currency(@puts.where(:expiration_id => expiration.id).where("situation_id = 1 or situation_id = 3 or situation_id = 4").sum(:total_price), unit: "R$ ", separator: ",", delimiter: ".", strip_insignificant_zeros: true) %></p>
+        </div>
+    </div>
+    <% end %>
+</div>
+</div>
+<div class="col-xl-12 mt-3">
+    <% @expirations.each do |expiration| %>
+        <% if @puts.where(:expiration_id => expiration.id).any? %>
         <div class="card border-success">
             <div class="card-title">
                 <h4 class="text-success mt-4 ml-4">
@@ -40,5 +54,6 @@
                 </span>
             </div>
         </div>
+        <% end %>
     <% end %>
     </div>

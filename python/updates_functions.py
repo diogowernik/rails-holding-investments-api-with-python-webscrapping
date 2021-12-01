@@ -165,3 +165,5 @@ def update_fiis_table(conn, field):
         params = (row[f'{field}'], index,)
         cursor.execute(query, params)
     conn.commit()
+
+    print(f'updated {field} with success')

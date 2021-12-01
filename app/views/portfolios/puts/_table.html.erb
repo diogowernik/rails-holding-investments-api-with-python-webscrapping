@@ -119,7 +119,7 @@
         <div class="card-body">
             <h4 class="">Puts Finalizadas 
             </br></br> Lucro até o momento:
-            <span class="text-primary"><%= @portfolio_puts.sum((:total_price)) %></span>
+            <span class="text-primary"><%= @portfolio_puts.where("situation_id = 1 or situation_id = 3 or situation_id = 4").sum((:total_price)) %></span>
             </h4>
             <table class="display table table-striped table-bordered w-100" cellspacing="0">
                 <thead>
@@ -135,10 +135,26 @@
                 <tbody>
                     <% @portfolio_puts.each do |portfolio_put| %>
                     <tr>
-                        <td><%= portfolio_put.situation.title %></td>     
+                        <% if portfolio_put.situation.title == "Exercicio" %>
+                        
+                        <td> Compra de <%= number_with_precision(portfolio_put.shares_amount, precision: 0) %> 
+                        <%= portfolio_put.put.br_stock.ticker %> 
+                        (<%= number_with_precision(portfolio_put.put.strike - portfolio_put.price, precision: 2, separator: ",", delimiter: ".") %>)</td> 
+
+                        <td><%= portfolio_put.put.ticker %></td>                        
+                        <td class="text-primary">0,00</td>
+                        <td class="text-primary">0,00</td>
+
+
+                        <% else %>
+
+                        <td><%= portfolio_put.situation.title %></td>    
                         <td><%= portfolio_put.put.ticker %></td>                        
                         <td class="text-primary"><%= number_with_precision(portfolio_put.total_price, precision: 2, separator: ",", delimiter: ".") %></td>
                         <td class="text-primary"><%= number_with_precision((portfolio_put.total_price/(portfolio_put.shares_amount * portfolio_put.put.strike))*100, precision: 2, separator: ",", delimiter: ".") %></td>
+
+                        <% end %> 
+                        
                         <td><%= portfolio_put.put.expiration.title %></td>
                         <td><%= link_to 'E', edit_portfolio_put_path(portfolio_put) %> | <%= link_to 'D', portfolio_put_path(portfolio_put), method: :delete, data: { confirm: 'Are you sure?' } %></td>
                     </tr>

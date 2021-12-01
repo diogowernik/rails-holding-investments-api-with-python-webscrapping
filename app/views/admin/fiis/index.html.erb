@@ -11,6 +11,7 @@
       <thead>
         <tr>
           <th>ticker</th>
+          <th>setor</th>
           <th>Preço</th>
           <th>title</th>
           <th>Url</th>
@@ -22,6 +23,7 @@
         <% @fiis.each do |fii| %>
           <tr>
             <td><%= fii.ticker %></td>
+            <td><%= fii.setor %></td>
             <td><%= fii.price %></td>
             <td><%= fii.title %></td>
             <td><%= fii.slug %></td>  

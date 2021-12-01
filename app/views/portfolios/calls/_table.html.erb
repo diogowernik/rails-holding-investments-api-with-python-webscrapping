@@ -106,7 +106,7 @@
                 <h4 class="m-4">
                 Lucro Realizado = 
                 <span class="text-primary">
-                <%= number_to_currency(@portfolio_calls.sum(:total_price), unit: "R$ ", separator: ",", delimiter: ".", strip_insignificant_zeros: true) %></h4>
+                <%= number_to_currency(@portfolio_calls.where("situation_id = 1 or situation_id = 3 or situation_id = 4").sum(:total_price), unit: "R$ ", separator: ",", delimiter: ".", strip_insignificant_zeros: true) %></h4>
                 </span>
                 </p>
 
@@ -124,10 +124,22 @@
                     <tbody>
                         <% @portfolio_calls.each do |portfolio_call| %>
                         <tr>
+                                 
+                            <% if portfolio_call.situation.title == "Exercicio" %>   
+
+                            <td>. Venda de <%= portfolio_call.br_stock.ticker %> 
+                             (<%= number_with_precision(portfolio_call.call.strike + portfolio_call.price, precision: 2, separator: ",", delimiter: ".") %>)  </td>     
+                            <td><%= portfolio_call.call.ticker %></td>  
+                            <td>0,00</td>
+                            <td >0,00</td>
+                            <% else %>
+
                             <td><%= portfolio_call.situation.title %></td>     
-                            <td><%= portfolio_call.call.ticker %></td>                         
+                            <td><%= portfolio_call.call.ticker %></td>  
                             <td class="<% if portfolio_call.total_price >= 0 %>text-primary<% else %>text-warning<% end %>"><%= number_with_precision(portfolio_call.total_price, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td class="<% if portfolio_call.total_price >= 0 %>text-primary<% else %>text-warning<% end %>""><%= number_with_precision((portfolio_call.total_price/(portfolio_call.shares_amount * portfolio_call.call.strike))*100, precision: 2, separator: ",", delimiter: ".") %></td>
+
+                            <% end %>                        
                             <td><%= portfolio_call.call.expiration.title %></td>
                             <td><%= link_to 'E', edit_portfolio_call_path(portfolio_call) %> | <%= link_to 'D', portfolio_call_path(portfolio_call), method: :delete, data: { confirm: 'Are you sure?' } %></td>
                         </tr>

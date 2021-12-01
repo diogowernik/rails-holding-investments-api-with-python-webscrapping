@@ -69,7 +69,7 @@ class Admin::FiisController < AdminController
   
       # Only allow a list of trusted parameters through.
       def fii_params
-        params.require(:fii).permit(:ticker, :title, :slug, :price)
+        params.require(:fii).permit(:ticker, :title, :slug, :price, :setor)
       end
   end
   

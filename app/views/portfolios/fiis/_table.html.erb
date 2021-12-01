@@ -25,7 +25,16 @@
                             <td><%= number_with_precision(portfolio_fii.share_cost, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td><%= number_with_precision(portfolio_fii.total_cost, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td class="text-primary"><%= number_with_precision(portfolio_fii.dividends_profit, precision: 2, separator: ",", delimiter: ".") %></td>
-                            <td class="<% if portfolio_fii.trade_profit >= 0 %>text-primary<% else %>text-warning<% end %>"><%= number_with_precision(portfolio_fii.trade_profit, precision: 2, separator: ",", delimiter: ".") %></td>
+                            <td class="
+                                <% if portfolio_fii.trade_profit.present? %>
+                                    <% if portfolio_fii.trade_profit >= 0 %>
+                                        text-primary
+                                    <% else %>
+                                        text-warning
+                                    <% end %>
+                                <% end %>
+                            ">
+                            <%= number_with_precision(portfolio_fii.trade_profit, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td><%= number_with_precision(portfolio_fii.total_today, precision: 2, separator: ",", delimiter: ".") %></td>
                             <td><%= link_to 'E', edit_portfolio_fii_path(portfolio_fii) %> | <%= link_to 'D', portfolio_fii_path(portfolio_fii), method: :delete, data: { confirm: 'Are you sure?' } %></td>
                         </tr>
