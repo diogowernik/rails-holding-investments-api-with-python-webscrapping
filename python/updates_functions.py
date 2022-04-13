@@ -16,11 +16,14 @@ def get_yahoo_price(conn, table):
 
     yahoo_df = yf.download(app_list, period="1min")["Adj Close"]
     yahoo_df = yahoo_df.T.reset_index()
-    yahoo_df.columns = ["ticker",  "price"] # , "valor_duplicado" (As vezes 2 as vezes 3)
-    yahoo_df['ticker'] = yahoo_df['ticker'].map(lambda x: x.rstrip('.SA'))
-    yahoo_df = yahoo_df.set_index('ticker')
-    # print(yahoo_df)
-
+    try:
+        yahoo_df.columns = ["ticker",  "price"] # , "valor_duplicado" (As vezes 2 as vezes 3)
+        yahoo_df['ticker'] = yahoo_df['ticker'].map(lambda x: x.rstrip('.SA'))
+        yahoo_df = yahoo_df.set_index('ticker')
+        # print(yahoo_df)
+    except Exception as e:
+        print(f' Key Exception - {e}')
+        pass
     app_df = pd.read_sql_query(f"SELECT ticker, price FROM {table} ORDER BY ticker", conn, index_col="ticker")
     # print(app_df)
 
@@ -31,7 +34,7 @@ def get_yahoo_price(conn, table):
     for index, row in app_df.iterrows():
         query = f"Update {table} set price = ? where ticker = ?"
         params = (row['price'], index,)
-        cursor.execute(query, params)
+        cursor.execute(query, params)    
     conn.commit()
         
     # cursor.close()
